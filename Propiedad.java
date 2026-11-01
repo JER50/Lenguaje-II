@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Propiedad {
     //Atributos
     private String nombre;
@@ -14,13 +15,12 @@ public class Propiedad {
     private int antigüedad;
     private int pisos;
     private String descripción;
-    private int cantImagenes;
-    private String nombreImagenes;
+    private ArrayList<String> imagenes;
     private double latitud;
     private double longitud;
 
     //Constructor
-    public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, int pisos, String descripción, int cantImagenes,String nombreImagenes, double latitud, double longitud) {
+    public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, int pisos, String descripción, ArrayList<String> imagenes, double latitud, double longitud) {
         this.nombre = nombre;
         this.precio = precio;
         this.tipoInmueble = tipoInmueble;
@@ -35,8 +35,7 @@ public class Propiedad {
         this.antigüedad = antigüedad;
         this.pisos = pisos;
         this.descripción = descripción;
-        this.cantImagenes = cantImagenes;
-        this.nombreImagenes = nombreImagenes;
+        this.imagenes = imagenes;
         this.latitud = latitud;
         this.longitud = longitud;
     }
@@ -84,11 +83,8 @@ public class Propiedad {
     public String getDescripción() {return descripción;}
     public void setDescripción(String descripción) {this.descripción = descripción;}
 
-    public int getCantImagenes() {return cantImagenes;}
-    public void setCantImagenes(int cantImagenes) {this.cantImagenes = cantImagenes;}
-
-    public String getNombreImagenes() {return nombreImagenes;}
-    public void setNombreImagenes(String nombreImagenes) {this.nombreImagenes = nombreImagenes;}
+    public ArrayList<String> getImagenes() {return imagenes;}
+    public void setImagenes(ArrayList<String> imagenes) {this.imagenes = imagenes;}
 
     public double getLatitud() {return latitud;}
     public void setLatitud(double latitud) {this.latitud = latitud;}
