@@ -1,27 +1,39 @@
 import java.io.FileWriter;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class GestorArchivo {
     private static String evitaProblemas(String texto) {
         if (texto==null)
             return "";
-        texto.replace("\\", "\\\\");
-        texto.replace("\"", "\\\"");
-        return texto;
+        return texto.replace("\\", "\\\\").replace("\"", "\\\"");
+    }
+
+    private static ArrayList<String> evitaProblemasListas(ArrayList<String> lista) {
+        ArrayList<String> listaLimpia = new ArrayList<String>();
+        if (lista==null || lista.isEmpty())
+            return listaLimpia;
+        for (int i = 0; i < lista.size(); i++) {
+            String elemento = lista.get(i);
+            if (elemento != null) {
+                listaLimpia.add(elemento.replace("\\", "\\\\").replace("\"", "\\\""));
+            }
+        }
+        return listaLimpia;
     }
 
     private static String extraerStrings(String json, String clave) {
-        String patron = "\"" + clave + "\": \"";
-        int inicio = json.indexOf(patron);
+        int inicio = json.indexOf("\"" + clave + "\": \"");
         if (inicio == -1) return "";
-        inicio += patron.length();
+        inicio += ("\"" + clave + "\": \"").length();
         int fin = json.indexOf("\"", inicio);
         String valorConEscape = json.substring(inicio, fin);
         return valorConEscape.replace("\\\"", "\"").replace("\\\\", "\\");
     }
+
     private static String extraerValores(String json, String clave) {
-        //String patron = "正式\"" + clave + "\":"; // Buscamos por ejemplo -> "edad":
         int inicio = json.indexOf("\"" + clave + "\":");
         if (inicio == -1) return "0";
         inicio += ("\"" + clave + "\":").length();
@@ -35,13 +47,29 @@ public class GestorArchivo {
         return json.substring(inicio, fin).trim();
     }
 
+    private static ArrayList<String> extraerLista(String json, String clave) {
+        ArrayList<String> listaExtraida = new ArrayList<String>();
+        int inicio = json.indexOf("\"" + clave + "\":");
+        if (inicio == -1) return listaExtraida;
+        inicio += ("\"" + clave + "\":").length();
+        int corchete = json.indexOf("[", inicio);
+        if (corchete == -1) return listaExtraida;
+        while () {
+            if (== "]") {
+                break;
+            }
+        }
+
+        return listaExtraida;
+    }
+
     public static void guardadoJSON(Propiedad prop, String rutaArchivo) {
         String nombre = evitaProblemas(prop.getNombre());
         String tipoInmueble = evitaProblemas(prop.getTipoInmueble());
         String tipoListado = evitaProblemas(prop.getTipoListado());
         String direccion = evitaProblemas(prop.getDireccion());
         String descripción = evitaProblemas(prop.getDescripción());
-        String nombreImagenes = evitaProblemas(prop.getNombreImagenes());
+        ArrayList<String> listaImagenes = evitaProblemasListas(prop.getImagenes());
 
         String json = "{\n" +
                 "  \"nombre\": \"" + nombre + "\",\n" +
@@ -49,19 +77,18 @@ public class GestorArchivo {
                 "  \"tipoInmueble\": \"" + tipoInmueble + "\"\n" +
                 "  \"tipoListado\": \"" + tipoListado + "\"\n" +
                 "  \"direccion\": \"" + direccion + "\"\n" +
-                "  \"metrosTotales\": \"" + prop.getMetrosTotales() + "\"\n" +
-                "  \"metrosCubiertos\": \"" + prop.getMetrosCubiertos() + "\"\n" +
-                "  \"cantAmb\": \"" + prop.getCantAmb() + "\"\n" +
-                "  \"cantBaños\": \"" + prop.getCantBaños() + "\"\n" +
-                "  \"cochera\": \"" + prop.isCochera() + "\"\n" +
-                "  \"expensas\": \"" + prop.getExpensas() + "\"\n" +
-                "  \"antigüedad\": \"" + prop.getAntigüedad() + "\"\n" +
-                "  \"pisos\": \"" + prop.getPisos() + "\"\n" +
+                "  \"metrosTotales\": " + prop.getMetrosTotales() + ",\n" +
+                "  \"metrosCubiertos\": " + prop.getMetrosCubiertos() + ",\n" +
+                "  \"cantAmb\": " + prop.getCantAmb() + ",\n" +
+                "  \"cantBaños\": " + prop.getCantBaños() + ",\n" +
+                "  \"cochera\": " + prop.isCochera() + ",\n" +
+                "  \"expensas\": " + prop.getExpensas() + ",\n" +
+                "  \"antigüedad\": " + prop.getAntigüedad() + ",\n" +
+                "  \"pisos\": " + prop.getPisos() + ",\n" +
                 "  \"descripción\": \"" + descripción + "\"\n" +
-                "  \"cantImagenes\": \"" + prop.getCantImagenes() + "\"\n" +
-                "  \"nombreImagenes\": \"" + nombreImagenes + "\"\n" +
-                "  \"latitud\": \"" + prop.getLatitud() + "\"\n" +
-                "  \"longitud\": \"" + prop.getLongitud() + "\"\n" +
+                "  \"listaImagenes\": \"" + listaImagenes + "\"\n" +
+                "  \"latitud\": " + prop.getLatitud() + ",\n" +
+                "  \"longitud\": " + prop.getLongitud() + ",\n" +
                 "}";
 
         try (FileWriter writer = new FileWriter(rutaArchivo)) {
@@ -80,7 +107,7 @@ public class GestorArchivo {
             String tipoListado = extraerStrings(json, "tipoListado");
             String direccion = extraerStrings(json, "direccion");
             int metrosTotales = Integer.parseInt(extraerValores(json, "metrosTotales"));
-            int metrosCubiertos = Integer.parseInt(extraerStrings(json, "metrosCubiertos"));
+            int metrosCubiertos = Integer.parseInt(extraerValores(json, "metrosCubiertos"));
             int cantAmb = Integer.parseInt(extraerValores(json, "cantAmb"));
             int cantBaños = Integer.parseInt(extraerValores(json, "cantBaños"));
             boolean cochera = Boolean.parseBoolean(extraerValores(json, "cochera"));
@@ -88,12 +115,11 @@ public class GestorArchivo {
             int antigüedad = Integer.parseInt(extraerValores(json, "antigüedad"));
             int pisos = Integer.parseInt(extraerValores(json, "pisos"));
             String descripción = extraerStrings(json, "descripción");
-            int cantImagenes = Integer.parseInt(extraerValores(json, "-"));
-            String nombreImagenes = extraerStrings(json, "nombreImagenes");
+            ArrayList<String> listaImagenes = extraerLista(json, "listaImagenes");
             double latitud = Double.parseDouble(extraerValores(json, "latitud"));
             double longitud = Double.parseDouble(extraerValores(json, "longitud"));
 
-            return new Propiedad(nombre, precio, tipoInmueble, tipoListado, direccion, metrosTotales, metrosCubiertos, cantAmb, cantBaños, cochera, expensas, antigüedad, pisos, descripción, cantImagenes, nombreImagenes, latitud, longitud);
+            return new Propiedad(nombre, precio, tipoInmueble, tipoListado, direccion, metrosTotales, metrosCubiertos, cantAmb, cantBaños, cochera, expensas, antigüedad, pisos, descripción, listaImagenes, latitud, longitud);
 
         } catch (NumberFormatException e) {
             System.out.println("Error: El formato numérico en el JSON está corrupto.");
@@ -101,6 +127,17 @@ public class GestorArchivo {
         } catch (Exception e) {
             System.out.println("Error al cargar: " + e.getMessage());
             return null;
+        }
+    }
+
+    public  static void borrarJSON(String rutaArchivo) {
+        File archivo = new File(rutaArchivo);
+        boolean eliminado = archivo.delete();
+
+        if (eliminado) {
+            System.out.println("Archivo eliminado correctamente");
+        } else {
+            System.out.println("El archivo no pudo ser borrado");
         }
     }
 }
