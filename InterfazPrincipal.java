@@ -8,13 +8,16 @@ import  java.util.List;
 
 
 public class InterfazPrincipal extends JFrame{
+    //Dispositivo
+    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
     //Paneles
     JPanel pnlLogo = new JPanel();
     JPanel pnlCentro = new JPanel(new FlowLayout(FlowLayout.LEFT, 25, 5));
 
     JScrollPane scroll = new JScrollPane(pnlCentro);
 
-    PanelRedondeado pnlFiltrador = new PanelRedondeado(20);
+    PanelRedondo pnlFiltrador = new PanelRedondo(20);
     JPanel pnlFiltrador2 = new JPanel();
     JPanel pnlGrilla = new JPanel();
 
@@ -23,14 +26,14 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
 
-    InterfazPrincipal(){
+    InterfazPrincipal(ArrayList<Propiedad> prop){
         setTitle("Inmobiliaria");
-        setSize(1024, 768);
+        setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -42,16 +45,17 @@ public class InterfazPrincipal extends JFrame{
         pnlFiltrador.setLayout(new BorderLayout());
         pnlFiltrador2.setLayout(new BoxLayout(pnlFiltrador2, BoxLayout.Y_AXIS));
 
+        pnlGrilla.setLayout(new GridLayout(0, 3, 15, 15));
+
 
         //Ajuste de Paneles
         pnlLogo.setPreferredSize(new Dimension(MAXIMIZED_HORIZ,110));
         pnlLogo.setBackground(Color.WHITE);
 
-        pnlFiltrador.setPreferredSize(new Dimension(150,550));
         pnlFiltrador.setBackground(Color.WHITE);
         pnlFiltrador2.setBackground(Color.WHITE);
 
-        pnlGrilla.setPreferredSize(new Dimension(1680,1000));
+        pnlGrilla.setPreferredSize(new Dimension((int)(pantalla.width * 0.86), (int)(pantalla.height * 0.9)));
         pnlGrilla.setBorder(BorderFactory.createTitledBorder("Explorador"));
 
 
@@ -96,7 +100,7 @@ public class InterfazPrincipal extends JFrame{
         txtHasta.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
-        //Agrego
+        //Agregar
         //Agregar a Paneles
         pnlLogo.add(lblLogo);
 
@@ -116,6 +120,7 @@ public class InterfazPrincipal extends JFrame{
         pnlFiltrador2.add(txtDesde);
         pnlFiltrador2.add(lblPrecioF);
         pnlFiltrador2.add(txtHasta);
+        pnlFiltrador2.add(Box.createVerticalStrut(15));
 
         pnlFiltrador.add(btnAgregar, BorderLayout.NORTH);
         pnlFiltrador.add(pnlFiltrador2, BorderLayout.CENTER);
@@ -132,7 +137,18 @@ public class InterfazPrincipal extends JFrame{
     
     public static void main(String[] args){
     FlatLightLaf.setup();
-    SwingUtilities.invokeLater(() -> {new InterfazPrincipal().setVisible(true);
+    ArrayList<String> List1 = new ArrayList<>();
+    for(int i = 0; i<4; i++){
+        List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\Logo.png");
+    }
+
+    ArrayList<Propiedad> List2 = new ArrayList<>();
+    for(int i = 0; i<12; i++){
+        Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
+        List2.add(prop);
+    }
+
+    SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
         });
     }
 }
