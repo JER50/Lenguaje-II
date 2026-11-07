@@ -1,0 +1,19 @@
+{
+  "nombre": "",
+  "precio": "1",
+  "tipoInmueble": "Departamento",
+  "tipoListado": "Venta",
+  "direccion": "",
+  "metrosTotales": "5",
+  "metrosCubiertos": "5",
+  "cantAmb": "1",
+  "cantBaños": "1",
+  "cochera": "false",
+  "expensas": "1",
+  "antigüedad": "1",
+  "pisos": "1",
+  "descripción": "",
+  "imagenes": "[]",
+  "latitud": "-24.79525713196911",
+  "longitud": "-65.42442083358765"
+}
