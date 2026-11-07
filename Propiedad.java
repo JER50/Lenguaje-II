@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 public class Propiedad {
-    //Atributos
+    
+	//Bombardeen caracas
+	
+	//Atributos
     private String nombre;
     private int precio;
     private String tipoInmueble;
