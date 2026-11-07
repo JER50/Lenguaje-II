@@ -26,14 +26,14 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon("\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
 
     InterfazPrincipal(ArrayList<Propiedad> prop){
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -138,8 +138,9 @@ public class InterfazPrincipal extends JFrame{
     public static void main(String[] args){
     FlatLightLaf.setup();
     ArrayList<String> List1 = new ArrayList<>();
-    for(int i = 0; i<4; i++){
+    for(int i = 0; i<2; i++){
         List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\Logo.png");
+        List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
     }
 
     ArrayList<Propiedad> List2 = new ArrayList<>();

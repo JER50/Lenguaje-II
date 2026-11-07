@@ -1,6 +1,7 @@
+import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.util.ArrayList;
 
 public class GestorArchivo {
     private static String evitaProblemas(String texto) {
@@ -35,36 +36,38 @@ public class GestorArchivo {
         return json.substring(inicio, fin).trim();
     }
 
-    public static void guardadoJSON(Propiedad prop, String rutaArchivo) {
+    public void guardadoJSON(Propiedad prop, String rutaArchivo) {
         String nombre = evitaProblemas(prop.getNombre());
         String tipoInmueble = evitaProblemas(prop.getTipoInmueble());
         String tipoListado = evitaProblemas(prop.getTipoListado());
         String direccion = evitaProblemas(prop.getDireccion());
         String descripción = evitaProblemas(prop.getDescripción());
-        String nombreImagenes = evitaProblemas(prop.getNombreImagenes());
 
         String json = "{\n" +
                 "  \"nombre\": \"" + nombre + "\",\n" +
-                "  \"precio\": " + prop.getPrecio() + ",\n" +
-                "  \"tipoInmueble\": \"" + tipoInmueble + "\"\n" +
-                "  \"tipoListado\": \"" + tipoListado + "\"\n" +
-                "  \"direccion\": \"" + direccion + "\"\n" +
-                "  \"metrosTotales\": \"" + prop.getMetrosTotales() + "\"\n" +
-                "  \"metrosCubiertos\": \"" + prop.getMetrosCubiertos() + "\"\n" +
-                "  \"cantAmb\": \"" + prop.getCantAmb() + "\"\n" +
-                "  \"cantBaños\": \"" + prop.getCantBaños() + "\"\n" +
-                "  \"cochera\": \"" + prop.isCochera() + "\"\n" +
-                "  \"expensas\": \"" + prop.getExpensas() + "\"\n" +
-                "  \"antigüedad\": \"" + prop.getAntigüedad() + "\"\n" +
-                "  \"pisos\": \"" + prop.getPisos() + "\"\n" +
-                "  \"descripción\": \"" + descripción + "\"\n" +
-                "  \"cantImagenes\": \"" + prop.getCantImagenes() + "\"\n" +
-                "  \"nombreImagenes\": \"" + nombreImagenes + "\"\n" +
-                "  \"latitud\": \"" + prop.getLatitud() + "\"\n" +
+                "  \"precio\": \"" + prop.getPrecio() + "\",\n" +
+                "  \"tipoInmueble\": \"" + tipoInmueble + "\",\n" +
+                "  \"tipoListado\": \"" + tipoListado + "\",\n" +
+                "  \"direccion\": \"" + direccion + "\",\n" +
+                "  \"metrosTotales\": \"" + prop.getMetrosTotales() + "\",\n" +
+                "  \"metrosCubiertos\": \"" + prop.getMetrosCubiertos() + "\",\n" +
+                "  \"cantAmb\": \"" + prop.getCantAmb() + "\",\n" +
+                "  \"cantBaños\": \"" + prop.getCantBaños() + "\",\n" +
+                "  \"cochera\": \"" + prop.isCochera() + "\",\n" +
+                "  \"expensas\": \"" + prop.getExpensas() + "\",\n" +
+                "  \"antigüedad\": \"" + prop.getAntigüedad() + "\",\n" +
+                "  \"pisos\": \"" + prop.getPisos() + "\",\n" +
+                "  \"descripción\": \"" + descripción + "\",\n" +
+                "  \"imagenes\": \"" + prop.getImagenes() + "\",\n" +
+                "  \"latitud\": \"" + prop.getLatitud() + "\",\n" +
                 "  \"longitud\": \"" + prop.getLongitud() + "\"\n" +
                 "}";
-
-        try (FileWriter writer = new FileWriter(rutaArchivo)) {
+        File archivo = new File(rutaArchivo, "Propiedad.json");
+        int n = 1;
+        while(archivo.exists()){
+            archivo = new File(rutaArchivo, "Propiedad(" + n++ +").json");
+        }
+        try (FileWriter writer = new FileWriter(archivo)) {
             writer.write(json);
         } catch (Exception e) {
             System.out.println("Error al escribir: " + e.getMessage());
@@ -88,12 +91,10 @@ public class GestorArchivo {
             int antigüedad = Integer.parseInt(extraerValores(json, "antigüedad"));
             int pisos = Integer.parseInt(extraerValores(json, "pisos"));
             String descripción = extraerStrings(json, "descripción");
-            int cantImagenes = Integer.parseInt(extraerValores(json, "-"));
-            String nombreImagenes = extraerStrings(json, "nombreImagenes");
             double latitud = Double.parseDouble(extraerValores(json, "latitud"));
             double longitud = Double.parseDouble(extraerValores(json, "longitud"));
 
-            return new Propiedad(nombre, precio, tipoInmueble, tipoListado, direccion, metrosTotales, metrosCubiertos, cantAmb, cantBaños, cochera, expensas, antigüedad, pisos, descripción, cantImagenes, nombreImagenes, latitud, longitud);
+            return new Propiedad(nombre, precio, tipoInmueble, tipoListado, direccion, metrosTotales, metrosCubiertos, cantAmb, cantBaños, cochera, expensas, antigüedad, pisos, descripción, new ArrayList<>(), latitud, longitud);
 
         } catch (NumberFormatException e) {
             System.out.println("Error: El formato numérico en el JSON está corrupto.");

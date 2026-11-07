@@ -6,6 +6,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class InterfazAmpliada extends JFrame{
+    // Dispositivo
+    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
     //Paneles
     JPanel pnlNorte = new JPanel();
     JPanel pnlEste = new JPanel();
@@ -22,19 +25,19 @@ public class InterfazAmpliada extends JFrame{
     JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
     JPanel pnlTexto = new JPanel(new FlowLayout(FlowLayout.CENTER,100,30));
 
-    PanelRedondeado pnlCaracteristicas = new PanelRedondeado(20);
-    PanelRedondeado pnlDescripcion = new PanelRedondeado(20);
-    PanelRedondeado pnlMapa = new PanelRedondeado(15);
+    PanelRedondo pnlCaracteristicas = new PanelRedondo(20);
+    PanelRedondo pnlDescripcion = new PanelRedondo(20);
+    PanelRedondo pnlMapa = new PanelRedondo(15);
 
 
-    ImageIcon imglogo = new ImageIcon("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
 
     InterfazAmpliada(Propiedad p){
         setTitle("Inmobiliaria");
-        setSize(1024, 768);
+        setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -99,7 +102,7 @@ public class InterfazAmpliada extends JFrame{
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar(x)");
 
-        MapaInmueble.agregarMapa(pnlMapa, p.getLatitud(), p.getLongitud());
+        new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
 
 
         //Ajusto Eventos
