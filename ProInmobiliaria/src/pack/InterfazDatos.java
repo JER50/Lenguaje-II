@@ -24,10 +24,11 @@ public class InterfazDatos extends JFrame{
     JPanel pnlMapa = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
     //Inicializo Listas
+    ArrayList<String> imagenes;
     String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
     String[] tipoPropiedad = {"Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros"};
     
-    InterfazDatos(Propiedad p, Runnable alAceptar){
+    InterfazDatos(Propiedad p, Runnable alAceptar) {
         setTitle("Propiedad");
         setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -443,14 +444,14 @@ public class InterfazDatos extends JFrame{
         mp.getMapa().setPreferredSize(new Dimension(mpAnchura,mpAltura));
 
         btnImagenes.addActionListener(e -> {
-            ArrayList<String> imagenes = Selector.elegirImagenes(this);
+            imagenes = GestorArchivo.elegirImagenes(this);
             System.out.println(imagenes);
         });
 
         btnGuardar.addActionListener(e -> {
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
-            Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), new ArrayList<>(), lat, lon );
+            Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), imagenes, lat, lon );
 
             GestorArchivo.guardadoJSON(nuePropiedad);
             dispose();
