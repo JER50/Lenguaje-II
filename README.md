@@ -1,4 +1,4 @@
-- [ ] Imagen Default
+- [x] Imagen Default
 - [ ] Filtros
 - [ ] Ampliado y Tarjeta(dejarlo lindo)
 - [ ] Completar Editar
