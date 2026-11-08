@@ -195,6 +195,7 @@ public class InterfazDatos extends JFrame{
         btnAceptar.addActionListener(e -> {
             p.setNombre(txtNombre.getText());
             //relleanar
+
             alAceptar.run();
             dispose();
         });
@@ -366,6 +367,8 @@ public class InterfazDatos extends JFrame{
         JRadioButton rbSi = new JRadioButton("Si");
         JRadioButton rbNo = new JRadioButton("No");
 
+        JButton btnImagenes = new JButton("Seleccionar Imagenes");
+
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
 
@@ -439,6 +442,11 @@ public class InterfazDatos extends JFrame{
         });
         mp.getMapa().setPreferredSize(new Dimension(mpAnchura,mpAltura));
 
+        btnImagenes.addActionListener(e -> {
+            ArrayList<String> imagenes = Selector.elegirImagenes(this);
+            System.out.println(imagenes);
+        });
+
         btnGuardar.addActionListener(e -> {
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
@@ -494,6 +502,8 @@ public class InterfazDatos extends JFrame{
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblDescripcion);
         pnlCentro.add(pnlscrolltxt);
+        pnlCentro.add(Box.createVerticalStrut(15));
+        pnlCentro.add(btnImagenes);
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblUbicacion);
         pnlCentro.add(txtLat);
