@@ -188,7 +188,7 @@ public class InterfazDatos extends JFrame{
             Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), new ArrayList<>(), lat, lon );
             GestorArchivo ga = new GestorArchivo();
 
-            ga.guardadoJSON(nuePropiedad, "D:\\Java\\Lenguaje II\\ProInmobiliaria\\propiedades");
+            ga.guardadoJSON(nuePropiedad);
             dispose();
         });
 
