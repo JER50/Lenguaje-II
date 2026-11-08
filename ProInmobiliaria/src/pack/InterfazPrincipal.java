@@ -3,6 +3,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 //Librerias
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 
 
 public class InterfazPrincipal extends JFrame{
+    //Carpeta de imagenes
+    private static final Path carpeta = Path.of("ProInmobiliaria", "archivos", "imagenes");
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -36,14 +39,14 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon(InterfazPrincipal.class.getResource("/imagenes/LogoT.png"));
+    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpeta.resolve("UcasalIcono.jpg").toString()));
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(InterfazPrincipal.class.getResource("/imagenes/UcasalIcono.jpg")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(carpeta.resolve("UcasalIcono.jpg").toString()));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
