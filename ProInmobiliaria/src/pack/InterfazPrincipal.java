@@ -204,14 +204,8 @@ public class InterfazPrincipal extends JFrame{
     	        System.out.println("Error accediendo a la carpeta");
     	 }
     	    
-    	    
-    	for(int i = 0; i<24; i++){
-    	        Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
-    	        propiedades.add(prop);
-    	        propiedades.add(prop);
-    	    }
-
-    	    SwingUtilities.invokeLater(() -> {new InterfazPrincipal(propiedades).setVisible(true);
-    	        });
-    	    }
+    	 SwingUtilities.invokeLater(() -> {new InterfazPrincipal(propiedades).setVisible(true);
+    	 
+    	 });
+    }
 }

@@ -24,7 +24,7 @@ public class InterfazDatos extends JFrame{
     JPanel pnlMapa = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
     //Inicializo Listas
-    ArrayList<String> imagenes;
+    ArrayList<String> imagenes = new ArrayList<String>();
     String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
     String[] tipoPropiedad = {"Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros"};
     
@@ -368,7 +368,7 @@ public class InterfazDatos extends JFrame{
         JRadioButton rbSi = new JRadioButton("Si");
         JRadioButton rbNo = new JRadioButton("No");
 
-        JButton btnImagenes = new JButton("Seleccionar Imagenes");
+        JButton btnImagenes = new JButton("Volver a seleccionar imagenes: ");
 
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
@@ -451,7 +451,7 @@ public class InterfazDatos extends JFrame{
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
             
-            if(imagenes.size()==0) imagenes.add(carpetaImagenes.resolve("Logo.png").toString());
+            if(imagenes.size()==0) imagenes.add(carpetaImagenes.resolve("default.png").toString());
             Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), imagenes, lat, lon );
 
             GestorArchivo.guardadoJSON(nuePropiedad);
