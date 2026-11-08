@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 
 public class GestorArchivo {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path carpeta = Path.of("ProInmobiliaria", "archivos", "propiedades");
+    private static final Path carpeta = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "propiedades");
 
     public static void guardadoJSON(Propiedad prop) {
         try {

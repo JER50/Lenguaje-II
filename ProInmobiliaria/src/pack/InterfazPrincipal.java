@@ -1,5 +1,8 @@
-package pack;//tema
+package pack;
+
+//tema
 import com.formdev.flatlaf.FlatLightLaf;
+
 //Librerias
 import javax.swing.*;
 import java.awt.*;
@@ -7,17 +10,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-//solicitar archivo = "nombre de la clase desde donde piden".class.getResource("direccion del archivo, dentro de archivos")
-//Por ejemplo, pido las imagenes para el logo y la interfaz princial con
-//ProInmobiliaria.src.pack.InterfazPrincipal.class.getResource("/imagenes/LogoT.png") y no con ProInmobiliaria.src.pack.InterfazPrincipal.class.getResource("/archivos/imagenes/LogoT.png")
-//No hace falta el /archivos al principio
-
-
 public class InterfazPrincipal extends JFrame{
+	
     //Carpeta de imagenes
-    private static final Path carpeta = Path.of("ProInmobiliaria", "archivos", "imagenes");
+    private static final Path carpeta = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
+    
+    
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -39,14 +37,17 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpeta.resolve("UcasalIcono.jpg").toString()));
+    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpeta.resolve("LogoT.png").toString()));
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
+    	
+    	System.out.print(carpeta.resolve("UcasalIcono.jpg").toString());
+    	
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(carpeta.resolve("UcasalIcono.jpg").toString()));
+        setIconImage(Toolkit.getDefaultToolkit().getImage( carpeta.resolve("UcasalIcono.jpg").toString()) );
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
