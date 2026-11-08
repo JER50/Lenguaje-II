@@ -20,13 +20,13 @@ Date:   Sat Nov 7 18:54:26 2026 -0300
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:54:18 2026 -0300
 
-    Delete Propiedad.java
+    Delete ProInmobiliaria.src.pack.Propiedad.java
 
 [33mcommit 1a152a27349ba9858920fa716551c236f8f4b5a6[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:54:11 2026 -0300
 
-    Delete PanelRedondo.java
+    Delete ProInmobiliaria.src.pack.PanelRedondo.java
 
 [33mcommit 44bafe9f407f80d63821364b517022d7dfeefb44[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
@@ -50,31 +50,31 @@ Date:   Sat Nov 7 18:53:47 2026 -0300
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:53:39 2026 -0300
 
-    Delete Mapa.java
+    Delete ProInmobiliaria.src.pack.Mapa.java
 
 [33mcommit 24ac653920b66a60311378f760f0c29ae4c5eec8[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:53:08 2026 -0300
 
-    Delete InterfazPrincipal.java
+    Delete ProInmobiliaria.src.pack.InterfazPrincipal.java
 
 [33mcommit 7b18afa6926484bfa52b2eb3cb95d7d8703fd71f[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:53:00 2026 -0300
 
-    Delete InterfazDatos.java
+    Delete ProInmobiliaria.src.pack.InterfazDatos.java
 
 [33mcommit b64b1914d8053b2a044f824908520fa882cef21f[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:52:49 2026 -0300
 
-    Delete InterfazAmpliada.java
+    Delete ProInmobiliaria.src.pack.InterfazAmpliada.java
 
 [33mcommit e6a26b546aec5173632b56332b9e77c37665f35a[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
 Date:   Sat Nov 7 18:52:41 2026 -0300
 
-    Delete GestorArchivo.java
+    Delete ProInmobiliaria.src.pack.GestorArchivo.java
 
 [33mcommit abe390328ff1e019fd083706e5433cb1941239ae[m
 Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
