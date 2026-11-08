@@ -22,7 +22,9 @@ public class GestorArchivo {
         return valorConEscape.replace("\\\"", "\"").replace("\\\\", "\\");
     }
     private static String extraerValores(String json, String clave) {
+
         //String patron = "正式\"" + clave + "\":"; // Buscamos por ejemplo -> "edad":
+        
         int inicio = json.indexOf("\"" + clave + "\":");
         if (inicio == -1) return "0";
         inicio += ("\"" + clave + "\":").length();

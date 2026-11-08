@@ -29,14 +29,14 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon("\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon("\\ProInmobiliaria\\imagenes\\LogoT.png");
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
