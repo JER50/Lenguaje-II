@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import  java.util.List;
 
 
+//solicitar archivo = "nombre de la clase desde donde piden".class.getResource("direccion del archivo, dentro de archivos")
+//Por ejemplo, pido las imagenes para el logo y la interfaz princial con
+//InterfazPrincipal.class.getResource("/imagenes/LogoT.png") y no con InterfazPrincipal.class.getResource("/archivos/imagenes/LogoT.png")
+//No hace falta el /archivos al principio
+
+
 public class InterfazPrincipal extends JFrame{
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
@@ -29,14 +35,14 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon("\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon(InterfazPrincipal.class.getResource("/imagenes/LogoT.png"));
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(InterfazPrincipal.class.getResource("/imagenes/UcasalIcono.jpg")));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -81,6 +87,7 @@ public class InterfazPrincipal extends JFrame{
 
 
         //Componenetes
+        
         //Inicializo botones Componentes
         JButton btnAgregar = new JButton("Agregar");
         JButton btnFiltrar = new JButton("Filtrar");
@@ -135,6 +142,7 @@ public class InterfazPrincipal extends JFrame{
             Tarjeta tarjeta = new Tarjeta(propiedad, () -> System.out.println("Abrir detalle"));
             pnlGrilla.add(tarjeta);
         }
+        
         pnlMarco.add(pnlGrilla);
         pnlCentro.add(pnlFiltrador);
         pnlCentro.add(pnlGrilla);
@@ -146,20 +154,22 @@ public class InterfazPrincipal extends JFrame{
     }
     
     public static void main(String[] args){
-    FlatLightLaf.setup();
-    ArrayList<String> List1 = new ArrayList<>();
-    for(int i = 0; i<2; i++){
-        List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\Logo.png");
-        List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
-    }
+    	FlatLightLaf.setup();
+    	
+    	
+    	ArrayList<String> List1 = new ArrayList<>();
+    	for(int i = 0; i<2; i++){
+    		List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\Logo.png");
+    		List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    	}
 
-    ArrayList<Propiedad> List2 = new ArrayList<>();
-    for(int i = 0; i<24; i++){
-        Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
-        List2.add(prop);
-    }
+    	ArrayList<Propiedad> List2 = new ArrayList<>();
+    	for(int i = 0; i<10; i++){
+    		Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
+    		List2.add(prop);
+    	}
 
-    SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
-        });
-    }
+    	SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
+        	});
+    	}
 }
