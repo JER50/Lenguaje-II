@@ -1,72 +1,19 @@
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.FileWriter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 public class GestorArchivo {
-    private static String evitaProblemas(String texto) {
-        if (texto==null)
-            return "";
-        texto.replace("\\", "\\\\");
-        texto.replace("\"", "\\\"");
-        return texto;
-    }
+    public static void guardadoJSON(Propiedad prop, String nombre) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    private static String extraerStrings(String json, String clave) {
-        String patron = "\"" + clave + "\": \"";
-        int inicio = json.indexOf(patron);
-        if (inicio == -1) return "";
-        inicio += patron.length();
-        int fin = json.indexOf("\"", inicio);
-        String valorConEscape = json.substring(inicio, fin);
-        return valorConEscape.replace("\\\"", "\"").replace("\\\\", "\\");
-    }
-    private static String extraerValores(String json, String clave) {
-        //String patron = "正式\"" + clave + "\":"; // Buscamos por ejemplo -> "edad":
-        int inicio = json.indexOf("\"" + clave + "\":");
-        if (inicio == -1) return "0";
-        inicio += ("\"" + clave + "\":").length();
-        int finComa = json.indexOf(",", inicio);
-        int finLlave = json.indexOf("}", inicio);
-        int finSalto = json.indexOf("\n", inicio);
-        int fin = json.length();
-        if (finComa != -1 && finComa < fin) fin = finComa;
-        if (finLlave != -1 && finLlave < fin) fin = finLlave;
-        if (finSalto != -1 && finSalto < fin) fin = finSalto;
-        return json.substring(inicio, fin).trim();
-    }
-
-    public static void guardadoJSON(Propiedad prop, String rutaArchivo) {
-        String nombre = evitaProblemas(prop.getNombre());
-        String tipoInmueble = evitaProblemas(prop.getTipoInmueble());
-        String tipoListado = evitaProblemas(prop.getTipoListado());
-        String direccion = evitaProblemas(prop.getDireccion());
-        String descripción = evitaProblemas(prop.getDescripción());
-        String nombreImagenes = evitaProblemas(prop.getNombreImagenes());
-
-        String json = "{\n" +
-                "  \"nombre\": \"" + nombre + "\",\n" +
-                "  \"precio\": " + prop.getPrecio() + ",\n" +
-                "  \"tipoInmueble\": \"" + tipoInmueble + "\"\n" +
-                "  \"tipoListado\": \"" + tipoListado + "\"\n" +
-                "  \"direccion\": \"" + direccion + "\"\n" +
-                "  \"metrosTotales\": \"" + prop.getMetrosTotales() + "\"\n" +
-                "  \"metrosCubiertos\": \"" + prop.getMetrosCubiertos() + "\"\n" +
-                "  \"cantAmb\": \"" + prop.getCantAmb() + "\"\n" +
-                "  \"cantBaños\": \"" + prop.getCantBaños() + "\"\n" +
-                "  \"cochera\": \"" + prop.isCochera() + "\"\n" +
-                "  \"expensas\": \"" + prop.getExpensas() + "\"\n" +
-                "  \"antigüedad\": \"" + prop.getAntigüedad() + "\"\n" +
-                "  \"pisos\": \"" + prop.getPisos() + "\"\n" +
-                "  \"descripción\": \"" + descripción + "\"\n" +
-                "  \"cantImagenes\": \"" + prop.getCantImagenes() + "\"\n" +
-                "  \"nombreImagenes\": \"" + nombreImagenes + "\"\n" +
-                "  \"latitud\": \"" + prop.getLatitud() + "\"\n" +
-                "  \"longitud\": \"" + prop.getLongitud() + "\"\n" +
-                "}";
-
-        try (FileWriter writer = new FileWriter(rutaArchivo)) {
-            writer.write(json);
-        } catch (Exception e) {
+        try (FileWriter writer = new FileWriter(nombre + ".json")) {
+            gson.toJson(prop, writer);
+        } catch (IOException e) {
             System.out.println("Error al escribir: " + e.getMessage());
         }
     }
