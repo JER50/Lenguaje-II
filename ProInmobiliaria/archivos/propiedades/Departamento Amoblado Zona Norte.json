@@ -1,0 +1,25 @@
+{
+  "nombre": "Departamento Amoblado Zona Norte",
+  "precio": 280000,
+  "tipoInmueble": "Departamento",
+  "tipoListado": "Alquiler",
+  "direccion": "Avenida Democracia S/N",
+  "metrosTotales": 35,
+  "metrosCubiertos": 35,
+  "cantAmb": 1,
+  "cantBaños": 1,
+  "cochera": true,
+  "expensas": 40000,
+  "antigüedad": 3,
+  "pisos": 1,
+  "descripción": "Un departamento amoblado en zona norte de una habitación, ideal para estudiantes ya que queda a una distancia caminable de la Universidad Católica y de la UNSA",
+  "imagenes": [
+    "archivos/imagenes/Depto 1-1.png",
+    "archivos/imagenes/Depto 1-2.png",
+    "archivos/imagenes/Depto 1-3.png",
+    "archivos/imagenes/Depto 1-4.png",
+    "archivos/imagenes/Depto 1-5.png"
+  ],
+  "latitud": -24.724009768904462,
+  "longitud": -65.41540324687958
+}

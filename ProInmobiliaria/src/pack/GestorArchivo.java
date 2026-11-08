@@ -64,7 +64,7 @@ public class GestorArchivo {
                 try {
                     Path destino = carpetaImagenes.resolve(f.getName());
                     Files.copy(f.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                    nombres.add(destino.toString());
+                    nombres.add(Path.of("").toAbsolutePath().relativize(destino).toString().replace("\\", "/"));;
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(parent, "No se pudieron copiar las imagenes: " + e.getMessage());
                 }
