@@ -1,17 +1,10 @@
-package pack;//tema
-
-import com.formdev.flatlaf.FlatLightLaf;
+package pack;
 //Librerias
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.nio.file.Path;
 
-public class InterfazAmpliada extends JFrame{
+public class InterfazAmpliada extends JPanel{
     // Dispositivo
-	
-	private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
-	
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
     //Paneles
@@ -19,8 +12,6 @@ public class InterfazAmpliada extends JFrame{
     JPanel pnlEste = new JPanel();
     JPanel pnlOeste = new JPanel();
     JPanel pnlSur = new JPanel();
-    
-    JPanel pnlLogo = new JPanel();
 
     JPanel pnlCentro = new JPanel(new BorderLayout());
     JScrollPane scroll = new JScrollPane(pnlCentro);
@@ -35,31 +26,15 @@ public class InterfazAmpliada extends JFrame{
     PanelRedondo pnlMapa = new PanelRedondo(15);
 
 
-    ImageIcon imglogo = new ImageIcon(carpetaImagenes.resolve("LogoT.png").toString());
-
-    InterfazAmpliada(Propiedad p){
-        setTitle("Inmobiliaria");
-        setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("UcasalIcono.png").toString()));
-        setLocationRelativeTo(null);
+    InterfazAmpliada(Propiedad p, Runnable alAtras){
         setLayout(new BorderLayout());
-
-        //Imagenes
-        //Ajustes de Imagenes
-        Image img = imglogo.getImage().getScaledInstance(180, 110, Image.SCALE_SMOOTH);
-
 
         //Paneles
         //Ajustes de Paneles
-        pnlLogo.setPreferredSize(new Dimension(MAXIMIZED_HORIZ,110));
-        pnlLogo.setBackground(Color.WHITE);
-
-        pnlNorte.setPreferredSize(new Dimension(MAXIMIZED_HORIZ, 20));
-        pnlEste.setPreferredSize(new Dimension(25,MAXIMIZED_VERT));
-        pnlOeste.setPreferredSize(new Dimension(25,MAXIMIZED_VERT));
-        pnlSur.setPreferredSize(new Dimension(MAXIMIZED_HORIZ, 5));
+        pnlNorte.setPreferredSize(new Dimension(0, 20));
+        pnlEste.setPreferredSize(new Dimension(25,0));
+        pnlOeste.setPreferredSize(new Dimension(25,0));
+        pnlSur.setPreferredSize(new Dimension(0, 5));
 
         pnlTexto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 360));
         pnlTexto.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -75,6 +50,12 @@ public class InterfazAmpliada extends JFrame{
         pnlCaracteristicas.setLayout(new BoxLayout(pnlCaracteristicas, BoxLayout.Y_AXIS));
         pnlCaracteristicas.setBackground(Color.WHITE);
 
+
+        int mpAnchura =(int)(pantalla.width*0.375);
+        int mpAltura =(int)(pantalla.height*0.3);
+
+        pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));        
+        pnlMapa.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlMapa.setBackground(Color.WHITE);
 
@@ -83,7 +64,6 @@ public class InterfazAmpliada extends JFrame{
 
         //Labels
         //Inicializo Labels
-        JLabel lblLogo = new JLabel(new ImageIcon(img));
         JLabel lbltitulo = new JLabel(p.getNombre());
 
         JLabel lblDescripcion = new JLabel("Descripción:");
@@ -107,20 +87,30 @@ public class InterfazAmpliada extends JFrame{
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar(x)");
 
-        new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
+        Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
+        mp.getMapa().setPreferredSize(new Dimension(mpAnchura, mpAltura));
 
 
         //Ajusto Eventos
         btnRegresar.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnRegresar.addActionListener(e -> alAtras.run());
 
         btnEditar.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnEditar.addActionListener(e ->{
+            InterfazDatos ventana = new InterfazDatos(p, () -> {
+                lbltitulo.setText(p.getNombre());
+                // actualiza aquí los demás labels que muestren datos de p
+                revalidate();
+                repaint();
+            });
+            ventana.setVisible(true);
+        });
 
         btnBorrar.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
         //Agrego
         //Agrego a Paneles
-        pnlLogo.add(lblLogo);
 
         pnlTexto.add(pnlDescripcion);
         pnlTexto.add(pnlCaracteristicas);
@@ -149,14 +139,6 @@ public class InterfazAmpliada extends JFrame{
 
 
         //Agrego a Panel Principal
-        add(pnlLogo, BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
-    }
-
-    public static void main(String[] args){
-        Propiedad p = new Propiedad("Casa", 1000, "Casa", "Venta", "Luis Angel de Dios", 80, 50, 5, 2, true, 200, 20, 2, "Una casa muy Bonita :D", new ArrayList<>(), -24.795784554541317, -65.42473102022629);
-        FlatLightLaf.setup();
-        SwingUtilities.invokeLater(() -> {new InterfazAmpliada(p).setVisible(true);
-        });
     }
 }

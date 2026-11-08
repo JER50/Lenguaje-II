@@ -1,36 +1,36 @@
 package pack;
-
 //tema
 import com.formdev.flatlaf.FlatLightLaf;
-
 //Librerias
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
-
+import  java.util.List;
+import java.nio.file.Path;
+//Principal
 public class InterfazPrincipal extends JFrame{
-	
     //Carpeta de imagenes
     private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
-    
-    
+
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
     //Paneles
     JPanel pnlLogo = new JPanel();
-    JPanel pnlCentro = new JPanel(new FlowLayout(FlowLayout.LEFT, 25, 5));
+    JPanel pnlCentro = new JPanel(new BorderLayout());
 
-    JScrollPane scroll = new JScrollPane(pnlCentro);
+    JScrollPane scroll = new JScrollPane();
 
     PanelRedondo pnlFiltrador = new PanelRedondo(20);
     JPanel pnlFiltrador2 = new JPanel();
     JPanel pnlGrilla = new JPanel();
     JPanel pnlMarco = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+    JPanel pnlLado = new JPanel(new BorderLayout());
 
-    //JScrollPane scroll2 = new JScrollPane(pnlGrilla);
+    CardLayout cards = new CardLayout();
+    JPanel pnlCards = new JPanel(cards);
+    JPanel pnlVistaGrilla = new JPanel(new BorderLayout());
+    InterfazAmpliada detalle;
 
     String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
     List<String> opciones = List.of("Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros");
@@ -40,19 +40,16 @@ public class InterfazPrincipal extends JFrame{
     ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("LogoT.png").toString()));
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
-    	
-    	System.out.print(carpetaImagenes.resolve("UcasalIcono.jpg").toString());
-    	
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage( carpetaImagenes.resolve("UcasalIcono.jpg").toString()) );
+        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("UcasalIcono.jpg").toString()));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         //Ajuste de Imagenes
-        Image img = imglogo.getImage().getScaledInstance(180, 110, Image.SCALE_SMOOTH);
+        Image img = imglogo.getImage().getScaledInstance((int)(pantalla.width * 0.09), (int)(pantalla.width * 0.05), Image.SCALE_SMOOTH);
 
 
         //Ajustes de Layout
@@ -92,15 +89,17 @@ public class InterfazPrincipal extends JFrame{
 
 
         //Componenetes
-        
         //Inicializo botones Componentes
         JButton btnAgregar = new JButton("Agregar");
         JButton btnFiltrar = new JButton("Filtrar");
 
         JComboBox<String> cmbOperacion = new JComboBox<>(operacion);
 
-        JTextField txtDesde = new JTextField(10);
-        JTextField txtHasta = new JTextField(10); 
+        SpinnerNumberModel numMdlDesde= new SpinnerNumberModel(0, 0, 1000000000, 1);
+        JSpinner spinDesde = new JSpinner(numMdlDesde);
+
+        SpinnerNumberModel numMdlHasta= new SpinnerNumberModel(0, 0, 1000000000, 1);
+        JSpinner spinHasta = new JSpinner(numMdlHasta);
 
 
         //Ajuste de Eventos
@@ -110,11 +109,11 @@ public class InterfazPrincipal extends JFrame{
         btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(); ventana.setVisible(true);});
         btnFiltrar.addActionListener(null);
 
-        txtDesde.setMaximumSize(txtDesde.getPreferredSize());
-        txtDesde.setAlignmentX(Component.LEFT_ALIGNMENT);
+        spinDesde.setMaximumSize(spinDesde.getPreferredSize());
+        spinDesde.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        txtHasta.setMaximumSize(txtHasta.getPreferredSize());
-        txtHasta.setAlignmentX(Component.LEFT_ALIGNMENT);
+        spinHasta.setMaximumSize(spinHasta.getPreferredSize());
+        spinHasta.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
         //Agregar
@@ -134,48 +133,64 @@ public class InterfazPrincipal extends JFrame{
         }
         pnlFiltrador2.add(Box.createVerticalStrut(15));
         pnlFiltrador2.add(lblPrecioI);
-        pnlFiltrador2.add(txtDesde);
+        pnlFiltrador2.add(spinDesde);
         pnlFiltrador2.add(lblPrecioF);
-        pnlFiltrador2.add(txtHasta);
+        pnlFiltrador2.add(spinHasta);
         pnlFiltrador2.add(Box.createVerticalStrut(15));
 
         pnlFiltrador.add(btnAgregar, BorderLayout.NORTH);
         pnlFiltrador.add(pnlFiltrador2, BorderLayout.CENTER);
         pnlFiltrador.add(btnFiltrar, BorderLayout.SOUTH);
 
-        for(Propiedad propiedad : propList ){
-            Tarjeta tarjeta = new Tarjeta(propiedad, () -> System.out.println("Abrir detalle"));
+        for(Propiedad propiedad : propList){
+            Tarjeta tarjeta = new Tarjeta(propiedad, () -> abrirDetalle(propiedad));
             pnlGrilla.add(tarjeta);
         }
-        
-        pnlMarco.add(pnlGrilla);
-        pnlCentro.add(pnlFiltrador);
-        pnlCentro.add(pnlGrilla);
 
+        pnlCentro.add(pnlGrilla, BorderLayout.NORTH);
 
-        //Agregar Al panel Principal
+        scroll.setViewportView(pnlCentro);
+        scroll.setBorder(null);
+        scroll.getVerticalScrollBar().setUnitIncrement(16);
+
+        pnlLado.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 0));
+        pnlLado.add(pnlFiltrador, BorderLayout.NORTH);
+
+        pnlVistaGrilla.add(pnlLado, BorderLayout.WEST);
+        pnlVistaGrilla.add(scroll, BorderLayout.CENTER);
+
+        pnlCards.add(pnlVistaGrilla, "grilla");
+
         add(pnlLogo, BorderLayout.NORTH);
-        add(scroll, BorderLayout.CENTER);
+        add(pnlCards, BorderLayout.CENTER);
+    }
+
+    private void abrirDetalle(Propiedad p) {
+        if (detalle != null) pnlCards.remove(detalle);
+        detalle = new InterfazAmpliada(p, this::volverAGrilla);
+        pnlCards.add(detalle, "detalle");
+        cards.show(pnlCards, "detalle");
+    }
+
+    private void volverAGrilla() {
+        cards.show(pnlCards, "grilla");
     }
     
     public static void main(String[] args){
-    	
-    	FlatLightLaf.setup();
-    	
-    	
-    	ArrayList<String> List1 = new ArrayList<>();
-    	for(int i = 0; i<2; i++){
-    		List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\Logo.png");
-    		List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
-    	}
+    FlatLightLaf.setup();
+    ArrayList<String> List1 = new ArrayList<>();
+    for(int i = 0; i<2; i++){
+        List1.add(carpetaImagenes.resolve("Logo.png").toString());
+        List1.add(carpetaImagenes.resolve("LogoT.png").toString());
+    }
 
-    	ArrayList<Propiedad> List2 = new ArrayList<>();
-    	for(int i = 0; i<10; i++){
-    		Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
-    		List2.add(prop);
-    	}
+    ArrayList<Propiedad> List2 = new ArrayList<>();
+    for(int i = 0; i<24; i++){
+        Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
+        List2.add(prop);
+    }
 
-    	SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
-        	});
-    	}
+    SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
+        });
+    }
 }

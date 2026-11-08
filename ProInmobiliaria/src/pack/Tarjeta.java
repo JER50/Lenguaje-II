@@ -1,4 +1,5 @@
-package pack;//Librerias
+package pack;
+//Librerias
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -10,7 +11,7 @@ public class Tarjeta extends JPanel {
 
     public Tarjeta(Propiedad prop, Runnable alClick) {
         setLayout(new BorderLayout(0, 8));
-        setPreferredSize(new Dimension((int)(pantalla.width * 0.28), 500));
+        setPreferredSize(new Dimension((int)(pantalla.width * 0.28), (int)(pantalla.height*0.4)));
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

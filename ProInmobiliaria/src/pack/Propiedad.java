@@ -1,5 +1,4 @@
 package pack;
-
 import java.util.ArrayList;
 public class Propiedad {
     //Atributos
@@ -22,9 +21,7 @@ public class Propiedad {
     private double longitud;
 
     //Constructor
-    public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, 
-    					int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, 
-    					int pisos, String descripción, ArrayList<String> imagenes, double latitud, double longitud) {
+    public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, int pisos, String descripción, ArrayList<String> imagenes, double latitud, double longitud) {
         this.nombre = nombre;
         this.precio = precio;
         this.tipoInmueble = tipoInmueble;
@@ -95,8 +92,4 @@ public class Propiedad {
 
     public double getLongitud() {return longitud;}
     public void setLongitud(double longitud) {this.longitud = longitud;}
-
-    public String toString() {
-    	return "Bombardeen caracas" + descripción;
-    }
 }

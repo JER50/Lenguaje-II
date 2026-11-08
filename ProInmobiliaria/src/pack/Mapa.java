@@ -1,5 +1,4 @@
 package pack;
-
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -65,5 +64,9 @@ public class Mapa {
         panel.add(mapa);
         panel.revalidate();
         panel.repaint();
+    }
+
+    public JXMapViewer getMapa() {
+    return mapa;
     }
 }
