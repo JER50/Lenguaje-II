@@ -1,4 +1,4 @@
-package ProInmobiliaria.src.pack;
+package pack;
 
 import javax.swing.*;
 import java.awt.*;

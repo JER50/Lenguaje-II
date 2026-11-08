@@ -1,4 +1,4 @@
-package ProInmobiliaria.src.pack;
+package pack;
 
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/flatlaf-3.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jxmapviewer2-2.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.2.jar!/" />
+      <root url="file://$PROJECT_DIR$/ProInmobiliaria/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/ProInmobiliaria/lib" recursive="false" />
+  </library>
+</component>

@@ -1,4 +1,4 @@
-package ProInmobiliaria.src.pack;
+package pack;
 
 import java.io.File;
 import java.io.FileWriter;

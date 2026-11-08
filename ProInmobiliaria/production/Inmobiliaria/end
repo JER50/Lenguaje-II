@@ -1,0 +1,130 @@
+[33mcommit 946537977f72c5fc92d2f8145530b4c209951853[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: MatiasAvila0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 23:26:54 2026 -0300
+
+    Prueba Gson
+
+[33mcommit 5743dcee880b8d3bc1b9b15a16557fa990ac18bc[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: JER50 <julianjer50@gmail.com>
+Date:   Sat Nov 7 18:55:40 2026 -0300
+
+    Add files via upload
+
+[33mcommit e3503ed8c50966c498b75fa947a82ca4112f97c1[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:54:26 2026 -0300
+
+    Delete TarjetaPropiedad.java
+
+[33mcommit 55f62c8054ee1832bfe7261d8cdc1b9e5c178acd[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:54:18 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.Propiedad.java
+
+[33mcommit 1a152a27349ba9858920fa716551c236f8f4b5a6[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:54:11 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.PanelRedondo.java
+
+[33mcommit 44bafe9f407f80d63821364b517022d7dfeefb44[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:54:02 2026 -0300
+
+    Delete PanelRedondeado.java
+
+[33mcommit c79fe88dd3f5e1e786f905f057b4e2ebbe899980[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:53:55 2026 -0300
+
+    Delete MapaSelector.java
+
+[33mcommit b20bb08c34fa280341d4209e05b830d79d9334c5[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:53:47 2026 -0300
+
+    Delete MapaInmueble.java
+
+[33mcommit 85eb2101dee5bdeafe5ed67adb1e42a073188d30[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:53:39 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.Mapa.java
+
+[33mcommit 24ac653920b66a60311378f760f0c29ae4c5eec8[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:53:08 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.InterfazPrincipal.java
+
+[33mcommit 7b18afa6926484bfa52b2eb3cb95d7d8703fd71f[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:53:00 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.InterfazDatos.java
+
+[33mcommit b64b1914d8053b2a044f824908520fa882cef21f[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:52:49 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.InterfazAmpliada.java
+
+[33mcommit e6a26b546aec5173632b56332b9e77c37665f35a[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:52:41 2026 -0300
+
+    Delete ProInmobiliaria.src.pack.GestorArchivo.java
+
+[33mcommit abe390328ff1e019fd083706e5433cb1941239ae[m
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:52:32 2026 -0300
+
+    Delete lib directory
+
+[33mcommit 4b94532843243cd0f01434bc8877ee66c00391e4[m
+Merge: 41802f7 660ab72
+Author: AvilaMatias0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:29:03 2026 -0300
+
+    Merge pull request #1 from JER50/master
+    
+    Inicial
+
+[33mcommit 660ab72b3a60f74647ff7b26d8d2795a04a61461[m
+Author: MatiasAvila0193 <avilamatiasignacio0193@gmail.com>
+Date:   Sat Nov 7 18:27:31 2026 -0300
+
+    Inicial
+
+[33mcommit 41802f7e48ba3a4bc1f7434f009a9bcd45580396[m
+Author: JER50 <julianjer50@gmail.com>
+Date:   Sat Nov 7 16:26:26 2026 -0300
+
+    Add files via upload
+
+[33mcommit 8571ac52b7671e5f2f51762ccf0a3b982687aacc[m
+Author: JER50 <julianjer50@gmail.com>
+Date:   Sat Nov 7 15:40:14 2026 -0300
+
+    Add files via upload
+
+[33mcommit e3c554d63cf54f3eb3e5c5c3d0d702de5d0a130a[m
+Author: JER50 <julianjer50@gmail.com>
+Date:   Sun Nov 1 18:16:37 2026 -0300
+
+    Add files via upload
+
+[33mcommit 628b7b99f6db1666a5994216ce48aa8d86734ef8[m
+Author: JER50 <julianjer50@gmail.com>
+Date:   Sun Nov 1 17:59:47 2026 -0300
+
+    Add files via upload
+    
+    Necesitan esto para el tema, el mapa y unca coas más que no recuerdo
+
+[33mcommit f134648c1b642c97b45d15419f4432691354f1ad[m
+Author: JER50 <julianjer50@gmail.com>
+Date:   Thu Oct 29 13:49:29 2026 -0300
+
+    Add files via upload

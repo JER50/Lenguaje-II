@@ -1,4 +1,4 @@
-package ProInmobiliaria.src.pack;//Librerias
+package pack;//Librerias
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

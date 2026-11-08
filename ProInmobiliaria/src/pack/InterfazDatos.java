@@ -1,4 +1,4 @@
-package ProInmobiliaria.src.pack;//tema
+package pack;//tema
 import com.formdev.flatlaf.FlatLightLaf;
 //Librerias
 import javax.swing.*;
