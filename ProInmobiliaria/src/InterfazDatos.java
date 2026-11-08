@@ -5,8 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 public class InterfazDatos extends JFrame{
-
-    //Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+    //Dispositivo
+    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
     //inicializo Paneles
     JPanel pnlNorte = new JPanel();
@@ -25,7 +25,7 @@ public class InterfazDatos extends JFrame{
 
     InterfazDatos(){
         setTitle("Propiedad");
-        setSize(640, 1024);
+        setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
         setLocationRelativeTo(null);
@@ -36,9 +36,9 @@ public class InterfazDatos extends JFrame{
         pnlCentro.setLayout(new BoxLayout(pnlCentro, BoxLayout.Y_AXIS));
 
         pnlNorte.setPreferredSize(new Dimension(0,20));
-        pnlEste.setPreferredSize(new Dimension(20,0));
-        pnlOeste.setPreferredSize(new Dimension(20,0));
-        pnlMapa.setPreferredSize(new java.awt.Dimension(60, 250));
+        pnlEste.setPreferredSize(new Dimension(10,0));
+        pnlOeste.setPreferredSize(new Dimension(10,0));
+        pnlMapa.setPreferredSize(new Dimension(60, 250));
 
 
         //Labels
@@ -176,7 +176,7 @@ public class InterfazDatos extends JFrame{
         txtLon.setAlignmentX(Component.LEFT_ALIGNMENT);
         txtLon.setFocusable(false);
 
-        MapaSelector.agregarMapa(pnlMapa, -24.795784554541317, -65.42473102022629, (lat, lon) -> {
+        new Mapa(pnlMapa, -24.795784554541317, -65.42473102022629, (lat, lon) -> {
             txtLat.setText(String.valueOf(lat));
             txtLon.setText(String.valueOf(lon));
         });

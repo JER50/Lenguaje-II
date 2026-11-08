@@ -7,30 +7,42 @@ import java.util.ArrayList;
 import  java.util.List;
 
 
+//solicitar archivo = "nombre de la clase desde donde piden".class.getResource("direccion del archivo, dentro de archivos")
+//Por ejemplo, pido las imagenes para el logo y la interfaz princial con
+//InterfazPrincipal.class.getResource("/imagenes/LogoT.png") y no con InterfazPrincipal.class.getResource("/archivos/imagenes/LogoT.png")
+//No hace falta el /archivos al principio
+
+
 public class InterfazPrincipal extends JFrame{
+    //Dispositivo
+    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
     //Paneles
     JPanel pnlLogo = new JPanel();
     JPanel pnlCentro = new JPanel(new FlowLayout(FlowLayout.LEFT, 25, 5));
 
     JScrollPane scroll = new JScrollPane(pnlCentro);
 
-    PanelRedondeado pnlFiltrador = new PanelRedondeado(20);
+    PanelRedondo pnlFiltrador = new PanelRedondo(20);
     JPanel pnlFiltrador2 = new JPanel();
     JPanel pnlGrilla = new JPanel();
+    JPanel pnlMarco = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
+    //JScrollPane scroll2 = new JScrollPane(pnlGrilla);
 
     String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
     List<String> opciones = List.of("Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros");
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon(InterfazPrincipal.class.getResource("/imagenes/LogoT.png"));
 
-    InterfazPrincipal(){
+    InterfazPrincipal(ArrayList<Propiedad> propList){
         setTitle("Inmobiliaria");
-        setSize(1024, 768);
+        setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(InterfazPrincipal.class.getResource("/imagenes/UcasalIcono.jpg")));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -42,17 +54,20 @@ public class InterfazPrincipal extends JFrame{
         pnlFiltrador.setLayout(new BorderLayout());
         pnlFiltrador2.setLayout(new BoxLayout(pnlFiltrador2, BoxLayout.Y_AXIS));
 
+        pnlGrilla.setLayout(new GridLayout(0, 3, 15, 15));
+
 
         //Ajuste de Paneles
         pnlLogo.setPreferredSize(new Dimension(MAXIMIZED_HORIZ,110));
         pnlLogo.setBackground(Color.WHITE);
 
-        pnlFiltrador.setPreferredSize(new Dimension(150,550));
         pnlFiltrador.setBackground(Color.WHITE);
         pnlFiltrador2.setBackground(Color.WHITE);
 
-        pnlGrilla.setPreferredSize(new Dimension(1680,1000));
-        pnlGrilla.setBorder(BorderFactory.createTitledBorder("Explorador"));
+        pnlMarco.setBorder(BorderFactory.createTitledBorder("Explorador"));
+        pnlGrilla.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+        scroll.getVerticalScrollBar().setUnitIncrement(16);
 
 
         //Labels
@@ -72,6 +87,7 @@ public class InterfazPrincipal extends JFrame{
 
 
         //Componenetes
+        
         //Inicializo botones Componentes
         JButton btnAgregar = new JButton("Agregar");
         JButton btnFiltrar = new JButton("Filtrar");
@@ -96,7 +112,7 @@ public class InterfazPrincipal extends JFrame{
         txtHasta.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
-        //Agrego
+        //Agregar
         //Agregar a Paneles
         pnlLogo.add(lblLogo);
 
@@ -116,11 +132,18 @@ public class InterfazPrincipal extends JFrame{
         pnlFiltrador2.add(txtDesde);
         pnlFiltrador2.add(lblPrecioF);
         pnlFiltrador2.add(txtHasta);
+        pnlFiltrador2.add(Box.createVerticalStrut(15));
 
         pnlFiltrador.add(btnAgregar, BorderLayout.NORTH);
         pnlFiltrador.add(pnlFiltrador2, BorderLayout.CENTER);
         pnlFiltrador.add(btnFiltrar, BorderLayout.SOUTH);
 
+        for(Propiedad propiedad : propList ){
+            Tarjeta tarjeta = new Tarjeta(propiedad, () -> System.out.println("Abrir detalle"));
+            pnlGrilla.add(tarjeta);
+        }
+        
+        pnlMarco.add(pnlGrilla);
         pnlCentro.add(pnlFiltrador);
         pnlCentro.add(pnlGrilla);
 
@@ -131,8 +154,22 @@ public class InterfazPrincipal extends JFrame{
     }
     
     public static void main(String[] args){
-    FlatLightLaf.setup();
-    SwingUtilities.invokeLater(() -> {new InterfazPrincipal().setVisible(true);
-        });
-    }
+    	FlatLightLaf.setup();
+    	
+    	
+    	ArrayList<String> List1 = new ArrayList<>();
+    	for(int i = 0; i<2; i++){
+    		List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\Logo.png");
+    		List1.add("E:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    	}
+
+    	ArrayList<Propiedad> List2 = new ArrayList<>();
+    	for(int i = 0; i<10; i++){
+    		Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
+    		List2.add(prop);
+    	}
+
+    	SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
+        	});
+    	}
 }

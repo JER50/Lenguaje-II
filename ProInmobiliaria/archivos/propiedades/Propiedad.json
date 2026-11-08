@@ -1,0 +1,19 @@
+{
+  "nombre": "4 Amb",
+  "precio": 1,
+  "tipoInmueble": "Departamento",
+  "tipoListado": "Venta",
+  "direccion": "Luis Angel",
+  "metrosTotales": "5",
+  "metrosCubiertos": "5",
+  "cantAmb": "1",
+  "cantBaños": "1",
+  "cochera": "false",
+  "expensas": "1",
+  "antigüedad": "1",
+  "pisos": "1",
+  "descripción": "Primero no se",
+  "imagenes": "[]",
+  "latitud": "-24.79312410438411",
+  "longitud": "-65.41382074356079"
+}

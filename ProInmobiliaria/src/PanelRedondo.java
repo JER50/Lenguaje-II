@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-public class PanelRedondeado extends JPanel {
+public class PanelRedondo extends JPanel {
     private final int radio;
 
-    public PanelRedondeado(int radio) {
+    public PanelRedondo(int radio) {
         this.radio = radio;
         setOpaque(false);
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

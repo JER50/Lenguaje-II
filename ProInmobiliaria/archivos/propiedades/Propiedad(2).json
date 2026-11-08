@@ -1,0 +1,19 @@
+{
+  "nombre": "Prueba de ahra",
+  "precio": "1",
+  "tipoInmueble": "Departamento",
+  "tipoListado": "Venta",
+  "direccion": "",
+  "metrosTotales": "5",
+  "metrosCubiertos": "5",
+  "cantAmb": "1",
+  "cantBaños": "1",
+  "cochera": "false",
+  "expensas": "1",
+  "antigüedad": "1",
+  "pisos": "1",
+  "descripción": "",
+  "imagenes": "[]",
+  "latitud": "-4.17248510721478",
+  "longitud": "-65.44143676757812"
+}
