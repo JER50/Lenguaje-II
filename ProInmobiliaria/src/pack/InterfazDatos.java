@@ -31,7 +31,7 @@ public class InterfazDatos extends JFrame{
         setTitle("Propiedad");
         setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("UcasalIcono.jpg").toString()));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -442,10 +442,11 @@ public class InterfazDatos extends JFrame{
         btnGuardar.addActionListener(e -> {
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
+            Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), new ArrayList<>(), lat, lon );
 
+            GestorArchivo.guardadoJSON(nuePropiedad);
             dispose();
         });
-
         btnCancelar.addActionListener(e -> dispose());
 
 
