@@ -4,7 +4,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import  java.util.List;
+import java.util.List;
+
 
 
 //solicitar archivo = "nombre de la clase desde donde piden".class.getResource("direccion del archivo, dentro de archivos")
