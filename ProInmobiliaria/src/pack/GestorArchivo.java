@@ -2,9 +2,12 @@ package pack;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.net.URL;
 
@@ -12,28 +15,23 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class GestorArchivo {
-    public static void guardadoJSON(Propiedad prop) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        URL pathURL = GestorArchivo.class.getResource("/propiedades/" + prop.getNombre() + ".json");
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final Path carpeta = Path.of("propiedades");
 
-        if (pathURL != null) {
-            try {
-                File json = new File(pathURL.toURI());
-                try (FileWriter writer = new FileWriter(json, true)) {
-                    gson.toJson(prop, writer);
-                } catch (IOException e) {
-                    System.out.println("Error al escribir: " + e.getMessage());
-                }
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
+    public static void guardadoJSON(Propiedad prop) {
+        Path archivo = carpeta.resolve(prop.getNombre());
+
+        try (FileWriter writer = new FileWriter(archivo.toFile(), StandardCharsets.UTF_8)) {
+            gson.toJson(prop, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public static Propiedad cargarJSON(String rutaArchivo) {
+        Path archivo = carpeta.resolve(rutaArchivo);
         try {
-            String json = new String(Files.readAllBytes(Paths.get(rutaArchivo)));
-            Gson gson = new Gson();
+            FileReader json = new FileReader(archivo.toFile(), StandardCharsets.UTF_8);
             return gson.fromJson(json, Propiedad.class);
 
         } catch (NumberFormatException e) {
