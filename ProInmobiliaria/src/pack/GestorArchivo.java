@@ -17,17 +17,15 @@ public class GestorArchivo {
         URL pathURL = GestorArchivo.class.getResource("/propiedades/" + prop.getNombre() + ".json");
 
         if (pathURL != null) {
-            File json = null;
             try {
-                json = new File(pathURL.toURI());
+                File json = new File(pathURL.toURI());
+                try (FileWriter writer = new FileWriter(json, true)) {
+                    gson.toJson(prop, writer);
+                } catch (IOException e) {
+                    System.out.println("Error al escribir: " + e.getMessage());
+                }
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
-            }
-
-            try (FileWriter writer = new FileWriter(json, true)) {
-                gson.toJson(prop, writer);
-            } catch (IOException e) {
-                System.out.println("Error al escribir: " + e.getMessage());
             }
         }
     }
