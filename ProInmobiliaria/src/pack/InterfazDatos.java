@@ -1,10 +1,17 @@
 package pack;//tema
+
 import com.formdev.flatlaf.FlatLightLaf;
+
 //Librerias
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
+
 public class InterfazDatos extends JFrame{
+	
+	private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
+    
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -24,10 +31,10 @@ public class InterfazDatos extends JFrame{
     String[] tipoPropiedad = {"Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros"};
 
     InterfazDatos(){
-        setTitle("ProInmobiliaria.src.pack.Propiedad");
-        setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
+        setTitle("Menú Propiedad");
+        setSize((int)(pantalla.width * 0.5), (int)(pantalla.height * 0.9));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("UcasalIcono.jpg").toString()));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -59,7 +66,7 @@ public class InterfazDatos extends JFrame{
         JLabel lblDescripcion = new JLabel("Deje una corta Descripcion:");
         JLabel lblUbicacion = new JLabel("Ubicacion:");
         
-
+        
 
         //Ajuste de Labels
         lblNombre.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -111,7 +118,6 @@ public class InterfazDatos extends JFrame{
 
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
-
         
         //Ajuste de Componentes
         txtNombre.setMaximumSize(txtNombre.getPreferredSize());
@@ -258,6 +264,7 @@ public class InterfazDatos extends JFrame{
         //Agregar a Panel Principal
         add(pnlContenedor);
         JScrollPane pnlscroll = new JScrollPane(pnlContenedor);
+        pnlscroll.getVerticalScrollBar().setUnitIncrement(20);
         setContentPane(pnlscroll);
 
     }

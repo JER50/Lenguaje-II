@@ -1,12 +1,17 @@
 package pack;//tema
+
 import com.formdev.flatlaf.FlatLightLaf;
 //Librerias
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.nio.file.Path;
 
 public class InterfazAmpliada extends JFrame{
     // Dispositivo
+	
+	private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
+	
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
     //Paneles
@@ -30,14 +35,14 @@ public class InterfazAmpliada extends JFrame{
     PanelRedondo pnlMapa = new PanelRedondo(15);
 
 
-    ImageIcon imglogo = new ImageIcon("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\LogoT.png");
+    ImageIcon imglogo = new ImageIcon(carpetaImagenes.resolve("LogoT.png").toString());
 
     InterfazAmpliada(Propiedad p){
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Java\\Lenguaje II\\ProInmobiliaria\\imagenes\\UsacalIcono.jpg"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("UcasalIcono.png").toString()));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 

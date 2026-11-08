@@ -13,7 +13,7 @@ import java.util.List;
 public class InterfazPrincipal extends JFrame{
 	
     //Carpeta de imagenes
-    private static final Path carpeta = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
+    private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
     
     
     //Dispositivo
@@ -37,17 +37,17 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpeta.resolve("LogoT.png").toString()));
+    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("LogoT.png").toString()));
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
     	
-    	System.out.print(carpeta.resolve("UcasalIcono.jpg").toString());
+    	System.out.print(carpetaImagenes.resolve("UcasalIcono.jpg").toString());
     	
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage( carpeta.resolve("UcasalIcono.jpg").toString()) );
+        setIconImage(Toolkit.getDefaultToolkit().getImage( carpetaImagenes.resolve("UcasalIcono.jpg").toString()) );
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -159,6 +159,7 @@ public class InterfazPrincipal extends JFrame{
     }
     
     public static void main(String[] args){
+    	
     	FlatLightLaf.setup();
     	
     	
