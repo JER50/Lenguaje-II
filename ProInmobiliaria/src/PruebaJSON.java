@@ -24,6 +24,10 @@ public class PruebaJSON {
 			Propiedad casa2 = administrador.fromJson(lector, Propiedad.class);
 			System.out.print(casa2.toString());
 		}
+		
+		
+		
+		
 	}
 	
 	
