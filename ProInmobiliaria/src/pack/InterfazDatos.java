@@ -445,12 +445,13 @@ public class InterfazDatos extends JFrame{
 
         btnImagenes.addActionListener(e -> {
             imagenes = GestorArchivo.elegirImagenes(this);
-            System.out.println(imagenes);
         });
 
         btnGuardar.addActionListener(e -> {
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
+            
+            if(imagenes.size()==0) imagenes.add(carpetaImagenes.resolve("Logo.png").toString());
             Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), imagenes, lat, lon );
 
             GestorArchivo.guardadoJSON(nuePropiedad);

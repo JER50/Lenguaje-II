@@ -21,7 +21,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GestorArchivo {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path carpeta = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "propiedades");
     
     private static final Path carpetaPropiedades = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "propiedades");
     private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
@@ -40,7 +39,7 @@ public class GestorArchivo {
     }
 
     public static Propiedad cargarJSON(String nombre) {
-        Path archivo = carpetaPropiedades.resolve(nombre + ".json");
+        Path archivo = carpetaPropiedades.resolve(nombre);
 
         try (Reader reader = Files.newBufferedReader(archivo, StandardCharsets.UTF_8)) {
             return gson.fromJson(reader, Propiedad.class);

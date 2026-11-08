@@ -7,10 +7,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import  java.util.List;
 import java.nio.file.Path;
+import java.nio.file.Files;
+
+import java.io.*;
+
 //Principal
 public class InterfazPrincipal extends JFrame{
     //Carpeta de imagenes
-    private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
+    private static final Path carpetaArchivos = Path.of(Path.of("").toAbsolutePath().toString(), "archivos");
 
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,14 +41,14 @@ public class InterfazPrincipal extends JFrame{
     List<JCheckBox> checks = new ArrayList<>();
 
     //imagenes
-    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("LogoT.png").toString()));
+    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaArchivos.resolve("imagenes").resolve("LogoT.png").toString()));
 
     InterfazPrincipal(ArrayList<Propiedad> propList){
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaImagenes.resolve("UcasalIcono.jpg").toString()));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaArchivos.resolve("imagenes").resolve("UcasalIcono.jpg").toString()));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -177,20 +181,37 @@ public class InterfazPrincipal extends JFrame{
     }
     
     public static void main(String[] args){
-    FlatLightLaf.setup();
-    ArrayList<String> List1 = new ArrayList<>();
-    for(int i = 0; i<2; i++){
-        List1.add(carpetaImagenes.resolve("Logo.png").toString());
-        List1.add(carpetaImagenes.resolve("LogoT.png").toString());
-    }
+    	
+    	FlatLightLaf.setup();
+    	 
+    	 ArrayList<String> List1 = new ArrayList<>();
+    	 
+    	 for(int i = 0; i<2; i++){
+    	        
+    	        List1.add(carpetaArchivos.resolve("imagenes").resolve("Logo.png").toString());
+    	        List1.add(carpetaArchivos.resolve("imagenes").resolve("LogoT.png").toString());
+    	 }
 
-    ArrayList<Propiedad> List2 = new ArrayList<>();
-    for(int i = 0; i<24; i++){
-        Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
-        List2.add(prop);
-    }
+    	 ArrayList<Propiedad> propiedades = new ArrayList<>();
+    	    
+         try (var archivos = Files.list(carpetaArchivos.resolve("propiedades"))) {
+        	 
+        	 
+        	 archivos.filter(Files::isRegularFile).filter(p -> p.toString().endsWith(".json"))
+    	        	.forEach( nombre -> {propiedades.add(GestorArchivo.cargarJSON(nombre.getFileName().toString()));});
 
-    SwingUtilities.invokeLater(() -> {new InterfazPrincipal(List2).setVisible(true);
-        });
-    }
+         } catch (IOException e) {
+    	        System.out.println("Error accediendo a la carpeta");
+    	 }
+    	    
+    	    
+    	for(int i = 0; i<24; i++){
+    	        Propiedad prop = new Propiedad("Casa", 110, "Casa", "Venta", "aqui Direccion", 1,1,1,1,true,10,10,1,"Hola",List1,-25,-25);
+    	        propiedades.add(prop);
+    	        propiedades.add(prop);
+    	    }
+
+    	    SwingUtilities.invokeLater(() -> {new InterfazPrincipal(propiedades).setVisible(true);
+    	        });
+    	    }
 }
