@@ -1,9 +1,12 @@
 package ProInmobiliaria.src.pack;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.net.URL;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,11 +14,21 @@ import com.google.gson.GsonBuilder;
 public class GestorArchivo {
     public static void guardadoJSON(Propiedad prop) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        URL pathURL = GestorArchivo.class.getResource("/propiedades/" + prop.getNombre() + ".json");
 
-        try (FileWriter writer = new FileWriter(GestorArchivo.class.getResource("/propiedades/" + prop.getNombre() + ".json").toString())) {
-            gson.toJson(prop, writer);
-        } catch (IOException e) {
-            System.out.println("Error al escribir: " + e.getMessage());
+        if (pathURL != null) {
+            File json = null;
+            try {
+                json = new File(pathURL.toURI());
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
+            try (FileWriter writer = new FileWriter(json, true)) {
+                gson.toJson(prop, writer);
+            } catch (IOException e) {
+                System.out.println("Error al escribir: " + e.getMessage());
+            }
         }
     }
 
