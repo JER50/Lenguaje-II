@@ -113,8 +113,38 @@ public class InterfazPrincipal extends JFrame{
         cmbOperacion.setAlignmentX(Component.LEFT_ALIGNMENT);
         cmbOperacion.setMaximumSize(cmbOperacion.getPreferredSize());
 
-        btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(this); ventana.setVisible(true);} );
-        btnFiltrar.addActionListener( null );
+        btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(this); ventana.setVisible(true);});
+        btnFiltrar.addActionListener(e -> {
+            mostrando = new ArrayList<Propiedad>();
+            int cmbIndice = cmbOperacion.getSelectedIndex();
+
+            for (JCheckBox cb : checks) {
+                if (cb.isSelected()) {
+                    for (Propiedad propFiltro : listaPropiedades) {
+                        if (cb.getText().equals(propFiltro.getTipoInmueble())) {
+                            mostrando.add(propFiltro);
+                        }
+                    }
+                }
+            }
+
+            switch (cmbIndice) {
+                case 1:
+                    mostrando.removeIf(propiedad -> !propiedad.getTipoListado().equals("Venta"));
+                    break;
+                case 2:
+                    mostrando.removeIf(propiedad -> !propiedad.getTipoListado().equals("Alquiler"));
+                    break;
+                case 3:
+                    mostrando.removeIf(propiedad -> !propiedad.getTipoListado().equals("Alquiler Temporal"));
+                    break;
+            }
+
+            mostrando.removeIf(propiedad -> propiedad.getPrecio() < (int)spinDesde.getValue());
+            mostrando.removeIf(propiedad -> propiedad.getPrecio() > (int)spinHasta.getValue());
+
+            refrescarGrilla();
+        });
 
         spinDesde.setMaximumSize(spinDesde.getPreferredSize());
         spinDesde.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -174,12 +204,12 @@ public class InterfazPrincipal extends JFrame{
 
     private void abrirDetalle(Propiedad p) {
         if (detalle != null) pnlCards.remove(detalle);
-        detalle = new InterfazAmpliada(p, this);
+        detalle = new InterfazAmpliada(p, this::volverAGrilla);
         pnlCards.add(detalle, "detalle");
         cards.show(pnlCards, "detalle");
     }
 
-    protected void volverAGrilla() {
+    private void volverAGrilla() {
         cards.show(pnlCards, "grilla");
     }
     
@@ -193,18 +223,15 @@ public class InterfazPrincipal extends JFrame{
     	
     	revalidate();
     	repaint();
-    	
     }    
     
     
     public void añadirPropiedad(Propiedad añadiendo) {
-    	GestorArchivo.guardadoJSON(añadiendo);
     	listaPropiedades.add(añadiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
     public void eliminarPropiedad(Propiedad removiendo) {
-    	GestorArchivo.borradoJSON(removiendo);
     	listaPropiedades.remove(removiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
@@ -223,5 +250,5 @@ public class InterfazPrincipal extends JFrame{
     	
     	return propiedades;
     }
-    
+
 }
