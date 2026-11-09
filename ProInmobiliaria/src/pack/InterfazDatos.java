@@ -81,36 +81,38 @@ public class InterfazDatos extends JFrame{
         //Componentes
         //Inicializo Componentes
         JTextField txtNombre = new JTextField(p.getNombre(),55);
-        JTextField txtDireccion = new JTextField(55);
-        JTextField txtLat = new JTextField(13);
-        JTextField txtLon = new JTextField(13);
+        JTextField txtDireccion = new JTextField(p.getDireccion());
+        JTextField txtLat = new JTextField(String.valueOf(p.getLatitud()));
+        JTextField txtLon = new JTextField(String.valueOf(p.getLongitud()));
 
         JComboBox<String> cmbTipoLista = new JComboBox<>(operacion);
+        cmbTipoLista.setSelectedItem(p.getTipoListado());
 
-        JComboBox<String> cmbTipoProiedad = new JComboBox<>(tipoPropiedad);
-
-        SpinnerNumberModel numMdlPrecio = new SpinnerNumberModel(1, 0, 1000000000, 1);
+        JComboBox<String> cmbTipoListado = new JComboBox<>(tipoPropiedad);
+        cmbTipoListado.setSelectedItem(p.getTipoInmueble());
+        
+        SpinnerNumberModel numMdlPrecio = new SpinnerNumberModel(p.getPrecio(), 1, 1000000000, 1);
         JSpinner spinPrecio = new JSpinner(numMdlPrecio);
 
-        SpinnerNumberModel numMdlExpensas = new SpinnerNumberModel(1, 0, 1000000, 1);
+        SpinnerNumberModel numMdlExpensas = new SpinnerNumberModel(p.getExpensas(), 1, 1000000, 1);
         JSpinner spinExpensas = new JSpinner(numMdlExpensas);
 
-        SpinnerNumberModel numMdlMetrosTotales = new SpinnerNumberModel(5, 5, 1000, 1);
+        SpinnerNumberModel numMdlMetrosTotales = new SpinnerNumberModel(p.getMetrosTotales(), 1, 1000, 1);
         JSpinner spinMetrosTotales = new JSpinner(numMdlMetrosTotales);
 
-        SpinnerNumberModel numMdlMetrosCubiertos = new SpinnerNumberModel(5, 5, 1000, 1);
+        SpinnerNumberModel numMdlMetrosCubiertos = new SpinnerNumberModel(p.getMetrosTotales(), 1, 1000, 1);
         JSpinner spinMetrosCubiertos = new JSpinner(numMdlMetrosCubiertos);
 
-        SpinnerNumberModel numMdlCantAmb = new SpinnerNumberModel(1, 1, 20, 1);
+        SpinnerNumberModel numMdlCantAmb = new SpinnerNumberModel(p.getCantAmb(), 1, 20, 1);
         JSpinner spinCantAmb = new JSpinner(numMdlCantAmb);
 
-        SpinnerNumberModel numMdlCantBaños = new SpinnerNumberModel(1, 0, 20, 1);
+        SpinnerNumberModel numMdlCantBaños = new SpinnerNumberModel(p.getCantBaños(), 1, 20, 1);
         JSpinner spinCantBaños = new JSpinner(numMdlCantBaños);
 
-        SpinnerNumberModel numMdlCantPisos = new SpinnerNumberModel(1, 1, 50, 1);
+        SpinnerNumberModel numMdlCantPisos = new SpinnerNumberModel(p.getPisos(), 1, 50, 1);
         JSpinner spinCantPisos = new JSpinner(numMdlCantPisos);
 
-        SpinnerNumberModel numMdlAntiguedad = new SpinnerNumberModel(1, 0, 1000, 1);
+        SpinnerNumberModel numMdlAntiguedad = new SpinnerNumberModel(p.getAntigüedad(), 1, 1000, 1);
         JSpinner spinAntiguedad = new JSpinner(numMdlAntiguedad);
 
         JTextArea txtDescripcion = new JTextArea(8, 55);
@@ -171,8 +173,8 @@ public class InterfazDatos extends JFrame{
             spinExpensas.setModel(new SpinnerNumberModel(0, 0, 0, 0));
         });
 
-        cmbTipoProiedad.setMaximumSize(cmbTipoProiedad.getPreferredSize());
-        cmbTipoProiedad.setAlignmentX(Component.LEFT_ALIGNMENT);
+        cmbTipoListado.setMaximumSize(cmbTipoListado.getPreferredSize());
+        cmbTipoListado.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         rbNo.setSelected(true);
         ButtonGroup grupo = new ButtonGroup();
@@ -187,11 +189,12 @@ public class InterfazDatos extends JFrame{
         txtLon.setAlignmentX(Component.LEFT_ALIGNMENT);
         txtLon.setFocusable(false);
 
-        Mapa mp = new Mapa(pnlMapa, -24.795784554541317, -65.42473102022629, (lat, lon) -> {
+        Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud(), (lat, lon) -> {
             txtLat.setText(String.valueOf(lat));
             txtLon.setText(String.valueOf(lon));
         });
         mp.getMapa().setPreferredSize(new Dimension(mpAnchura,mpAltura));
+        
 
         btnAceptar.addActionListener(e -> {
             p.setNombre(txtNombre.getText());
@@ -201,6 +204,7 @@ public class InterfazDatos extends JFrame{
             dispose();
         });
 
+        
         btnCancelar.addActionListener(e -> dispose());
 
 
@@ -216,7 +220,7 @@ public class InterfazDatos extends JFrame{
         pnlCentro.add(spinExpensas);
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblTipoInmueble);
-        pnlCentro.add(cmbTipoProiedad);
+        pnlCentro.add(cmbTipoListado);
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblTipoListado);
         pnlCentro.add(cmbTipoLista);

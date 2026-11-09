@@ -38,7 +38,7 @@ public class InterfazAmpliada extends JPanel{
     InterfazAmpliada(Propiedad p, InterfazPrincipal ventana){
         setLayout(new BorderLayout());
         //Imagenes
-        mostrarImagen(p);
+        
 
         //Paneles
         //Ajustes de Paneles
@@ -64,17 +64,18 @@ public class InterfazAmpliada extends JPanel{
         pnlContenido2.setBackground(Color.BLUE);
 
         pnlContBotIzq.setPreferredSize(new Dimension((int)(pantalla.width*0.1),2));
-
-        int mpAnchura =(int)(pantalla.width*0.45);
-        int mpAltura =(int)(pantalla.height*0.3);
-
-        pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));        
+        
+        
+       
+        
+        
+        pnlMapa.setPreferredSize(new Dimension((int)(pantalla.width*0.45), (int)(pantalla.height*0.3)));        
         pnlMapa.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlMapa.setBackground(Color.WHITE);
 
 
-        //Labels
+      //Labels
         //Inicializo Labels
         JLabel lbltitulo = new JLabel(p.getNombre());
         JLabel lblPrecio = new JLabel("Precio $"+String.valueOf(p.getPrecio()));
@@ -84,7 +85,10 @@ public class InterfazAmpliada extends JPanel{
 
         JLabel lblUbicacion = new JLabel("Ubicación:");
         JLabel lblDireccion = new JLabel(p.getDireccion());
-
+        colocarImagen(p);
+        
+        
+        
 
         //Ajuste de Labels
         lbltitulo.setFont(new Font("Arial", Font.BOLD, 20));
@@ -99,7 +103,8 @@ public class InterfazAmpliada extends JPanel{
 
         lblDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-
+        actualizarAmpliada();
+        
         //Componentes
         //inicializo Componentes
         JButton btnRegresar = new JButton("(<<)Regresar");
@@ -107,7 +112,7 @@ public class InterfazAmpliada extends JPanel{
         JButton btnBorrar = new JButton("Borrar(x)");
 
         Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
-        mp.getMapa().setPreferredSize(new Dimension(mpAnchura, mpAltura));
+        mp.getMapa().setPreferredSize(new Dimension((int)(pantalla.height*0.3), (int)(pantalla.height*0.3)));
 
         JButton btnSiguiente = new JButton("Siguiente(>>)");
 
@@ -123,6 +128,7 @@ public class InterfazAmpliada extends JPanel{
 
         btnEditar.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnEditar.addActionListener(e ->{
+        	
             InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
                 lbltitulo.setText(p.getNombre());
                 
@@ -139,19 +145,20 @@ public class InterfazAmpliada extends JPanel{
             ventana.refrescarGrilla();
             ventana.volverAGrilla();
         });
+        
         btnBorrar.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         btnAnterior.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnAnterior.addActionListener(e -> {
             int total = p.getImagenes().size();
             contador = (contador - 1 + total) % total;
-            mostrarImagen(p);
+            colocarImagen(p);
         });
 
         btnSiguiente.setAlignmentX(Component.RIGHT_ALIGNMENT);
         btnSiguiente.addActionListener(e -> {
             contador = (contador + 1) % p.getImagenes().size();
-            mostrarImagen(p);
+            colocarImagen(p);
         });
 
         txtDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -167,7 +174,6 @@ public class InterfazAmpliada extends JPanel{
         pnlContBotones.add(pnlContBotDer);
 
         pnlContBotIzq.add(btnAnterior);
-
         pnlContBotDer.add(btnSiguiente);
 
         pnlDescripcion.add(lbltitulo);
@@ -204,9 +210,14 @@ public class InterfazAmpliada extends JPanel{
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
-    private void mostrarImagen(Propiedad p) {
-    ImageIcon icono = new ImageIcon(p.getImagenes().get(contador));
-    Image img = icono.getImage().getScaledInstance((int)(pantalla.width*0.5), (int)(pantalla.height*0.5), Image.SCALE_SMOOTH);
-    foto.setIcon(new ImageIcon(img));
-}
+    private void colocarImagen(Propiedad p) {
+	    ImageIcon icono = new ImageIcon(p.getImagenes().get(contador));
+	    Image img = icono.getImage().getScaledInstance((int)(pantalla.width*0.5), (int)(pantalla.height*0.5), Image.SCALE_SMOOTH);
+	    foto.setIcon(new ImageIcon(img));
+    }
+    
+    protected void actualizarAmpliada() {
+    	
+    }
+    
 }

@@ -1,6 +1,8 @@
 package pack;
+
 //Tema
 import com.formdev.flatlaf.FlatLightLaf;
+
 //librerias
 import javax.swing.SwingUtilities;
 
@@ -12,7 +14,7 @@ public class ArranqueAplicacion {
     	
 		InterfazPrincipal ventana = new InterfazPrincipal(); 
     	    
-    	SwingUtilities.invokeLater(() -> { ventana.setVisible(true); });
+    	SwingUtilities.invokeLater( () -> { ventana.setVisible(true); } );
 	}
 
 }

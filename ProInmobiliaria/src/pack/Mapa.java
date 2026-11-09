@@ -29,20 +29,33 @@ public class Mapa {
 
     //Coloca marcador, devuelve coordenadas
     public Mapa(JPanel panel, double latInicial, double lonInicial, BiConsumer<Double, Double> alSeleccionar) {
-        this(panel, latInicial, lonInicial, 5);
 
-        mapa.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    GeoPosition pos = mapa.convertPointToGeoPosition(e.getPoint());
-                    pintor.setWaypoints(Set.of(new DefaultWaypoint(pos)));
-                    mapa.repaint();
-                    alSeleccionar.accept(pos.getLatitude(), pos.getLongitude());
-                }
-            }
-        });
-    }
+	    this(panel, latInicial, lonInicial, 5);
+	
+	    // Establecer marcador inicial
+	    GeoPosition inicial = new GeoPosition(latInicial, lonInicial);
+	
+	    pintor.setWaypoints(Set.of(new DefaultWaypoint(inicial)));
+	
+	    mapa.addMouseListener(new MouseAdapter() {
+	        @Override
+	        public void mouseClicked(MouseEvent e) {
+	            if (e.getButton() == MouseEvent.BUTTON1) {
+	
+	                GeoPosition pos = mapa.convertPointToGeoPosition(e.getPoint());
+	
+	                pintor.setWaypoints(Set.of(new DefaultWaypoint(pos)));
+	
+	                mapa.repaint();
+	
+	                alSeleccionar.accept(
+	                    pos.getLatitude(),
+	                    pos.getLongitude()
+	                );
+	            }
+	        }
+	    });
+	}
 
     //Configuración en común
     private Mapa(JPanel panel, double lat, double lon, int zoom) {
@@ -67,6 +80,6 @@ public class Mapa {
     }
 
     public JXMapViewer getMapa() {
-    return mapa;
+    	return mapa;
     }
 }
