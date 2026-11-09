@@ -152,10 +152,7 @@ public class InterfazPrincipal extends JFrame{
         listaPropiedades = cargarPropiedades();
         mostrando = new ArrayList<Propiedad>(listaPropiedades); 
         
-        for(Propiedad propiedad : mostrando){
-            Tarjeta tarjeta = new Tarjeta(propiedad, () -> abrirDetalle(propiedad));
-            pnlGrilla.add(tarjeta);
-        }
+        refrescarGrilla(); 
 
         pnlCentro.add(pnlGrilla, BorderLayout.NORTH);
 
@@ -188,7 +185,28 @@ public class InterfazPrincipal extends JFrame{
     
     public void refrescarGrilla() {
     	
+    	pnlGrilla.removeAll();
+    	for(Propiedad propiedad : mostrando){
+            Tarjeta tarjeta = new Tarjeta(propiedad, () -> abrirDetalle(propiedad));
+            pnlGrilla.add(tarjeta);
+        }
+    	
+    	revalidate();
+    	repaint();
     }    
+    
+    
+    public void añadirPropiedad(Propiedad añadiendo) {
+    	listaPropiedades.add(añadiendo);
+    	mostrando = new ArrayList<Propiedad>(listaPropiedades);
+    }
+    
+    public void eliminarPropiedad(Propiedad removiendo) {
+    	listaPropiedades.remove(removiendo);
+    	mostrando = new ArrayList<Propiedad>(listaPropiedades);
+    }
+    
+    
     
     public ArrayList<Propiedad> cargarPropiedades() {
     	

@@ -454,7 +454,7 @@ public class InterfazDatos extends JFrame{
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
             
-            if(imagenes.size()==0) imagenes.add("/archivos/imagenes/default.png".toString());
+            if(imagenes.size()==0) imagenes.add("archivos/imagenes/default.png");
             Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), imagenes, lat, lon );
 
             GestorArchivo.guardadoJSON(nuePropiedad);
@@ -462,8 +462,8 @@ public class InterfazDatos extends JFrame{
             //Actualización de la grida de propiedades
            
             dispose();
-            
-            SwingUtilities.invokeLater( () -> {} );
+           
+            ventanaPrincipal.añadirPropiedad(nuePropiedad);
             ventanaPrincipal.refrescarGrilla();
             
         });
