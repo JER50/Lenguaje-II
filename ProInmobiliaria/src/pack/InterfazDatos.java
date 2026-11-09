@@ -28,7 +28,7 @@ public class InterfazDatos extends JFrame{
     String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
     String[] tipoPropiedad = {"Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros"};
     
-    InterfazDatos(Propiedad p, Runnable alAceptar) {
+    InterfazDatos(Propiedad p, Runnable ejecutar) {
         setTitle("Propiedad");
         setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -88,8 +88,8 @@ public class InterfazDatos extends JFrame{
         JComboBox<String> cmbTipoLista = new JComboBox<>(operacion);
         cmbTipoLista.setSelectedItem(p.getTipoListado());
 
-        JComboBox<String> cmbTipoListado = new JComboBox<>(tipoPropiedad);
-        cmbTipoListado.setSelectedItem(p.getTipoInmueble());
+        JComboBox<String> cmbTipoPropiedad = new JComboBox<>(tipoPropiedad);
+        cmbTipoPropiedad.setSelectedItem(p.getTipoInmueble());
         
         SpinnerNumberModel numMdlPrecio = new SpinnerNumberModel(p.getPrecio(), 1, 1000000000, 1);
         JSpinner spinPrecio = new JSpinner(numMdlPrecio);
@@ -173,8 +173,8 @@ public class InterfazDatos extends JFrame{
             spinExpensas.setModel(new SpinnerNumberModel(0, 0, 0, 0));
         });
 
-        cmbTipoListado.setMaximumSize(cmbTipoListado.getPreferredSize());
-        cmbTipoListado.setAlignmentX(Component.LEFT_ALIGNMENT);
+        cmbTipoPropiedad.setMaximumSize(cmbTipoPropiedad.getPreferredSize());
+        cmbTipoPropiedad.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         rbNo.setSelected(true);
         ButtonGroup grupo = new ButtonGroup();
@@ -197,11 +197,29 @@ public class InterfazDatos extends JFrame{
         
 
         btnAceptar.addActionListener(e -> {
-            p.setNombre(txtNombre.getText());
-            //rellenar
-
-            alAceptar.run();
+        	p.setNombre(txtNombre.getText());
+        	p.setPrecio((int) spinPrecio.getValue());
+        	p.setTipoInmueble((String) cmbTipoPropiedad.getSelectedItem());
+        	p.setTipoListado((String) cmbTipoLista.getSelectedItem());
+        	p.setDireccion(txtDireccion.getText());
+        	p.setMetrosCubiertos((int) spinMetrosTotales.getValue());
+        	p.setMetrosCubiertos((int) spinMetrosCubiertos.getValue());
+        	p.setCantAmb((int) spinCantAmb.getValue());
+        	p.setCantBaños((int) spinCantBaños.getValue());
+        	p.setCochera(rbSi.isSelected());
+        	p.setExpensas((int) spinExpensas.getValue());
+        	p.setAntigüedad((int) spinAntiguedad.getValue());
+        	p.setPisos((int) spinCantPisos.getValue());
+        	p.setDescripción((String) txtDescripcion.getText());
+        	p.setImagenes(imagenes);
+        	p.setLatitud(Double.parseDouble(txtLat.getText().trim()));
+        	p.setLongitud(Double.parseDouble(txtLon.getText().trim()));
+             
+            //Actualización de la grida de propiedades
+           
             dispose();
+           
+           	ejecutar.run();
         });
 
         
@@ -220,7 +238,7 @@ public class InterfazDatos extends JFrame{
         pnlCentro.add(spinExpensas);
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblTipoInmueble);
-        pnlCentro.add(cmbTipoListado);
+        pnlCentro.add(cmbTipoPropiedad);
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblTipoListado);
         pnlCentro.add(cmbTipoLista);
