@@ -137,8 +137,15 @@ public class InterfazAmpliada extends JPanel{
         	
             InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
                 lbltitulo.setText(p.getNombre());
+                lblPrecio.setText(String.valueOf(p.getPrecio()));
+                lblExpensas.setText(String.valueOf(p.getExpensas()));
+
+                txtDescripcion.setText(p.getDescripción());
+
+                lblDireccion.setText(p.getDireccion());
                 
                 // actualiza aquí los demás labels que muestren datos de p
+                
                 revalidate();
                 repaint();
             });
