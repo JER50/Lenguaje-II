@@ -1,5 +1,5 @@
 - [x] Imagen Default
-- [ ] Filtros
+- [x] Filtros
 - [x] Borrado
 - [ ] Ampliado y Tarjeta(dejarlo lindo)
 - [ ] Completar Editar
