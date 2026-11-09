@@ -1,6 +1,4 @@
 package pack;
-//tema
-import com.formdev.flatlaf.FlatLightLaf;
 //Librerias
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +34,7 @@ public class InterfazPrincipal extends JFrame{
     JPanel pnlVistaGrilla = new JPanel(new BorderLayout());
     InterfazAmpliada detalle;
 
-    String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
+    String[] operacion = {"Todos","Venta","Alquiler","Alquiler Temporal"};
     List<String> opciones = List.of("Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros");
     List<JCheckBox> checks = new ArrayList<>();
 

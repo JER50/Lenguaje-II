@@ -29,7 +29,7 @@ public class Mapa {
 
     //Coloca marcador, devuelve coordenadas
     public Mapa(JPanel panel, double latInicial, double lonInicial, BiConsumer<Double, Double> alSeleccionar) {
-        this(panel, latInicial, lonInicial, 6);
+        this(panel, latInicial, lonInicial, 5);
 
         mapa.addMouseListener(new MouseAdapter() {
             @Override

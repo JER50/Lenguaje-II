@@ -10,20 +10,26 @@ public class InterfazAmpliada extends JPanel{
     //Paneles
     JPanel pnlNorte = new JPanel();
     JPanel pnlEste = new JPanel();
+    JPanel pnlCentro = new JPanel();
     JPanel pnlOeste = new JPanel();
     JPanel pnlSur = new JPanel();
 
-    JPanel pnlCentro = new JPanel(new BorderLayout());
-    JScrollPane scroll = new JScrollPane(pnlCentro);
-
     JPanel pnlContenido = new JPanel();
+    JPanel pnlContenido2 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
+    PanelRedondo pnlContIzq = new PanelRedondo(20);
+    JPanel pnlContDer = new JPanel();
+
 
     JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
-    JPanel pnlTexto = new JPanel(new FlowLayout(FlowLayout.CENTER,100,30));
+
+    JScrollPane scroll = new JScrollPane(pnlCentro);
 
     PanelRedondo pnlCaracteristicas = new PanelRedondo(20);
     PanelRedondo pnlDescripcion = new PanelRedondo(20);
     PanelRedondo pnlMapa = new PanelRedondo(15);
+
+    //Atributos
+    int contador;
 
 
     InterfazAmpliada(Propiedad p, Runnable alAtras){
@@ -36,20 +42,22 @@ public class InterfazAmpliada extends JPanel{
         pnlOeste.setPreferredSize(new Dimension(25,0));
         pnlSur.setPreferredSize(new Dimension(0, 5));
 
-        pnlTexto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 360));
-        pnlTexto.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
-        pnlBotones.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
         pnlBotones.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        pnlDescripcion.setPreferredSize(new Dimension(500,300));
-        pnlDescripcion.setLayout(new BoxLayout(pnlDescripcion, BoxLayout.Y_AXIS));
-        pnlDescripcion.setBackground(Color.WHITE);
+        pnlContIzq.setLayout(new BoxLayout(pnlContIzq, BoxLayout.Y_AXIS));
+        pnlContIzq.setBackground(Color.WHITE);
 
-        pnlCaracteristicas.setPreferredSize(new Dimension(200,300));
-        pnlCaracteristicas.setLayout(new BoxLayout(pnlCaracteristicas, BoxLayout.Y_AXIS));
-        pnlCaracteristicas.setBackground(Color.WHITE);
+        pnlContDer.setLayout(new BoxLayout(pnlContDer, BoxLayout.Y_AXIS));
+        pnlContDer.setBackground(Color.WHITE);
 
+        pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.97),(int)(pantalla.height*0.2)));
+        pnlContenido2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlContenido2.setBackground(Color.BLUE);
+
+        //pnlTexto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 360));
+        //pnlTexto.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         int mpAnchura =(int)(pantalla.width*0.375);
         int mpAltura =(int)(pantalla.height*0.3);
@@ -58,8 +66,6 @@ public class InterfazAmpliada extends JPanel{
         pnlMapa.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlMapa.setBackground(Color.WHITE);
-
-        pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
 
         //Labels
@@ -80,6 +86,8 @@ public class InterfazAmpliada extends JPanel{
         lblUbicacion.setFont(new Font("Arial", Font.BOLD, 20));
         lblUbicacion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        lblDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
+
 
         //Componentes
         //inicializo Componentes
@@ -90,6 +98,11 @@ public class InterfazAmpliada extends JPanel{
         Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
         mp.getMapa().setPreferredSize(new Dimension(mpAnchura, mpAltura));
 
+        JButton btnSiguiente = new JButton("Siguiente(>>)");
+
+        JTextArea txtDescripcion = new JTextArea(p.getDescripción(), 6, 55);
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setWrapStyleWord(true);
 
         //Ajusto Eventos
         btnRegresar.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -111,28 +124,30 @@ public class InterfazAmpliada extends JPanel{
         
         btnBorrar.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        btnSiguiente.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        txtDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
+        txtDescripcion.setFocusable(false);
+
 
         //Agrego
         //Agrego a Paneles
-
-        pnlTexto.add(pnlDescripcion);
-        pnlTexto.add(pnlCaracteristicas);
-
         pnlBotones.add(btnRegresar);
         pnlBotones.add(btnEditar);
         pnlBotones.add(btnBorrar);
 
         pnlDescripcion.add(lblDescripcion);
-        pnlCaracteristicas.add(lblCaracteristicas);
+        pnlDescripcion.add(txtDescripcion);
+
+        pnlContIzq.add(btnSiguiente);
+        pnlContIzq.add(Box.createVerticalStrut(20));
+        pnlContDer.add(pnlDescripcion);
 
         pnlContenido.add(pnlBotones);
-        pnlContenido.add(Box.createVerticalStrut(15));
-        pnlContenido.add(lbltitulo);
-        pnlContenido.add(Box.createVerticalStrut(15));
-        pnlContenido.add(pnlTexto);
-        pnlContenido.add(lblUbicacion);
-        pnlContenido.add(Box.createVerticalStrut(15));
-        pnlContenido.add(pnlMapa);
+        pnlContenido.add(pnlContenido2);
+
+        pnlContenido2.add(pnlContIzq);
+        pnlContenido2.add(pnlContDer);
 
         pnlCentro.add(pnlNorte, BorderLayout.NORTH);
         pnlCentro.add(pnlContenido, BorderLayout.CENTER);

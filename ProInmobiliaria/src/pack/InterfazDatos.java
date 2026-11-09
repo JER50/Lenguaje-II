@@ -253,6 +253,7 @@ public class InterfazDatos extends JFrame{
         pnlCentro.add(txtLat);
         pnlCentro.add(txtLon);
         pnlCentro.add(Box.createVerticalStrut(15));
+        pnlCentro.add(pnlMapa);
 
         pnlSur.add(btnAceptar);
         pnlSur.add(btnCancelar);
@@ -370,7 +371,7 @@ public class InterfazDatos extends JFrame{
         JRadioButton rbSi = new JRadioButton("Si");
         JRadioButton rbNo = new JRadioButton("No");
 
-        JButton btnImagenes = new JButton("Volver a seleccionar imagenes: ");
+        JButton btnImagenes = new JButton("seleccionar imagenes: ");
 
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
