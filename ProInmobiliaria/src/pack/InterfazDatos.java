@@ -124,7 +124,7 @@ public class InterfazDatos extends JFrame{
 
         JButton btnAceptar = new JButton("Aceptar");
         JButton btnCancelar = new JButton("Cancelar");
-
+        JButton btnImagenes = new JButton("Seleccionar imagenes: ");
         
         //Ajuste de Componentes
         txtNombre.setMaximumSize(txtNombre.getPreferredSize());
@@ -195,7 +195,11 @@ public class InterfazDatos extends JFrame{
         });
         mp.getMapa().setPreferredSize(new Dimension(mpAnchura,mpAltura));
         
-
+        btnImagenes.addActionListener(e -> {
+            imagenes = GestorArchivo.elegirImagenes(this);
+        });
+        
+        
         btnAceptar.addActionListener(e -> {
         	p.setNombre(txtNombre.getText());
         	p.setPrecio((int) spinPrecio.getValue());
@@ -211,7 +215,10 @@ public class InterfazDatos extends JFrame{
         	p.setAntigüedad((int) spinAntiguedad.getValue());
         	p.setPisos((int) spinCantPisos.getValue());
         	p.setDescripción((String) txtDescripcion.getText());
-        	p.setImagenes(imagenes);
+        		
+        	if(imagenes.size()==0) imagenes.add("archivos/imagenes/default.png");
+        
+        	p.setImagenes(imagenes);        	
         	p.setLatitud(Double.parseDouble(txtLat.getText().trim()));
         	p.setLongitud(Double.parseDouble(txtLon.getText().trim()));
              
@@ -224,7 +231,7 @@ public class InterfazDatos extends JFrame{
 
         
         btnCancelar.addActionListener(e -> dispose());
-
+        
 
         //Agrego
         //Agregar a Paneles
@@ -270,6 +277,8 @@ public class InterfazDatos extends JFrame{
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblDescripcion);
         pnlCentro.add(pnlscrolltxt);
+        pnlCentro.add(Box.createVerticalStrut(15));
+        pnlCentro.add(btnImagenes);
         pnlCentro.add(Box.createVerticalStrut(15));
         pnlCentro.add(lblUbicacion);
         pnlCentro.add(txtLat);
@@ -393,11 +402,11 @@ public class InterfazDatos extends JFrame{
         JRadioButton rbSi = new JRadioButton("Si");
         JRadioButton rbNo = new JRadioButton("No");
 
-        JButton btnImagenes = new JButton("seleccionar imagenes: ");
+        JButton btnImagenes = new JButton("Seleccionar imagenes: ");
 
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
-
+        
         
         //Ajuste de Componentes
         txtNombre.setMaximumSize(txtNombre.getPreferredSize());
@@ -553,21 +562,10 @@ public class InterfazDatos extends JFrame{
         pnlContenedor.add(pnlOeste, BorderLayout.WEST);
         pnlContenedor.add(pnlSur, BorderLayout.SOUTH);
 
-        //Agregar a Panel Principal
         add(pnlContenedor);
         JScrollPane pnlScroll = new JScrollPane(pnlContenedor);
         pnlScroll.getVerticalScrollBar().setUnitIncrement(16);
         setContentPane(pnlScroll);
     }
 
-    public static void main(String[] args){
-        FlatLightLaf.setup();
-        
-        /* Desactivada la llamada desde acá
-        SwingUtilities.invokeLater(() -> {new InterfazDatos().setVisible(true);
-  
-        });
-        
-        */
-    }
 }

@@ -232,12 +232,18 @@ public class InterfazPrincipal extends JFrame{
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
+    
     public void eliminarPropiedad(Propiedad removiendo) {
         GestorArchivo.borradoJSON(removiendo);
     	listaPropiedades.remove(removiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
+    public void eliminarPropiedad(Propiedad removiendo, int auxiliar) {
+        
+    	listaPropiedades.remove(removiendo);
+    	mostrando = new ArrayList<Propiedad>(listaPropiedades);
+    }
     
     
     public ArrayList<Propiedad> cargarPropiedades() {

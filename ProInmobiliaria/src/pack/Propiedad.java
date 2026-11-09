@@ -20,6 +20,27 @@ public class Propiedad {
     private double latitud;
     private double longitud;
 
+    public Propiedad(Propiedad copiado) {
+        this.nombre = copiado.getNombre();
+        this.precio = copiado.getPrecio();
+        this.tipoInmueble = copiado.getTipoInmueble();
+        this.tipoListado = copiado.getTipoListado();
+        this.direccion = copiado.getDireccion();
+        this.metrosTotales = copiado.getMetrosTotales();
+        this.metrosCubiertos = copiado.getMetrosCubiertos();
+        this.cantAmb = copiado.getCantAmb();
+        this.cantBaños = copiado.getCantBaños();
+        this.cochera = copiado.isCochera();
+        this.expensas = copiado.getExpensas();
+        this.antigüedad = copiado.getAntigüedad();
+        this.pisos = copiado.getPisos();
+        this.descripción = copiado.getDescripción();
+        this.imagenes = copiado.getImagenes();
+        this.latitud = copiado.getLatitud();
+        this.longitud = copiado.getLongitud();
+    }
+    
+    
     //Constructor
     public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, int pisos, String descripción, ArrayList<String> imagenes, double latitud, double longitud) {
         this.nombre = nombre;

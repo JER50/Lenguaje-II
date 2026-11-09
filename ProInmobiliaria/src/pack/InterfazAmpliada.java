@@ -114,7 +114,6 @@ public class InterfazAmpliada extends JPanel{
         lblDescripcion.setFont(new Font("Arial", Font.BOLD, 17));
         lblDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        actualizarAmpliada();
         
         //Componentes
         //inicializo Componentes
@@ -135,27 +134,31 @@ public class InterfazAmpliada extends JPanel{
 
         //Ajusto Eventos
         btnRegresar.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btnRegresar.addActionListener(e -> {ventana.volverAGrilla();});
+        btnRegresar.addActionListener(e -> {ventana.refrescarGrilla(); ventana.volverAGrilla();});
 
         btnEditar.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnEditar.addActionListener(e ->{
-        	
-            InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
-                lbltitulo.setText(p.getNombre());
-                lblPrecio.setText(String.valueOf(p.getPrecio()));
-                lblExpensas.setText(String.valueOf(p.getExpensas()));
-
-                txtDescripcion.setText(p.getDescripción());
-
-                lblDireccion.setText(p.getDireccion());
-                
-                // actualiza aquí los demás labels que muestren datos de p
-                
-                revalidate();
-                repaint();
-            });
-            
-            ventanaMod.setVisible(true);
+        
+        Propiedad auxiliar = new Propiedad(p);
+ 
+	        InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
+	        	
+	            lbltitulo.setText(p.getNombre());
+	            lblPrecio.setText(String.valueOf(p.getPrecio()));
+	            lblExpensas.setText(String.valueOf(p.getExpensas()));
+	            txtDescripcion.setText(p.getDescripción());
+	            lblDireccion.setText(p.getDireccion());
+	            colocarImagen(p);
+	            
+	            ventana.eliminarPropiedad(p,67);
+	            ventana.eliminarPropiedad(auxiliar);
+	            ventana.añadirPropiedad(p);
+	                
+	            revalidate();
+	            repaint();
+	        });
+	            
+	            ventanaMod.setVisible(true);
         });
         
         btnBorrar.addActionListener(e -> {
@@ -249,10 +252,6 @@ public class InterfazAmpliada extends JPanel{
 	    ImageIcon icono = new ImageIcon(p.getImagenes().get(contador));
 	    Image img = icono.getImage().getScaledInstance((int)(pantalla.width*0.5), (int)(pantalla.height*0.5), Image.SCALE_SMOOTH);
 	    foto.setIcon(new ImageIcon(img));
-    }
-    
-    protected void actualizarAmpliada() {
-    	
     }
     
 }
