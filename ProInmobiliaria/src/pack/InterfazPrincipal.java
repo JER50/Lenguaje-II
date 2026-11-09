@@ -43,7 +43,8 @@ public class InterfazPrincipal extends JFrame{
     //imagenes
     ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaArchivos.resolve("imagenes").resolve("LogoT.png").toString()));
 
-    InterfazPrincipal(ArrayList<Propiedad> propList){
+    InterfazPrincipal(){
+    	
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -110,7 +111,7 @@ public class InterfazPrincipal extends JFrame{
         cmbOperacion.setAlignmentX(Component.LEFT_ALIGNMENT);
         cmbOperacion.setMaximumSize(cmbOperacion.getPreferredSize());
 
-        btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(); ventana.setVisible(true);});
+        btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(this); ventana.setVisible(true);});
         btnFiltrar.addActionListener(null);
 
         spinDesde.setMaximumSize(spinDesde.getPreferredSize());
@@ -145,8 +146,10 @@ public class InterfazPrincipal extends JFrame{
         pnlFiltrador.add(btnAgregar, BorderLayout.NORTH);
         pnlFiltrador.add(pnlFiltrador2, BorderLayout.CENTER);
         pnlFiltrador.add(btnFiltrar, BorderLayout.SOUTH);
-
-        for(Propiedad propiedad : propList){
+        
+        ArrayList<Propiedad> listaPropiedades = cargarPropiedades(); 
+        
+        for(Propiedad propiedad : listaPropiedades){
             Tarjeta tarjeta = new Tarjeta(propiedad, () -> abrirDetalle(propiedad));
             pnlGrilla.add(tarjeta);
         }
@@ -180,32 +183,21 @@ public class InterfazPrincipal extends JFrame{
         cards.show(pnlCards, "grilla");
     }
     
-    public static void main(String[] args){
+    public void refrescarGrilla() {
     	
-    	FlatLightLaf.setup();
-    	 
-    	 ArrayList<String> List1 = new ArrayList<>();
-    	 
-    	 for(int i = 0; i<2; i++){
-    	        
-    	        List1.add(carpetaArchivos.resolve("imagenes").resolve("Logo.png").toString());
-    	        List1.add(carpetaArchivos.resolve("imagenes").resolve("LogoT.png").toString());
-    	 }
-
-    	 ArrayList<Propiedad> propiedades = new ArrayList<>();
-    	    
-         try (var archivos = Files.list(carpetaArchivos.resolve("propiedades"))) {
-        	 
-        	 
-        	 archivos.filter(Files::isRegularFile).filter(p -> p.toString().endsWith(".json"))
-    	        	.forEach( nombre -> {propiedades.add(GestorArchivo.cargarJSON(nombre.getFileName().toString()));});
-
-         } catch (IOException e) {
+    }    
+    
+    public ArrayList<Propiedad> cargarPropiedades() {
+    	
+    	ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
+    	try (var archivos = Files.list(carpetaArchivos.resolve("propiedades"))) {
+        	archivos.filter(Files::isRegularFile).filter(p -> p.toString().endsWith(".json"))
+    	        	.forEach( direccion -> {propiedades.add(GestorArchivo.cargarJSON(direccion.getFileName().toString()));});
+        } catch (IOException e) {
     	        System.out.println("Error accediendo a la carpeta");
-    	 }
-    	    
-    	 SwingUtilities.invokeLater(() -> {new InterfazPrincipal(propiedades).setVisible(true);
-    	 
-    	 });
+    	}
+    	
+    	return propiedades;
     }
+    
 }

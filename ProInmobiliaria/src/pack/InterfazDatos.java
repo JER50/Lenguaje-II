@@ -275,8 +275,10 @@ public class InterfazDatos extends JFrame{
     |
     |
     */
- 
-    InterfazDatos(){
+    
+    //Acá habria que vincular la actualización del panel cuando le den a agregar
+    
+    InterfazDatos(InterfazPrincipal ventanaPrincipal){
         setTitle("Propiedad");
         setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -451,12 +453,18 @@ public class InterfazDatos extends JFrame{
             double lat = Double.parseDouble(txtLat.getText().trim());
             double lon= Double.parseDouble(txtLon.getText().trim());
             
-            if(imagenes.size()==0) imagenes.add(carpetaImagenes.resolve("default.png").toString());
+            if(imagenes.size()==0) imagenes.add("/archivos/imagenes/default.png".toString());
             Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), imagenes, lat, lon );
 
             GestorArchivo.guardadoJSON(nuePropiedad);
+            
+            //acá se indicaría la actualización del panel principal
+            
+            ventanaPrincipal.refrescarGrilla();
+            
             dispose();
         });
+        
         btnCancelar.addActionListener(e -> dispose());
 
 
@@ -531,7 +539,12 @@ public class InterfazDatos extends JFrame{
 
     public static void main(String[] args){
         FlatLightLaf.setup();
+        
+        /* Desactivada la llamada desde acá
         SwingUtilities.invokeLater(() -> {new InterfazDatos().setVisible(true);
+  
         });
+        
+        */
     }
 }

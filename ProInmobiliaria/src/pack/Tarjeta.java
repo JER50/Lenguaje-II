@@ -20,6 +20,7 @@ public class Tarjeta extends JPanel {
 
         // Imagen
         ImageIcon icono = new ImageIcon(prop.getImagenes().get(0));
+        
         Image img = icono.getImage().getScaledInstance(300, 180, Image.SCALE_SMOOTH);
         add(new JLabel(new ImageIcon(img)), BorderLayout.NORTH);
 

@@ -99,13 +99,16 @@ public class InterfazAmpliada extends JPanel{
         btnEditar.addActionListener(e ->{
             InterfazDatos ventana = new InterfazDatos(p, () -> {
                 lbltitulo.setText(p.getNombre());
+                
                 // actualiza aquí los demás labels que muestren datos de p
                 revalidate();
                 repaint();
             });
+            
             ventana.setVisible(true);
         });
-
+        
+        
         btnBorrar.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 

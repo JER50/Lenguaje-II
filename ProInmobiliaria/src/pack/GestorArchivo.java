@@ -58,11 +58,14 @@ public class GestorArchivo {
 
         int resultado = chooser.showOpenDialog(parent);
 
+        //GUARDAR SOLO COMO NOMBRE Y UBICAR DE FORMA ABSULTA AL BUSCAR LAS IMAGENES
+        
         if (resultado == JFileChooser.APPROVE_OPTION) {
             for (File f : chooser.getSelectedFiles()) {
                 try {
                     Path destino = carpetaImagenes.resolve(f.getName());
                     Files.copy(f.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+                    System.out.print(Path.of("").toAbsolutePath().relativize(destino).toString().replace("\\", "/"));
                     nombres.add(Path.of("").toAbsolutePath().relativize(destino).toString().replace("\\", "/"));;
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(parent, "No se pudieron copiar las imagenes: " + e.getMessage());
