@@ -2,6 +2,6 @@
 - [x] Filtros
 - [x] Borrado
 - [ ] Ampliado y Tarjeta(dejarlo lindo)
-- [ ] Completar Editar
+- [x] Completar Editar
 - [x] Refresh Dinamico
-- [ ] Propiedades de ejemplo
+- [x] Propiedades de ejemplo
