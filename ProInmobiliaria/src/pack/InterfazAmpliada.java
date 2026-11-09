@@ -9,42 +9,45 @@ public class InterfazAmpliada extends JPanel{
 
     //Paneles
     JPanel pnlNorte = new JPanel();
-    JPanel pnlEste = new JPanel();
     JPanel pnlCentro = new JPanel();
     JPanel pnlOeste = new JPanel();
     JPanel pnlSur = new JPanel();
 
     JPanel pnlContenido = new JPanel();
-    JPanel pnlContenido2 = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
+    JPanel pnlContenido2 = new JPanel();
     PanelRedondo pnlContIzq = new PanelRedondo(20);
     JPanel pnlContDer = new JPanel();
-
-
     JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
 
     JScrollPane scroll = new JScrollPane(pnlCentro);
 
     PanelRedondo pnlCaracteristicas = new PanelRedondo(20);
     PanelRedondo pnlDescripcion = new PanelRedondo(20);
-    PanelRedondo pnlMapa = new PanelRedondo(15);
+    JPanel pnlMapa = new JPanel();
+
+    JPanel pnlContBotones = new JPanel(new FlowLayout());
+    JPanel pnlContBotIzq = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
+    JPanel pnlContBotDer = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,5));
+
 
     //Atributos
-    int contador;
+    int contador=0;
+    JLabel foto = new JLabel();
 
 
     InterfazAmpliada(Propiedad p, InterfazPrincipal ventana){
         setLayout(new BorderLayout());
+        //Imagenes
+        mostrarImagen(p);
 
         //Paneles
         //Ajustes de Paneles
         pnlNorte.setPreferredSize(new Dimension(0, 20));
-        pnlEste.setPreferredSize(new Dimension(25,0));
         pnlOeste.setPreferredSize(new Dimension(25,0));
         pnlSur.setPreferredSize(new Dimension(0, 5));
 
         pnlDescripcion.setLayout(new BoxLayout(pnlDescripcion, BoxLayout.Y_AXIS));
         pnlDescripcion.setBackground(Color.WHITE);
-
 
         pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
@@ -56,14 +59,13 @@ public class InterfazAmpliada extends JPanel{
         pnlContDer.setLayout(new BoxLayout(pnlContDer, BoxLayout.Y_AXIS));
         pnlContDer.setBackground(Color.WHITE);
 
-        pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.97),(int)(pantalla.height*0.2)));
         pnlContenido2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.98),(int)(pantalla.height*0.7)));
         pnlContenido2.setBackground(Color.BLUE);
 
-        //pnlTexto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 360));
-        //pnlTexto.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlContBotIzq.setPreferredSize(new Dimension((int)(pantalla.width*0.1),2));
 
-        int mpAnchura =(int)(pantalla.width*0.375);
+        int mpAnchura =(int)(pantalla.width*0.45);
         int mpAltura =(int)(pantalla.height*0.3);
 
         pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));        
@@ -79,7 +81,9 @@ public class InterfazAmpliada extends JPanel{
         JLabel lblExpensas = new JLabel("Expensas $"+String.valueOf(p.getExpensas()));
 
         JLabel lblDescripcion = new JLabel("Descripción:");
+
         JLabel lblUbicacion = new JLabel("Ubicación:");
+        JLabel lblDireccion = new JLabel(p.getDireccion());
 
 
         //Ajuste de Labels
@@ -107,6 +111,8 @@ public class InterfazAmpliada extends JPanel{
 
         JButton btnSiguiente = new JButton("Siguiente(>>)");
 
+        JButton btnAnterior = new JButton("(<<)Anterior");
+
         JTextArea txtDescripcion = new JTextArea(p.getDescripción(), 6, 55);
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
@@ -128,20 +134,28 @@ public class InterfazAmpliada extends JPanel{
             ventanaMod.setVisible(true);
         });
         
-        
         btnBorrar.addActionListener(e -> {
-        	ventana.eliminarPropiedad(p);
-        	ventana.refrescarGrilla();
-        	ventana.volverAGrilla();
-    	});
-        
+            ventana.eliminarPropiedad(p);
+            ventana.refrescarGrilla();
+            ventana.volverAGrilla();
+        });
         btnBorrar.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        btnSiguiente.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnAnterior.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnAnterior.addActionListener(e -> {
+            int total = p.getImagenes().size();
+            contador = (contador - 1 + total) % total;
+            mostrarImagen(p);
+        });
+
+        btnSiguiente.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        btnSiguiente.addActionListener(e -> {
+            contador = (contador + 1) % p.getImagenes().size();
+            mostrarImagen(p);
+        });
 
         txtDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
         txtDescripcion.setFocusable(false);
-
 
         //Agrego
         //Agrego a Paneles
@@ -149,15 +163,28 @@ public class InterfazAmpliada extends JPanel{
         pnlBotones.add(btnEditar);
         pnlBotones.add(btnBorrar);
 
+        pnlContBotones.add(pnlContBotIzq);
+        pnlContBotones.add(pnlContBotDer);
+
+        pnlContBotIzq.add(btnAnterior);
+
+        pnlContBotDer.add(btnSiguiente);
+
         pnlDescripcion.add(lbltitulo);
         pnlDescripcion.add(lblPrecio);
         pnlDescripcion.add(lblExpensas);
         pnlDescripcion.add(lblDescripcion);
         pnlDescripcion.add(txtDescripcion);
 
-        pnlContIzq.add(btnSiguiente);
-        pnlContIzq.add(Box.createVerticalStrut(20));
+        pnlContIzq.add(foto);
+        pnlContIzq.add(Box.createVerticalStrut(15));
+        pnlContIzq.add(pnlContBotones);
+        pnlContIzq.add(Box.createVerticalStrut(40));
         pnlContIzq.add(lblUbicacion);
+        pnlContIzq.add(lblDireccion);
+        pnlContIzq.add(pnlMapa);
+        pnlContIzq.add(Box.createVerticalStrut(20));
+
         pnlContDer.add(pnlDescripcion);
 
         pnlContenido.add(pnlBotones);
@@ -168,12 +195,18 @@ public class InterfazAmpliada extends JPanel{
 
         pnlCentro.add(pnlNorte, BorderLayout.NORTH);
         pnlCentro.add(pnlContenido, BorderLayout.CENTER);
-        pnlCentro.add(pnlEste, BorderLayout.EAST);
         pnlCentro.add(pnlOeste, BorderLayout.WEST);
         pnlCentro.add(pnlSur, BorderLayout.SOUTH);
 
 
         //Agrego a Panel Principal
         add(scroll, BorderLayout.CENTER);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     }
+
+    private void mostrarImagen(Propiedad p) {
+    ImageIcon icono = new ImageIcon(p.getImagenes().get(contador));
+    Image img = icono.getImage().getScaledInstance((int)(pantalla.width*0.5), (int)(pantalla.height*0.5), Image.SCALE_SMOOTH);
+    foto.setIcon(new ImageIcon(img));
+}
 }
