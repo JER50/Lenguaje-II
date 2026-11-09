@@ -21,7 +21,7 @@ public class Tarjeta extends JPanel {
 
         // Imagen
         ImageIcon icono = new ImageIcon(prop.getImagenes().get(0));
-        Image img = icono.getImage().getScaledInstance(450, 250, Image.SCALE_SMOOTH);
+        Image img = icono.getImage().getScaledInstance((int)(pantalla.width*0.24), (int)(pantalla.height*0.24), Image.SCALE_SMOOTH);
 
 
         // Info en el centro

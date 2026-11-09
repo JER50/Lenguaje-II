@@ -88,6 +88,10 @@ public class InterfazAmpliada extends JPanel{
         JLabel lbltitulo = new JLabel(p.getNombre());
         JLabel lblPrecio = new JLabel("Precio $"+String.valueOf(p.getPrecio()));
         JLabel lblExpensas = new JLabel("Expensas $"+String.valueOf(p.getExpensas()));
+        JLabel lblTipo = new JLabel(p.getTipoInmueble()+" - "+p.getTipoListado());
+        JLabel lblMetros = new JLabel(String.valueOf(p.getMetrosTotales()) + "m\u00B2 Totales / " + String.valueOf(p.getMetrosCubiertos()) + "m\u00B2 Cubiertos: ");
+        JLabel lblCantidades = new JLabel();
+        JLabel lblOtros = new JLabel("Otros: Antiguedad " + String.valueOf(p.getAntigüedad()) + " Años / " + (p.isCochera()? "Tiene Cochera" : "No tiene Cochera"));
 
         JLabel lblDescripcion = new JLabel("Descripción:");
 
@@ -107,6 +111,7 @@ public class InterfazAmpliada extends JPanel{
         lblUbicacion.setFont(new Font("Arial", Font.BOLD, 20));
         lblUbicacion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        lblDescripcion.setFont(new Font("Arial", Font.BOLD, 17));
         lblDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         actualizarAmpliada();
@@ -186,9 +191,20 @@ public class InterfazAmpliada extends JPanel{
         pnlContBotones.add(btnAnterior);
         pnlContBotones.add(btnSiguiente);
 
+        pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lbltitulo);
+        pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lblPrecio);
+        pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lblExpensas);
+        pnlDescripcion.add(Box.createVerticalStrut(10));
+        pnlDescripcion.add(lblTipo);
+        pnlDescripcion.add(Box.createVerticalStrut(10));
+        pnlDescripcion.add(lblMetros);
+        pnlDescripcion.add(lblCantidades);
+        pnlDescripcion.add(Box.createVerticalStrut(10));
+        pnlDescripcion.add(lblOtros);
+        pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lblDescripcion);
         pnlDescripcion.add(txtDescripcion);
 
