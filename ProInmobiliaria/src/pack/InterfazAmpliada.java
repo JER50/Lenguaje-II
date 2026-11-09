@@ -14,20 +14,22 @@ public class InterfazAmpliada extends JPanel{
     JPanel pnlSur = new JPanel();
 
     JPanel pnlContenido = new JPanel();
-    JPanel pnlContenido2 = new JPanel();
-    PanelRedondo pnlContIzq = new PanelRedondo(20);
+    JPanel pnlContenido2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 40, 5));
+    JPanel pnlContIzq = new JPanel();
     JPanel pnlContDer = new JPanel();
+
+    PanelRedondo pnlFoto = new PanelRedondo(20);
     JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
 
     JScrollPane scroll = new JScrollPane(pnlCentro);
 
     PanelRedondo pnlCaracteristicas = new PanelRedondo(20);
     PanelRedondo pnlDescripcion = new PanelRedondo(20);
-    JPanel pnlMapa = new JPanel();
+
+    PanelRedondo pnlMapa = new PanelRedondo(20);
+    JPanel pnlContMapa = new JPanel();
 
     JPanel pnlContBotones = new JPanel(new FlowLayout());
-    JPanel pnlContBotIzq = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
-    JPanel pnlContBotDer = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,5));
 
 
     //Atributos
@@ -37,9 +39,7 @@ public class InterfazAmpliada extends JPanel{
 
     InterfazAmpliada(Propiedad p, InterfazPrincipal ventana){
         setLayout(new BorderLayout());
-        //Imagenes
-        
-
+    
         //Paneles
         //Ajustes de Paneles
         pnlNorte.setPreferredSize(new Dimension(0, 20));
@@ -51,30 +51,37 @@ public class InterfazAmpliada extends JPanel{
 
         pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
-        pnlBotones.setBackground(Color.WHITE);
         pnlBotones.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         pnlContIzq.setLayout(new BoxLayout(pnlContIzq, BoxLayout.Y_AXIS));
-        pnlContIzq.setBackground(Color.WHITE);
 
         pnlContDer.setLayout(new BoxLayout(pnlContDer, BoxLayout.Y_AXIS));
         pnlContDer.setBackground(Color.WHITE);
 
         pnlContenido2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        //pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.98),(int)(pantalla.height*0.7)));
-        pnlContenido2.setBackground(Color.BLUE); 
+        pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.98),(int)(pantalla.height*1)));
+
+        pnlMapa.setLayout(new BoxLayout(pnlMapa, BoxLayout.Y_AXIS));
+        pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlMapa.setBackground(Color.WHITE);
         
-        pnlMapa.setPreferredSize(new Dimension((int)(pantalla.width*0.45), (int)(pantalla.height*0.3)));        
-        //pnlContBotIzq.setPreferredSize(new Dimension((int)(pantalla.width*0.1),2));
+        pnlContMapa.setPreferredSize(new Dimension((int)(pantalla.width*0.45), (int)(pantalla.height*0.3)));        
 
         int mpAnchura =(int)(pantalla.width*0.5);
         int mpAltura =(int)(pantalla.height*0.3);
 
-        pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));        
-        pnlMapa.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
-        pnlMapa.setBackground(Color.WHITE);
+        pnlContMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));        
+        pnlContMapa.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+        pnlContMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlContMapa.setBackground(Color.WHITE);
 
+        pnlFoto.setLayout(new BoxLayout(pnlFoto, BoxLayout.Y_AXIS));
+        pnlFoto.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlFoto.setBackground(Color.WHITE);
+
+        pnlContBotones.setPreferredSize(new Dimension((int)(pantalla.width*0.01),(int)(pantalla.height*0.04)));
+        pnlContBotones.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlContBotones.setBackground(Color.WHITE);
 
       //Labels
         //Inicializo Labels
@@ -110,7 +117,7 @@ public class InterfazAmpliada extends JPanel{
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar(x)");
 
-        Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
+        Mapa mp = new Mapa(pnlContMapa, p.getLatitud(), p.getLongitud());
         mp.getMapa().setPreferredSize(new Dimension(mpAnchura, mpAltura));
 
         JButton btnSiguiente = new JButton("Siguiente(>>)");
@@ -169,11 +176,8 @@ public class InterfazAmpliada extends JPanel{
         pnlBotones.add(btnEditar);
         pnlBotones.add(btnBorrar);
 
-        pnlContBotones.add(pnlContBotIzq);
-        pnlContBotones.add(pnlContBotDer);
-
-        pnlContBotIzq.add(btnAnterior);
-        pnlContBotDer.add(btnSiguiente);
+        pnlContBotones.add(btnAnterior);
+        pnlContBotones.add(btnSiguiente);
 
         pnlDescripcion.add(lbltitulo);
         pnlDescripcion.add(lblPrecio);
@@ -181,14 +185,22 @@ public class InterfazAmpliada extends JPanel{
         pnlDescripcion.add(lblDescripcion);
         pnlDescripcion.add(txtDescripcion);
 
-        pnlContIzq.add(foto);
-        pnlContIzq.add(Box.createVerticalStrut(15));
-        pnlContIzq.add(pnlContBotones);
-        pnlContIzq.add(Box.createVerticalStrut(40));
-        pnlContIzq.add(lblUbicacion);
-        pnlContIzq.add(lblDireccion);
+        pnlFoto.add(Box.createVerticalStrut(20));
+        pnlFoto.add(foto);
+        pnlFoto.add(Box.createVerticalStrut(15));
+        pnlFoto.add(pnlContBotones);
+        pnlFoto.add(Box.createVerticalStrut(10));
+
+        pnlMapa.add(lblUbicacion);
+        pnlMapa.add(lblDireccion);
+        pnlMapa.add(Box.createVerticalStrut(10));
+        pnlMapa.add(pnlContMapa);
+        pnlMapa.add(Box.createVerticalStrut(10));
+
+        pnlContIzq.add(pnlFoto);
+        pnlContIzq.add(Box.createVerticalStrut(14));
         pnlContIzq.add(pnlMapa);
-        pnlContIzq.add(Box.createVerticalStrut(20));
+
 
         pnlContDer.add(pnlDescripcion);
 

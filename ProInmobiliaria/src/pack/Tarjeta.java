@@ -21,14 +21,14 @@ public class Tarjeta extends JPanel {
 
         // Imagen
         ImageIcon icono = new ImageIcon(prop.getImagenes().get(0));
-        
         Image img = icono.getImage().getScaledInstance(450, 250, Image.SCALE_SMOOTH);
-        add(new JLabel(new ImageIcon(img)), BorderLayout.NORTH);
 
 
         // Info en el centro
         JPanel info = new JPanel();
-        JPanel foto = new JPanel();
+
+        JPanel foto = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 15));
+        foto.setOpaque(false);
 
         info.setOpaque(false);
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
@@ -78,6 +78,10 @@ public class Tarjeta extends JPanel {
         filaDatos2.add(filaDireccion);
         filaDatos2.setMaximumSize(new Dimension(Integer.MAX_VALUE, filaDatos2.getPreferredSize().height));
 
+        //Agregar a paneles
+        foto.add(Box.createVerticalStrut(10));
+        foto.add(new JLabel(new ImageIcon(img)));
+
         info.add(lblTitulo);
         info.add(Box.createVerticalStrut(10));
         info.add(filaDatos1);
@@ -85,6 +89,7 @@ public class Tarjeta extends JPanel {
         info.add(filaDatos2);
         info.add(Box.createVerticalStrut(8));
 
+        add(foto, BorderLayout.NORTH);
         add(info, BorderLayout.CENTER);
 
 
