@@ -42,6 +42,10 @@ public class InterfazAmpliada extends JPanel{
         pnlOeste.setPreferredSize(new Dimension(25,0));
         pnlSur.setPreferredSize(new Dimension(0, 5));
 
+        pnlDescripcion.setLayout(new BoxLayout(pnlDescripcion, BoxLayout.Y_AXIS));
+        pnlDescripcion.setBackground(Color.WHITE);
+
+
         pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
         pnlBotones.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -71,9 +75,10 @@ public class InterfazAmpliada extends JPanel{
         //Labels
         //Inicializo Labels
         JLabel lbltitulo = new JLabel(p.getNombre());
+        JLabel lblPrecio = new JLabel("Precio $"+String.valueOf(p.getPrecio()));
+        JLabel lblExpensas = new JLabel("Expensas $"+String.valueOf(p.getExpensas()));
 
         JLabel lblDescripcion = new JLabel("Descripción:");
-        JLabel lblCaracteristicas = new JLabel("Caracteristicas:");
         JLabel lblUbicacion = new JLabel("Ubicación:");
 
 
@@ -81,7 +86,9 @@ public class InterfazAmpliada extends JPanel{
         lbltitulo.setFont(new Font("Arial", Font.BOLD, 20));
         lbltitulo.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        lblCaracteristicas.setAlignmentX(Component.LEFT_ALIGNMENT);
+        lblPrecio.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        lblExpensas.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         lblUbicacion.setFont(new Font("Arial", Font.BOLD, 20));
         lblUbicacion.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -136,11 +143,15 @@ public class InterfazAmpliada extends JPanel{
         pnlBotones.add(btnEditar);
         pnlBotones.add(btnBorrar);
 
+        pnlDescripcion.add(lbltitulo);
+        pnlDescripcion.add(lblPrecio);
+        pnlDescripcion.add(lblExpensas);
         pnlDescripcion.add(lblDescripcion);
         pnlDescripcion.add(txtDescripcion);
 
         pnlContIzq.add(btnSiguiente);
         pnlContIzq.add(Box.createVerticalStrut(20));
+        pnlContIzq.add(lblUbicacion);
         pnlContDer.add(pnlDescripcion);
 
         pnlContenido.add(pnlBotones);
