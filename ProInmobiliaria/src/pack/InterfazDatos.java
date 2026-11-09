@@ -195,7 +195,7 @@ public class InterfazDatos extends JFrame{
 
         btnAceptar.addActionListener(e -> {
             p.setNombre(txtNombre.getText());
-            //relleanar
+            //rellenar
 
             alAceptar.run();
             dispose();
@@ -456,8 +456,6 @@ public class InterfazDatos extends JFrame{
             
             if(imagenes.size()==0) imagenes.add("archivos/imagenes/default.png");
             Propiedad nuePropiedad = new Propiedad(txtNombre.getText(),(int)spinPrecio.getValue(),(String) cmbTipoProiedad.getSelectedItem(),(String) cmbTipoLista.getSelectedItem(),txtDireccion.getText(),(int) spinMetrosTotales.getValue(),(int) spinMetrosCubiertos.getValue(),(int) spinCantAmb.getValue(), (int) spinCantBaños.getValue(), rbSi.isSelected(), (int) spinExpensas.getValue(), (int) spinAntiguedad.getValue(), (int) spinCantPisos.getValue(), txtDescripcion.getText(), imagenes, lat, lon );
-
-            GestorArchivo.guardadoJSON(nuePropiedad);
             
             //Actualización de la grida de propiedades
            

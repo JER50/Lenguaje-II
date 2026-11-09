@@ -32,7 +32,7 @@ public class InterfazAmpliada extends JPanel{
     int contador;
 
 
-    InterfazAmpliada(Propiedad p, Runnable alAtras){
+    InterfazAmpliada(Propiedad p, InterfazPrincipal ventana){
         setLayout(new BorderLayout());
 
         //Paneles
@@ -113,11 +113,11 @@ public class InterfazAmpliada extends JPanel{
 
         //Ajusto Eventos
         btnRegresar.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btnRegresar.addActionListener(e -> alAtras.run());
+        btnRegresar.addActionListener(e -> {ventana.volverAGrilla();});
 
         btnEditar.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnEditar.addActionListener(e ->{
-            InterfazDatos ventana = new InterfazDatos(p, () -> {
+            InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
                 lbltitulo.setText(p.getNombre());
                 
                 // actualiza aquí los demás labels que muestren datos de p
@@ -125,9 +125,15 @@ public class InterfazAmpliada extends JPanel{
                 repaint();
             });
             
-            ventana.setVisible(true);
+            ventanaMod.setVisible(true);
         });
         
+        
+        btnBorrar.addActionListener(e -> {
+        	ventana.eliminarPropiedad(p);
+        	ventana.refrescarGrilla();
+        	ventana.volverAGrilla();
+    	});
         
         btnBorrar.setAlignmentX(Component.LEFT_ALIGNMENT);
 

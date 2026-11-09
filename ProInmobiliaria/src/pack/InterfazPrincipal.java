@@ -113,8 +113,8 @@ public class InterfazPrincipal extends JFrame{
         cmbOperacion.setAlignmentX(Component.LEFT_ALIGNMENT);
         cmbOperacion.setMaximumSize(cmbOperacion.getPreferredSize());
 
-        btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(this); ventana.setVisible(true);});
-        btnFiltrar.addActionListener(null);
+        btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(this); ventana.setVisible(true);} );
+        btnFiltrar.addActionListener( null );
 
         spinDesde.setMaximumSize(spinDesde.getPreferredSize());
         spinDesde.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -174,12 +174,12 @@ public class InterfazPrincipal extends JFrame{
 
     private void abrirDetalle(Propiedad p) {
         if (detalle != null) pnlCards.remove(detalle);
-        detalle = new InterfazAmpliada(p, this::volverAGrilla);
+        detalle = new InterfazAmpliada(p, this);
         pnlCards.add(detalle, "detalle");
         cards.show(pnlCards, "detalle");
     }
 
-    private void volverAGrilla() {
+    protected void volverAGrilla() {
         cards.show(pnlCards, "grilla");
     }
     
@@ -193,15 +193,18 @@ public class InterfazPrincipal extends JFrame{
     	
     	revalidate();
     	repaint();
+    	
     }    
     
     
     public void añadirPropiedad(Propiedad añadiendo) {
+    	GestorArchivo.guardadoJSON(añadiendo);
     	listaPropiedades.add(añadiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
     public void eliminarPropiedad(Propiedad removiendo) {
+    	GestorArchivo.borradoJSON(removiendo);
     	listaPropiedades.remove(removiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }

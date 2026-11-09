@@ -37,6 +37,26 @@ public class GestorArchivo {
             throw new RuntimeException(e);
         }
     }
+    
+    public static void borradoJSON(Propiedad propiedad) {
+    	Path eliminando = carpetaPropiedades.resolve(propiedad.getNombre() + ".json");
+    	
+    	try {
+    	    Files.delete(eliminando);
+    	    
+    	    if(!propiedad.getImagenes().get(0).equals("archivos/imagenes/default.png")) {
+	    	    
+    	    	for(String img : propiedad.getImagenes()) {
+	    	    	System.out.print(carpetaImagenes.resolve(img));
+	    	    	Files.delete(Path.of("").toAbsolutePath().resolve(img));
+	    	    }
+    	    	
+    	    }
+    	    
+    	} catch (IOException e) {
+    	    e.printStackTrace();
+    	}
+    }
 
     public static Propiedad cargarJSON(String nombre) {
         Path archivo = carpetaPropiedades.resolve(nombre);
@@ -58,14 +78,13 @@ public class GestorArchivo {
 
         int resultado = chooser.showOpenDialog(parent);
 
-        //GUARDAR SOLO COMO NOMBRE Y UBICAR DE FORMA ABSULTA AL BUSCAR LAS IMAGENES
+       
         
         if (resultado == JFileChooser.APPROVE_OPTION) {
             for (File f : chooser.getSelectedFiles()) {
                 try {
                     Path destino = carpetaImagenes.resolve(f.getName());
                     Files.copy(f.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.print(Path.of("").toAbsolutePath().relativize(destino).toString().replace("\\", "/"));
                     nombres.add(Path.of("").toAbsolutePath().relativize(destino).toString().replace("\\", "/"));;
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(parent, "No se pudieron copiar las imagenes: " + e.getMessage());
