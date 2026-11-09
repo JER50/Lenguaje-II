@@ -1,7 +1,5 @@
 package pack;
 
-import java.util.ArrayList;
-
 import javax.swing.SwingUtilities;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -14,9 +12,7 @@ public class ArranqueAplicacion {
     	
 		InterfazPrincipal ventana = new InterfazPrincipal(); 
     	    
-    	SwingUtilities.invokeLater(() -> {ventana.setVisible(true);
-    	
-    	});
+    	SwingUtilities.invokeLater(() -> { ventana.setVisible(true); });
 	}
 
 }

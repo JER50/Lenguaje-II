@@ -459,11 +459,13 @@ public class InterfazDatos extends JFrame{
 
             GestorArchivo.guardadoJSON(nuePropiedad);
             
-            //acá se indicaría la actualización del panel principal
+            //Actualización de la grida de propiedades
+           
+            dispose();
             
+            SwingUtilities.invokeLater( () -> {} );
             ventanaPrincipal.refrescarGrilla();
             
-            dispose();
         });
         
         btnCancelar.addActionListener(e -> dispose());

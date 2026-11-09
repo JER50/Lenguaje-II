@@ -32,17 +32,21 @@ public class InterfazPrincipal extends JFrame{
     CardLayout cards = new CardLayout();
     JPanel pnlCards = new JPanel(cards);
     JPanel pnlVistaGrilla = new JPanel(new BorderLayout());
+    
     InterfazAmpliada detalle;
 
     String[] operacion = {"Todos","Venta","Alquiler","Alquiler Temporal"};
     List<String> opciones = List.of("Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros");
     List<JCheckBox> checks = new ArrayList<>();
-
+    ArrayList<Propiedad> listaPropiedades;
+    ArrayList<Propiedad> mostrando;
+    
+    
     //imagenes
     ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaArchivos.resolve("imagenes").resolve("LogoT.png").toString()));
 
     InterfazPrincipal(){
-    	
+    
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -145,9 +149,10 @@ public class InterfazPrincipal extends JFrame{
         pnlFiltrador.add(pnlFiltrador2, BorderLayout.CENTER);
         pnlFiltrador.add(btnFiltrar, BorderLayout.SOUTH);
         
-        ArrayList<Propiedad> listaPropiedades = cargarPropiedades(); 
+        listaPropiedades = cargarPropiedades();
+        mostrando = new ArrayList<Propiedad>(listaPropiedades); 
         
-        for(Propiedad propiedad : listaPropiedades){
+        for(Propiedad propiedad : mostrando){
             Tarjeta tarjeta = new Tarjeta(propiedad, () -> abrirDetalle(propiedad));
             pnlGrilla.add(tarjeta);
         }
