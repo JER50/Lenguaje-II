@@ -9,13 +9,14 @@ public class Tarjeta extends JPanel {
     //Dispositivo
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
+    private final int radio = 40;
 
 
     public Tarjeta(Propiedad prop, Runnable alClick) {
+        setOpaque(false);
         setLayout(new BorderLayout(0, 8));
         setPreferredSize(new Dimension((int)(pantalla.width * 0.28), (int)(pantalla.height*0.4)));
         setBackground(Color.WHITE);
-        setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         // Imagen
@@ -27,6 +28,8 @@ public class Tarjeta extends JPanel {
 
         // Info en el centro
         JPanel info = new JPanel();
+        JPanel foto = new JPanel();
+
         info.setOpaque(false);
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
         info.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
@@ -34,10 +37,10 @@ public class Tarjeta extends JPanel {
         JLabel lblTitulo = new JLabel(String.valueOf(prop.getNombre()));
         lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 25));
 
-        JLabel lblPrecio = new JLabel(" - Precio: $" + String.valueOf(prop.getPrecio()));
+        JLabel lblPrecio = new JLabel(" - $" + String.valueOf(prop.getPrecio()));
         lblPrecio.setFont(new Font("SansSerif", Font.BOLD, 18));
 
-        JLabel lblAlquiler = new JLabel("Tipo: " + String.valueOf(prop.getTipoListado()));
+        JLabel lblAlquiler = new JLabel(String.valueOf(prop.getTipoListado()));
         lblAlquiler.setFont(new Font("SansSerif", Font.BOLD, 18));
 
         JLabel lblAmbientes = new JLabel("Ambientes: " + String.valueOf(prop.getCantAmb()));
@@ -76,9 +79,12 @@ public class Tarjeta extends JPanel {
         filaDatos2.setMaximumSize(new Dimension(Integer.MAX_VALUE, filaDatos2.getPreferredSize().height));
 
         info.add(lblTitulo);
+        info.add(Box.createVerticalStrut(10));
         info.add(filaDatos1);
+        info.add(Box.createVerticalStrut(10));
         info.add(filaDatos2);
         info.add(Box.createVerticalStrut(8));
+
         add(info, BorderLayout.CENTER);
 
 
@@ -90,5 +96,22 @@ public class Tarjeta extends JPanel {
         };
         addMouseListener(ma);
         for (Component c : getComponents()) c.addMouseListener(ma);
+    }
+
+     @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Fondo redondeado
+        g2.setColor(getBackground());
+        g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, radio, radio);
+
+        // Borde redondeado
+        g2.setColor(new Color(220, 220, 220));
+        g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, radio, radio);
+
+        g2.dispose();
+        super.paintComponent(g);
     }
 }

@@ -51,6 +51,7 @@ public class InterfazAmpliada extends JPanel{
 
         pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
+        pnlBotones.setBackground(Color.WHITE);
         pnlBotones.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         pnlContIzq.setLayout(new BoxLayout(pnlContIzq, BoxLayout.Y_AXIS));
@@ -61,15 +62,15 @@ public class InterfazAmpliada extends JPanel{
 
         pnlContenido2.setAlignmentX(Component.LEFT_ALIGNMENT);
         //pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.98),(int)(pantalla.height*0.7)));
-        pnlContenido2.setBackground(Color.BLUE);
-
-        pnlContBotIzq.setPreferredSize(new Dimension((int)(pantalla.width*0.1),2));
-        
-        
-       
-        
+        pnlContenido2.setBackground(Color.BLUE); 
         
         pnlMapa.setPreferredSize(new Dimension((int)(pantalla.width*0.45), (int)(pantalla.height*0.3)));        
+        //pnlContBotIzq.setPreferredSize(new Dimension((int)(pantalla.width*0.1),2));
+
+        int mpAnchura =(int)(pantalla.width*0.5);
+        int mpAltura =(int)(pantalla.height*0.3);
+
+        pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));        
         pnlMapa.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlMapa.setBackground(Color.WHITE);
@@ -86,8 +87,6 @@ public class InterfazAmpliada extends JPanel{
         JLabel lblUbicacion = new JLabel("Ubicación:");
         JLabel lblDireccion = new JLabel(p.getDireccion());
         colocarImagen(p);
-        
-        
         
 
         //Ajuste de Labels
@@ -112,7 +111,7 @@ public class InterfazAmpliada extends JPanel{
         JButton btnBorrar = new JButton("Borrar(x)");
 
         Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud());
-        mp.getMapa().setPreferredSize(new Dimension((int)(pantalla.height*0.3), (int)(pantalla.height*0.3)));
+        mp.getMapa().setPreferredSize(new Dimension(mpAnchura, mpAltura));
 
         JButton btnSiguiente = new JButton("Siguiente(>>)");
 
@@ -207,6 +206,7 @@ public class InterfazAmpliada extends JPanel{
 
         //Agrego a Panel Principal
         add(scroll, BorderLayout.CENTER);
+        scroll.getVerticalScrollBar().setUnitIncrement(16);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
