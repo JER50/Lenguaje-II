@@ -1,6 +1,7 @@
 - [x] Imagen Default
 - [ ] Filtros
+- [x] Borrado
 - [ ] Ampliado y Tarjeta(dejarlo lindo)
 - [ ] Completar Editar
-- [ ] Refresh Dinamico
+- [x] Refresh Dinamico
 - [ ] Propiedades de ejemplo
