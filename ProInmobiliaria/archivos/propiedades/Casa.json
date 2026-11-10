@@ -1,0 +1,21 @@
+{
+  "nombre": "Casa",
+  "precio": 1,
+  "tipoInmueble": "Casa",
+  "tipoListado": "Venta",
+  "direccion": "Bº Constitución",
+  "metrosTotales": 3,
+  "metrosCubiertos": 4,
+  "cantAmb": 6,
+  "cantBaños": 7,
+  "cochera": true,
+  "expensas": 0,
+  "antigüedad": 8,
+  "pisos": 5,
+  "descripción": "",
+  "imagenes": [
+    "archivos/imagenes/default.png"
+  ],
+  "latitud": -24.799678907919457,
+  "longitud": -65.37537932395935
+}

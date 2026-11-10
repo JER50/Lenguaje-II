@@ -3,10 +3,9 @@ package pack;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import  java.util.List;
+import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Files;
-
 import java.io.*;
 
 //Principal
@@ -114,34 +113,30 @@ public class InterfazPrincipal extends JFrame{
         cmbOperacion.setMaximumSize(cmbOperacion.getPreferredSize());
 
         btnAgregar.addActionListener(e -> {InterfazDatos ventana = new InterfazDatos(this); ventana.setVisible(true);});
+
         btnFiltrar.addActionListener(e -> {
-            mostrando = new ArrayList<Propiedad>();
-            int cmbIndice = cmbOperacion.getSelectedIndex();
+            mostrando = new ArrayList<>(listaPropiedades);
 
+            if (cmbOperacion.getSelectedIndex() != 0) {
+                mostrando.removeIf(p -> !p.getTipoListado().equals((String) cmbOperacion.getSelectedItem()));
+            }
+
+            List<String> tipos = new ArrayList<>();
             for (JCheckBox cb : checks) {
-                if (cb.isSelected()) {
-                    for (Propiedad propFiltro : listaPropiedades) {
-                        if (cb.getText().equals(propFiltro.getTipoInmueble())) {
-                            mostrando.add(propFiltro);
-                        }
-                    }
-                }
+                if (cb.isSelected()) tipos.add(cb.getText());
+            }
+            if (!tipos.isEmpty()) {
+                mostrando.removeIf(p -> !tipos.contains(p.getTipoInmueble()));
             }
 
-            switch (cmbIndice) {
-                case 1:
-                    mostrando.removeIf(propiedad -> !propiedad.getTipoListado().equals("Venta"));
-                    break;
-                case 2:
-                    mostrando.removeIf(propiedad -> !propiedad.getTipoListado().equals("Alquiler"));
-                    break;
-                case 3:
-                    mostrando.removeIf(propiedad -> !propiedad.getTipoListado().equals("Alquiler Temporal"));
-                    break;
+            int desde = ((Number) spinDesde.getValue()).intValue();
+            int hasta = ((Number) spinHasta.getValue()).intValue();
+            if (desde > 0){
+                mostrando.removeIf(p -> p.getPrecio() < desde);
             }
-
-            mostrando.removeIf(propiedad -> propiedad.getPrecio() < (int)spinDesde.getValue());
-            mostrando.removeIf(propiedad -> propiedad.getPrecio() > (int)spinHasta.getValue());
+            if (hasta > 0){
+                mostrando.removeIf(p -> p.getPrecio() > hasta);
+            }
 
             refrescarGrilla();
         });

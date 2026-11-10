@@ -1,6 +1,4 @@
 package pack;
-//tema
-import com.formdev.flatlaf.FlatLightLaf;
 //Librerias
 import javax.swing.*;
 import java.awt.*;
@@ -81,7 +79,7 @@ public class InterfazDatos extends JFrame{
         //Componentes
         //Inicializo Componentes
         JTextField txtNombre = new JTextField(p.getNombre(),55);
-        JTextField txtDireccion = new JTextField(p.getDireccion());
+        JTextField txtDireccion = new JTextField(p.getDireccion(),55);
         JTextField txtLat = new JTextField(String.valueOf(p.getLatitud()));
         JTextField txtLon = new JTextField(String.valueOf(p.getLongitud()));
 
@@ -115,7 +113,7 @@ public class InterfazDatos extends JFrame{
         SpinnerNumberModel numMdlAntiguedad = new SpinnerNumberModel(p.getAntigüedad(), 1, 1000, 1);
         JSpinner spinAntiguedad = new JSpinner(numMdlAntiguedad);
 
-        JTextArea txtDescripcion = new JTextArea(8, 55);
+        JTextArea txtDescripcion = new JTextArea(p.getDescripción(),8, 55);
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
 
@@ -206,7 +204,7 @@ public class InterfazDatos extends JFrame{
         	p.setTipoInmueble((String) cmbTipoPropiedad.getSelectedItem());
         	p.setTipoListado((String) cmbTipoLista.getSelectedItem());
         	p.setDireccion(txtDireccion.getText());
-        	p.setMetrosCubiertos((int) spinMetrosTotales.getValue());
+        	p.setMetrosTotales((int) spinMetrosTotales.getValue());
         	p.setMetrosCubiertos((int) spinMetrosCubiertos.getValue());
         	p.setCantAmb((int) spinCantAmb.getValue());
         	p.setCantBaños((int) spinCantBaños.getValue());
@@ -297,18 +295,17 @@ public class InterfazDatos extends JFrame{
 
         //Agregar a Panel Principal
         add(pnlContenedor);
-        JScrollPane pnlscroll = new JScrollPane(pnlContenedor);
-        setContentPane(pnlscroll);
+        JScrollPane pnlScroll = new JScrollPane(pnlContenedor);
+        pnlScroll.getVerticalScrollBar().setUnitIncrement(16);
+        setContentPane(pnlScroll);
 
     }
 
     /*
-    |
-    |
-    |
+    | Desde aqui comienza El contructor Vacio
+    |  es el Boton "Agregar" de la Interfaz Principal.
+    |  Crea Propiedades más no las edita.
     */
-    
-    //Acá habria que vincular la actualización del panel cuando le den a agregar
     
     InterfazDatos(InterfazPrincipal ventanaPrincipal){
         setTitle("Propiedad");
@@ -562,6 +559,7 @@ public class InterfazDatos extends JFrame{
         pnlContenedor.add(pnlOeste, BorderLayout.WEST);
         pnlContenedor.add(pnlSur, BorderLayout.SOUTH);
 
+        //Agrego Panel Principal
         add(pnlContenedor);
         JScrollPane pnlScroll = new JScrollPane(pnlContenedor);
         pnlScroll.getVerticalScrollBar().setUnitIncrement(16);

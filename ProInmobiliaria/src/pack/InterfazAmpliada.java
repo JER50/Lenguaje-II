@@ -14,7 +14,7 @@ public class InterfazAmpliada extends JPanel{
     JPanel pnlSur = new JPanel();
 
     JPanel pnlContenido = new JPanel();
-    JPanel pnlContenido2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 40, 5));
+    JPanel pnlContenido2 = new JPanel(new GridBagLayout());
     JPanel pnlContIzq = new JPanel();
     JPanel pnlContDer = new JPanel();
 
@@ -46,8 +46,12 @@ public class InterfazAmpliada extends JPanel{
         pnlOeste.setPreferredSize(new Dimension(25,0));
         pnlSur.setPreferredSize(new Dimension(0, 5));
 
+        pnlCaracteristicas.setLayout(new BoxLayout(pnlCaracteristicas, BoxLayout.Y_AXIS));
+        pnlCaracteristicas.setBackground(Color.WHITE);
+
         pnlDescripcion.setLayout(new BoxLayout(pnlDescripcion, BoxLayout.Y_AXIS));
         pnlDescripcion.setBackground(Color.WHITE);
+        
 
         pnlContenido.setLayout(new BoxLayout(pnlContenido, BoxLayout.Y_AXIS));
 
@@ -56,7 +60,6 @@ public class InterfazAmpliada extends JPanel{
         pnlContIzq.setLayout(new BoxLayout(pnlContIzq, BoxLayout.Y_AXIS));
 
         pnlContDer.setLayout(new BoxLayout(pnlContDer, BoxLayout.Y_AXIS));
-        pnlContDer.setBackground(Color.WHITE);
 
         pnlContenido2.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlContenido2.setPreferredSize(new Dimension((int)(pantalla.width*0.98),(int)(pantalla.height*1)));
@@ -90,8 +93,8 @@ public class InterfazAmpliada extends JPanel{
         JLabel lblExpensas = new JLabel("Expensas $"+String.valueOf(p.getExpensas()));
         JLabel lblTipo = new JLabel(p.getTipoInmueble()+" - "+p.getTipoListado());
         JLabel lblMetros = new JLabel(String.valueOf(p.getMetrosTotales()) + "m\u00B2 Totales / " + String.valueOf(p.getMetrosCubiertos()) + "m\u00B2 Cubiertos: ");
-        JLabel lblCantidades = new JLabel();
-        JLabel lblOtros = new JLabel("Otros: Antiguedad " + String.valueOf(p.getAntigüedad()) + " Años / " + (p.isCochera()? "Tiene Cochera" : "No tiene Cochera"));
+        JLabel lblCantidades = new JLabel(String.valueOf(p.getPisos())+" Pisos / "+String.valueOf(p.getCantAmb())+" Ambientes / "+String.valueOf(p.getCantBaños())+" Baños");
+        JLabel lblOtros = new JLabel("Otros: " + String.valueOf(p.getAntigüedad()) + " Años de Antiguedad / " + (p.isCochera()? "Tiene Cochera" : "No tiene Cochera"));
 
         JLabel lblDescripcion = new JLabel("Descripción:");
 
@@ -144,10 +147,16 @@ public class InterfazAmpliada extends JPanel{
 	        InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
 	        	
 	            lbltitulo.setText(p.getNombre());
-	            lblPrecio.setText(String.valueOf(p.getPrecio()));
-	            lblExpensas.setText(String.valueOf(p.getExpensas()));
+	            lblPrecio.setText("Precio $"+String.valueOf(p.getPrecio()));
+	            lblExpensas.setText("Expensas $"+String.valueOf(p.getExpensas()));
+                lblTipo.setText(p.getTipoInmueble()+" - "+p.getTipoListado());
+                lblMetros.setText(String.valueOf(p.getMetrosTotales()) + "m\u00B2 Totales / " + String.valueOf(p.getMetrosCubiertos()) + "m\u00B2 Cubiertos: ");
+                lblCantidades.setText(String.valueOf(p.getPisos())+" Pisos / "+String.valueOf(p.getCantAmb())+" Ambientes / "+String.valueOf(p.getCantBaños())+" Baños");
+                lblOtros.setText("Otros: " + String.valueOf(p.getAntigüedad()) + " Años de Antiguedad / " + (p.isCochera()? "Tiene Cochera" : "No tiene Cochera"));
+
 	            txtDescripcion.setText(p.getDescripción());
 	            lblDireccion.setText(p.getDireccion());
+
 	            colocarImagen(p);
 	            
 	            ventana.eliminarPropiedad(p,67);
@@ -194,19 +203,21 @@ public class InterfazAmpliada extends JPanel{
         pnlContBotones.add(btnAnterior);
         pnlContBotones.add(btnSiguiente);
 
-        pnlDescripcion.add(Box.createVerticalStrut(10));
-        pnlDescripcion.add(lbltitulo);
-        pnlDescripcion.add(Box.createVerticalStrut(10));
-        pnlDescripcion.add(lblPrecio);
-        pnlDescripcion.add(Box.createVerticalStrut(10));
-        pnlDescripcion.add(lblExpensas);
-        pnlDescripcion.add(Box.createVerticalStrut(10));
-        pnlDescripcion.add(lblTipo);
-        pnlDescripcion.add(Box.createVerticalStrut(10));
-        pnlDescripcion.add(lblMetros);
-        pnlDescripcion.add(lblCantidades);
-        pnlDescripcion.add(Box.createVerticalStrut(10));
-        pnlDescripcion.add(lblOtros);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lbltitulo);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lblPrecio);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lblExpensas);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lblTipo);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lblMetros);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lblCantidades);
+        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(lblOtros);
+
         pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lblDescripcion);
         pnlDescripcion.add(txtDescripcion);
@@ -228,13 +239,28 @@ public class InterfazAmpliada extends JPanel{
         pnlContIzq.add(pnlMapa);
 
 
+        pnlContDer.add(pnlCaracteristicas);
+        pnlContDer.add(Box.createVerticalStrut(14));
         pnlContDer.add(pnlDescripcion);
 
         pnlContenido.add(pnlBotones);
         pnlContenido.add(pnlContenido2);
 
-        pnlContenido2.add(pnlContIzq);
-        pnlContenido2.add(pnlContDer);
+        // Esto pega los paneles arriba
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.weighty = 1.0;
+        gbc.insets = new Insets(5, 40, 0, 0);
+
+        gbc.gridx = 0;
+        gbc.weightx = 0;
+        pnlContenido2.add(pnlContIzq, gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        pnlContenido2.add(pnlContDer, gbc);
+        //
 
         pnlCentro.add(pnlNorte, BorderLayout.NORTH);
         pnlCentro.add(pnlContenido, BorderLayout.CENTER);
