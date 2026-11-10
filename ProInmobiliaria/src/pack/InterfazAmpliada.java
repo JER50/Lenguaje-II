@@ -131,7 +131,7 @@ public class InterfazAmpliada extends JPanel{
 
         JButton btnAnterior = new JButton("(<<)Anterior");
 
-        JTextArea txtDescripcion = new JTextArea(p.getDescripción(), 6, 55);
+        JTextArea txtDescripcion = new JTextArea(p.getDescripción(), 8, 55);
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
 
@@ -217,6 +217,7 @@ public class InterfazAmpliada extends JPanel{
         pnlCaracteristicas.add(lblCantidades);
         pnlCaracteristicas.add(Box.createVerticalStrut(10));
         pnlCaracteristicas.add(lblOtros);
+        pnlCaracteristicas.add(Box.createVerticalStrut(15));
 
         pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lblDescripcion);
