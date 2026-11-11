@@ -1,0 +1,21 @@
+{
+  "nombre": "Casa de Campo",
+  "precio": 68000000,
+  "tipoInmueble": "Casa",
+  "tipoListado": "Venta",
+  "direccion": "Acceso sur de Salta, referencia de zona Terminal",
+  "metrosTotales": 800,
+  "metrosCubiertos": 120,
+  "cantAmb": 4,
+  "cantBaños": 1,
+  "cochera": true,
+  "expensas": 0,
+  "antigüedad": 20,
+  "pisos": 1,
+  "descripción": "Casa de campo con parque amplio, galería y parrilla.",
+  "latitud": -24.7963,
+  "longitud": -65.39955,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 10.jpg"
+  ]
+}

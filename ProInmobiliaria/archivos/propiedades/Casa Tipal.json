@@ -1,0 +1,25 @@
+{
+  "nombre": "Casa Tipal",
+  "precio": 35000000,
+  "tipoInmueble": "Casa",
+  "tipoListado": "Venta",
+  "direccion": "Barrio Tipal, Salta",
+  "metrosTotales": 320,
+  "metrosCubiertos": 180,
+  "cantAmb": 5,
+  "cantBaños": 2,
+  "cochera": true,
+  "expensas": 25000,
+  "antigüedad": 4,
+  "pisos": 2,
+  "descripción": "Amplia casa familiar con jardín, cochera y excelentes terminaciones.",
+  "imagenes": [
+    "archivos/imagenes/casatipal.png",
+    "archivos/imagenes/casatipal2.png",
+    "archivos/imagenes/casatipal3.png",
+    "archivos/imagenes/casatipal4.png",
+    "archivos/imagenes/casatipal5.png"
+  ],
+  "latitud": -24.757268,
+  "longitud": -65.472125
+}

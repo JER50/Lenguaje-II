@@ -1,0 +1,21 @@
+{
+  "nombre": "Galpón Industrial",
+  "precio": 75000000,
+  "tipoInmueble": "Galpón",
+  "tipoListado": "Venta",
+  "direccion": "Zona de acceso a Terminal de Ómnibus, Salta",
+  "metrosTotales": 500,
+  "metrosCubiertos": 450,
+  "cantAmb": 0,
+  "cantBaños": 1,
+  "cochera": false,
+  "expensas": 0,
+  "antigüedad": 18,
+  "pisos": 1,
+  "descripción": "Galpón amplio con oficina y espacio de guardado, apto para actividad comercial.",
+  "latitud": -24.796,
+  "longitud": -65.3992,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 08.jpg"
+  ]
+}

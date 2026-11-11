@@ -1,0 +1,21 @@
+{
+  "nombre": "Departamento Moderno Terminal",
+  "precio": 95000000,
+  "tipoInmueble": "Departamento",
+  "tipoListado": "Venta",
+  "direccion": "Cercanías de Terminal de Ómnibus de Salta",
+  "metrosTotales": 70,
+  "metrosCubiertos": 65,
+  "cantAmb": 2,
+  "cantBaños": 1,
+  "cochera": false,
+  "expensas": 40000,
+  "antigüedad": 3,
+  "pisos": 1,
+  "descripción": "Departamento moderno de dos ambientes, próximo a la Terminal de Ómnibus.",
+  "latitud": -24.7952,
+  "longitud": -65.39845,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 06.jpg"
+  ]
+}

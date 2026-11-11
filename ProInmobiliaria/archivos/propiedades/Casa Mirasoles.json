@@ -1,0 +1,24 @@
+{
+  "nombre": "Casa Mirasoles",
+  "precio": 25000000,
+  "tipoInmueble": "Casa",
+  "tipoListado": "Venta",
+  "direccion": "Barrio Mirasoles, Salta",
+  "metrosTotales": 320,
+  "metrosCubiertos": 150,
+  "cantAmb": 4,
+  "cantBaños": 1,
+  "cochera": true,
+  "expensas": 0,
+  "antigüedad": 4,
+  "pisos": 2,
+  "descripción": "Amplia casa familiar con jardin,muy bien cuidada",
+  "imagenes": [
+    "archivos/imagenes/casamirasoles.png",
+    "archivos/imagenes/casamirasoles2.png",
+    "archivos/imagenes/casamirasoles3.png",
+    "archivos/imagenes/casamirasoles4.png"
+  ],
+  "latitud": -26.827476,
+  "longitud": -65.225829
+}

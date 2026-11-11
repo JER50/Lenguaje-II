@@ -1,0 +1,21 @@
+{
+  "nombre": "Quinta Recreativa",
+  "precio": 120000000,
+  "tipoInmueble": "Quinta",
+  "tipoListado": "Venta",
+  "direccion": "Zona urbana de Salta, acceso desde el centro",
+  "metrosTotales": 600,
+  "metrosCubiertos": 160,
+  "cantAmb": 5,
+  "cantBaños": 2,
+  "cochera": true,
+  "expensas": 0,
+  "antigüedad": 10,
+  "pisos": 1,
+  "descripción": "Quinta recreativa con pileta, jardín amplio y espacios para reuniones.",
+  "latitud": -24.789,
+  "longitud": -65.411,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 05.jpg"
+  ]
+}
