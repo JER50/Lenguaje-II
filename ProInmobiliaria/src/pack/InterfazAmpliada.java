@@ -160,7 +160,9 @@ public class InterfazAmpliada extends JPanel{
 
 	            txtDescripcion.setText(p.getDescripción());
 	            lblDireccion.setText(p.getDireccion());
-
+	            
+	            
+	            
 	            colocarImagen(p);
 	            
 	            ventana.eliminarPropiedad(p,67);

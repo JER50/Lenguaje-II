@@ -92,7 +92,7 @@ public class InterfazDatos extends JFrame{
         SpinnerNumberModel numMdlPrecio = new SpinnerNumberModel(p.getPrecio(), 1, 1000000000, 1);
         JSpinner spinPrecio = new JSpinner(numMdlPrecio);
 
-        SpinnerNumberModel numMdlExpensas = new SpinnerNumberModel(p.getExpensas(), 1, 1000000, 1);
+        SpinnerNumberModel numMdlExpensas = new SpinnerNumberModel(p.getExpensas(), 0, 1000000, 1);
         JSpinner spinExpensas = new JSpinner(numMdlExpensas);
 
         SpinnerNumberModel numMdlMetrosTotales = new SpinnerNumberModel(p.getMetrosTotales(), 1, 1000, 1);
@@ -173,8 +173,14 @@ public class InterfazDatos extends JFrame{
 
         cmbTipoPropiedad.setMaximumSize(cmbTipoPropiedad.getPreferredSize());
         cmbTipoPropiedad.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        rbNo.setSelected(true);
+        
+        if(p.isCochera()) {
+        	rbSi.setSelected(true);
+        }
+        else {
+        	rbNo.setSelected(true);
+        }
+        
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(rbSi);
         grupo.add(rbNo);

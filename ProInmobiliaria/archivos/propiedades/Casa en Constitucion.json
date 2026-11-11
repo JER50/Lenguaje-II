@@ -5,7 +5,7 @@
   "tipoListado": "Venta",
   "direccion": "Bº Constitución",
   "metrosTotales": 100,
-  "metrosCubiertos": 30,
+  "metrosCubiertos": 100,
   "cantAmb": 3,
   "cantBaños": 2,
   "cochera": true,
@@ -14,8 +14,8 @@
   "pisos": 1,
   "descripción": "Buenisima casa en Constitucion, veni a conocerla!",
   "imagenes": [
-    "archivos/imagenes/default.png"
+    "archivos/imagenes/Captura de pantalla 2026-11-08 151801.png"
   ],
-  "latitud": -24.801719, 
+  "latitud": -24.801719,
   "longitud": -65.377271
 }
