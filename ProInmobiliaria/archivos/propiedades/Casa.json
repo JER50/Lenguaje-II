@@ -1,21 +1,21 @@
 {
-  "nombre": "Casa",
-  "precio": 1,
+  "nombre": "Casa en Constitucion",
+  "precio": 15000000,
   "tipoInmueble": "Casa",
   "tipoListado": "Venta",
   "direccion": "Bº Constitución",
-  "metrosTotales": 3,
-  "metrosCubiertos": 4,
-  "cantAmb": 6,
-  "cantBaños": 7,
+  "metrosTotales": 100,
+  "metrosCubiertos": 30,
+  "cantAmb": 3,
+  "cantBaños": 2,
   "cochera": true,
   "expensas": 0,
   "antigüedad": 8,
-  "pisos": 5,
-  "descripción": "",
+  "pisos": 1,
+  "descripción": "Buenisima casa en Constitucion, veni a conocerla!",
   "imagenes": [
     "archivos/imagenes/default.png"
   ],
-  "latitud": -24.799678907919457,
-  "longitud": -65.37537932395935
+  "latitud": -24.801719, 
+  "longitud": -65.377271
 }
