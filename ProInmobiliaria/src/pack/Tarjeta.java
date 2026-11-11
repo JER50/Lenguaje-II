@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 
 public class Tarjeta extends JPanel {
     //Dispositivo
-    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+    private Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
     private final int radio = 40;
 
@@ -102,8 +102,9 @@ public class Tarjeta extends JPanel {
         addMouseListener(ma);
         for (Component c : getComponents()) c.addMouseListener(ma);
     }
-
-     @Override
+    
+    
+    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

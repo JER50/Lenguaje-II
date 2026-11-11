@@ -2,7 +2,8 @@ package pack;
 import javax.swing.*;
 import java.awt.*;
 public class PanelRedondo extends JPanel {
-    private final int radio;
+    
+	private final int radio;
 
     public PanelRedondo(int radio) {
         this.radio = radio;

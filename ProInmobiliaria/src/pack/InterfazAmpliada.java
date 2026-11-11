@@ -1,35 +1,37 @@
 package pack;
+
 //Librerias
 import javax.swing.*;
 import java.awt.*;
 
 public class InterfazAmpliada extends JPanel{
     // Dispositivo
-    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-
+    private Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+    private int altura = pantalla.height; 
+    
     //Paneles
-    JPanel pnlNorte = new JPanel();
-    JPanel pnlCentro = new JPanel();
-    JPanel pnlOeste = new JPanel();
-    JPanel pnlSur = new JPanel();
+    private JPanel pnlNorte = new JPanel();
+    private JPanel pnlCentro = new JPanel();
+    private JPanel pnlOeste = new JPanel();
+    private JPanel pnlSur = new JPanel();
 
-    JPanel pnlContenido = new JPanel();
-    JPanel pnlContenido2 = new JPanel(new GridBagLayout());
-    JPanel pnlContIzq = new JPanel();
-    JPanel pnlContDer = new JPanel();
+    private JPanel pnlContenido = new JPanel();
+    private JPanel pnlContenido2 = new JPanel(new GridBagLayout());
+    private JPanel pnlContIzq = new JPanel();
+    private JPanel pnlContDer = new JPanel();
 
-    PanelRedondo pnlFoto = new PanelRedondo(20);
-    JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
+    private PanelRedondo pnlFoto = new PanelRedondo(20);
+    private JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.LEFT,20,5));
 
-    JScrollPane scroll = new JScrollPane(pnlCentro);
+    private JScrollPane scroll = new JScrollPane(pnlCentro);
 
-    PanelRedondo pnlCaracteristicas = new PanelRedondo(20);
-    PanelRedondo pnlDescripcion = new PanelRedondo(20);
+    private PanelRedondo pnlCaracteristicas = new PanelRedondo(20);
+    private PanelRedondo pnlDescripcion = new PanelRedondo(20);
 
-    PanelRedondo pnlMapa = new PanelRedondo(20);
-    JPanel pnlContMapa = new JPanel();
+    private PanelRedondo pnlMapa = new PanelRedondo(20);
+    private JPanel pnlContMapa = new JPanel();
 
-    JPanel pnlContBotones = new JPanel(new FlowLayout());
+    private JPanel pnlContBotones = new JPanel(new FlowLayout());
 
 
     //Atributos
@@ -97,24 +99,26 @@ public class InterfazAmpliada extends JPanel{
         JLabel lblOtros = new JLabel("Otros: " + String.valueOf(p.getAntigüedad()) + " Años de Antiguedad / " + (p.isCochera()? "Tiene Cochera" : "No tiene Cochera"));
 
         JLabel lblDescripcion = new JLabel("Descripción:");
-
         JLabel lblUbicacion = new JLabel("Ubicación:");
         JLabel lblDireccion = new JLabel(p.getDireccion());
+        
         colocarImagen(p);
         
+       
 
         //Ajuste de Labels
-        lbltitulo.setFont(new Font("Arial", Font.BOLD, 20));
+        lbltitulo.setFont(new Font("Arial", Font.BOLD, 20 ));
         lbltitulo.setAlignmentX(Component.LEFT_ALIGNMENT);
-
+        
+        
         lblPrecio.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         lblExpensas.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        lblUbicacion.setFont(new Font("Arial", Font.BOLD, 20));
+        lblUbicacion.setFont(new Font("Arial", Font.BOLD, 20 ));
         lblUbicacion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        lblDescripcion.setFont(new Font("Arial", Font.BOLD, 17));
+        lblDescripcion.setFont(new Font("Arial", Font.BOLD, 25 ));
         lblDescripcion.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         
@@ -141,12 +145,12 @@ public class InterfazAmpliada extends JPanel{
 
         btnEditar.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnEditar.addActionListener(e ->{
-        
-        Propiedad auxiliar = new Propiedad(p);
+        	
+        	Propiedad auxiliar = new Propiedad(p);
  
 	        InterfazDatos ventanaMod = new InterfazDatos(p, () -> {
 	        	
-	            lbltitulo.setText(p.getNombre());
+	        	lbltitulo.setText(p.getNombre());
 	            lblPrecio.setText("Precio $"+String.valueOf(p.getPrecio()));
 	            lblExpensas.setText("Expensas $"+String.valueOf(p.getExpensas()));
                 lblTipo.setText(p.getTipoInmueble()+" - "+p.getTipoListado());
@@ -203,21 +207,21 @@ public class InterfazAmpliada extends JPanel{
         pnlContBotones.add(btnAnterior);
         pnlContBotones.add(btnSiguiente);
 
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lbltitulo);
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lblPrecio);
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lblExpensas);
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lblTipo);
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lblMetros);
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lblCantidades);
-        pnlCaracteristicas.add(Box.createVerticalStrut(10));
+        pnlCaracteristicas.add(Box.createVerticalStrut(20));
         pnlCaracteristicas.add(lblOtros);
-        pnlCaracteristicas.add(Box.createVerticalStrut(15));
+        pnlCaracteristicas.add(Box.createVerticalStrut(25));
 
         pnlDescripcion.add(Box.createVerticalStrut(10));
         pnlDescripcion.add(lblDescripcion);

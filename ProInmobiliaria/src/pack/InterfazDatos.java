@@ -11,15 +11,15 @@ public class InterfazDatos extends JFrame{
     private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
 
     //inicializo Paneles
-    JPanel pnlNorte = new JPanel();
-    JPanel pnlEste = new JPanel();
-    JPanel pnlOeste = new JPanel();
-    JPanel pnlCentro = new JPanel();
-    JPanel pnlSur = new JPanel(new FlowLayout(FlowLayout.RIGHT, 25, 5));
+    private JPanel pnlNorte = new JPanel();
+    private JPanel pnlEste = new JPanel();
+    private JPanel pnlOeste = new JPanel();
+    private JPanel pnlCentro = new JPanel();
+    private JPanel pnlSur = new JPanel(new FlowLayout(FlowLayout.RIGHT, 25, 5));
 
-    JPanel pnlContenedor = new JPanel(new BorderLayout());
+    private JPanel pnlContenedor = new JPanel(new BorderLayout());
 
-    JPanel pnlMapa = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+    private JPanel pnlMapa = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
     //Inicializo Listas
     ArrayList<String> imagenes = new ArrayList<String>();

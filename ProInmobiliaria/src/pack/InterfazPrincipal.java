@@ -10,39 +10,37 @@ import java.io.*;
 
 //Principal
 public class InterfazPrincipal extends JFrame{
-    //Carpeta de imagenes
-    private static final Path carpetaArchivos = Path.of(Path.of("").toAbsolutePath().toString(), "archivos");
-
+	
     //Dispositivo
-    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+	private Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
     //Paneles
-    JPanel pnlLogo = new JPanel();
-    JPanel pnlCentro = new JPanel(new BorderLayout());
+    private JPanel pnlLogo = new JPanel();
+    private JPanel pnlCentro = new JPanel(new BorderLayout());
 
-    JScrollPane scroll = new JScrollPane();
+    private JScrollPane scroll = new JScrollPane();
 
-    PanelRedondo pnlFiltrador = new PanelRedondo(20);
-    JPanel pnlFiltrador2 = new JPanel();
-    JPanel pnlGrilla = new JPanel();
-    JPanel pnlMarco = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-    JPanel pnlLado = new JPanel(new BorderLayout());
+    private PanelRedondo pnlFiltrador = new PanelRedondo(20);
+    private JPanel pnlFiltrador2 = new JPanel();
+    private JPanel pnlGrilla = new JPanel();
+    private JPanel pnlMarco = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+    private JPanel pnlLado = new JPanel(new BorderLayout());
 
-    CardLayout cards = new CardLayout();
-    JPanel pnlCards = new JPanel(cards);
-    JPanel pnlVistaGrilla = new JPanel(new BorderLayout());
+    private CardLayout cards = new CardLayout();
+    private JPanel pnlCards = new JPanel(cards);
+    private JPanel pnlVistaGrilla = new JPanel(new BorderLayout());
     
-    InterfazAmpliada detalle;
+    private InterfazAmpliada detalle;
 
-    String[] operacion = {"Todos","Venta","Alquiler","Alquiler Temporal"};
-    List<String> opciones = List.of("Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros");
-    List<JCheckBox> checks = new ArrayList<>();
-    ArrayList<Propiedad> listaPropiedades;
-    ArrayList<Propiedad> mostrando;
+    private final String[] operacion = {"Todos","Venta","Alquiler","Alquiler Temporal"};
+    private final List<String> opciones = List.of("Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros");
+    private List<JCheckBox> checks = new ArrayList<>();
+    private ArrayList<Propiedad> listaPropiedades;
+    private ArrayList<Propiedad> mostrando;
     
     
     //imagenes
-    ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(carpetaArchivos.resolve("imagenes").resolve("LogoT.png").toString()));
+    private static ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage("archivos/imagenes/LogoT.png"));
 
     InterfazPrincipal(){
     
@@ -50,7 +48,7 @@ public class InterfazPrincipal extends JFrame{
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(carpetaArchivos.resolve("imagenes").resolve("UcasalIcono.jpg").toString()));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("archivos/imagenes/UcasalIcono.jpg"));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -244,7 +242,7 @@ public class InterfazPrincipal extends JFrame{
     public ArrayList<Propiedad> cargarPropiedades() {
     	
     	ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
-    	try (var archivos = Files.list(carpetaArchivos.resolve("propiedades"))) {
+    	try (var archivos = Files.list(Path.of("").toAbsolutePath().resolve("archivos").resolve("propiedades"))) {
         	archivos.filter(Files::isRegularFile).filter(p -> p.toString().endsWith(".json"))
     	        	.forEach( direccion -> {propiedades.add(GestorArchivo.cargarJSON(direccion.getFileName().toString()));});
         } catch (IOException e) {
