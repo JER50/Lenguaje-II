@@ -1,0 +1,21 @@
+{
+  "nombre": "Casa Familiar Catedral",
+  "precio": 85000000,
+  "tipoInmueble": "Casa",
+  "tipoListado": "Venta",
+  "direccion": "Zona Plaza 9 de Julio, cerca de Catedral Basílica, Salta",
+  "metrosTotales": 180,
+  "metrosCubiertos": 120,
+  "cantAmb": 4,
+  "cantBaños": 2,
+  "cochera": true,
+  "expensas": 0,
+  "antigüedad": 8,
+  "pisos": 2,
+  "descripción": "Casa familiar de dos plantas, con patio y cochera, en una zona céntrica.",
+  "latitud": -24.78835,
+  "longitud": -65.4101,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 01.jpg"
+  ]
+}

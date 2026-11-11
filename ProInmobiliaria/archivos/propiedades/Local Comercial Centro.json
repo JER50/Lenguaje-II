@@ -1,0 +1,21 @@
+{
+  "nombre": "Local Comercial Centro",
+  "precio": 650000,
+  "tipoInmueble": "Local comercial",
+  "tipoListado": "Alquiler",
+  "direccion": "Cercanías de Catedral Basílica, Salta",
+  "metrosTotales": 90,
+  "metrosCubiertos": 90,
+  "cantAmb": 2,
+  "cantBaños": 1,
+  "cochera": false,
+  "expensas": 35000,
+  "antigüedad": 12,
+  "pisos": 1,
+  "descripción": "Local comercial en una zona céntrica de circulación peatonal.",
+  "latitud": -24.78855,
+  "longitud": -65.40975,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 04.jpg"
+  ]
+}

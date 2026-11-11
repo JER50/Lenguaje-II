@@ -1,0 +1,21 @@
+{
+  "nombre": "Departamento Plaza 9 de Julio",
+  "precio": 450000,
+  "tipoInmueble": "Departamento",
+  "tipoListado": "Alquiler",
+  "direccion": "Cercanías de Plaza 9 de Julio, Salta",
+  "metrosTotales": 75,
+  "metrosCubiertos": 68,
+  "cantAmb": 3,
+  "cantBaños": 1,
+  "cochera": false,
+  "expensas": 45000,
+  "antigüedad": 5,
+  "pisos": 1,
+  "descripción": "Departamento céntrico de tres ambientes, próximo a comercios y espacios verdes.",
+  "latitud": -24.78805,
+  "longitud": -65.41005,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 02.jpg"
+  ]
+}

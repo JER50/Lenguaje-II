@@ -1,0 +1,21 @@
+{
+  "nombre": "Terreno Centro",
+  "precio": 32000000,
+  "tipoInmueble": "Terreno",
+  "tipoListado": "Venta",
+  "direccion": "Zona Catedral Basílica de Salta",
+  "metrosTotales": 300,
+  "metrosCubiertos": 0,
+  "cantAmb": 0,
+  "cantBaños": 0,
+  "cochera": false,
+  "expensas": 0,
+  "antigüedad": 0,
+  "pisos": 0,
+  "descripción": "Terreno residencial en una ubicación céntrica, ideal para un proyecto inmobiliario.",
+  "latitud": -24.7882,
+  "longitud": -65.41065,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 03.jpg"
+  ]
+}

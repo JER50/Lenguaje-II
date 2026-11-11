@@ -1,0 +1,21 @@
+{
+  "nombre": "Casa con Patio Terminal",
+  "precio": 380000,
+  "tipoInmueble": "Casa",
+  "tipoListado": "Alquiler",
+  "direccion": "Zona Parque San Martín y Terminal, Salta",
+  "metrosTotales": 100,
+  "metrosCubiertos": 90,
+  "cantAmb": 3,
+  "cantBaños": 1,
+  "cochera": true,
+  "expensas": 0,
+  "antigüedad": 15,
+  "pisos": 1,
+  "descripción": "Casa cómoda con patio y cochera, en una zona de fácil acceso.",
+  "latitud": -24.7957,
+  "longitud": -65.3989,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 07.jpg"
+  ]
+}

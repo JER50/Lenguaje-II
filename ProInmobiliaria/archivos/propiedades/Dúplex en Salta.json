@@ -1,0 +1,21 @@
+{
+  "nombre": "Dúplex en Salta",
+  "precio": 520000,
+  "tipoInmueble": "Dúplex",
+  "tipoListado": "Alquiler",
+  "direccion": "Cercanías de Terminal de Ómnibus, Salta",
+  "metrosTotales": 120,
+  "metrosCubiertos": 100,
+  "cantAmb": 3,
+  "cantBaños": 2,
+  "cochera": true,
+  "expensas": 25000,
+  "antigüedad": 7,
+  "pisos": 2,
+  "descripción": "Dúplex de dos plantas con cochera y ambientes luminosos.",
+  "latitud": -24.7949,
+  "longitud": -65.39795,
+  "imagenes": [
+    "archivos/imagenes/Propiedad 09.jpg"
+  ]
+}
