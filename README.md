@@ -1,7 +1,9 @@
 - [x] Imagen Default
 - [x] Filtros
 - [x] Borrado
-- [ ] Ampliado y Tarjeta(dejarlo lindo)
+- [x] Ampliado y Tarjeta(dejarlo lindo)
 - [x] Completar Editar
 - [x] Refresh Dinamico
 - [x] Propiedades de ejemplo
+
+yataya todo
