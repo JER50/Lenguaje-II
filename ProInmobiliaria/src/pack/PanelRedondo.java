@@ -1,10 +1,13 @@
 package pack;
 import javax.swing.*;
 import java.awt.*;
+
+//Clase de uso particular, para dar bordes redondos a los paneles que se quiera usar. 
+
 public class PanelRedondo extends JPanel {
     
 	private final int radio;
-
+	
     public PanelRedondo(int radio) {
         this.radio = radio;
         setOpaque(false);

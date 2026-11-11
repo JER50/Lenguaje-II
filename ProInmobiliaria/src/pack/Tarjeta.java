@@ -5,13 +5,19 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+//Cada objeto tarjeta corresponde al elemento representativo de una Propiedad dentro de la InterfazPrincipal.
+//De tal forma, solo se crean estos objetos y se añaden al panel necesario para representarlas gráficamente. 
+
 public class Tarjeta extends JPanel {
-    //Dispositivo
+	
+    //Datos del dispositivo local
     private Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
+    //Radio de los bordes
     private final int radio = 40;
 
-
+    //Constructor de las tarjetas. La misma depende de la Propiedad usada como argumento.
     public Tarjeta(Propiedad prop, Runnable alClick) {
         setOpaque(false);
         setLayout(new BorderLayout(0, 8));
@@ -19,12 +25,12 @@ public class Tarjeta extends JPanel {
         setBackground(Color.WHITE);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // Imagen
+        // Imagen N°1 almacenada en la propiedad
         ImageIcon icono = new ImageIcon(prop.getImagenes().get(0));
         Image img = icono.getImage().getScaledInstance((int)(pantalla.width*0.24), (int)(pantalla.height*0.24), Image.SCALE_SMOOTH);
 
 
-        // Info en el centro
+        //Información en el centro
         JPanel info = new JPanel();
 
         JPanel foto = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 15));
@@ -93,7 +99,7 @@ public class Tarjeta extends JPanel {
         add(info, BorderLayout.CENTER);
 
 
-        // Clic y efecto hover en toda la tarjeta
+        //Clic y efecto hover en toda la tarjeta
         MouseAdapter ma = new MouseAdapter() {
             @Override public void mouseClicked(MouseEvent e) { alClick.run(); }
             @Override public void mouseEntered(MouseEvent e) { setBackground(new Color(240, 245, 255)); }

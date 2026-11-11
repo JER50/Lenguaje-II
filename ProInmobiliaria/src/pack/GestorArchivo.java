@@ -18,13 +18,17 @@ import com.google.gson.GsonBuilder;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
+//Clase para manipular archivos: imagenes y .json (Propiedades)
 public class GestorArchivo {
+	
+	//Objeto Gson. Para la manipulación de los archivos .json
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     
+    //Direcciones de carpetas para almacenar cada tipo de archivo. Son absolutas al directorio de trabajo (donde se inicia el programa)
     private static final Path carpetaPropiedades = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "propiedades");
     private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
 
+    //Para guardar cada .json en la carpeta. El objeto Gson solo necesita el objeto Propiedad y el archivo donde se guardará
     public static void guardadoJSON(Propiedad prop) {
         try {
             Path archivo = carpetaPropiedades.resolve(prop.getNombre() + ".json");
@@ -38,6 +42,9 @@ public class GestorArchivo {
         }
     }
     
+    
+    //Para borrar cada .json de la carpeta y sus imagenes asociadas. Utiliza el objeto Propiedad para ver si está utilizando la imagen
+    //default y evitar eliminarla, y busca el archivo por el nombre asignado en sus propiedades. 
     public static void borradoJSON(Propiedad propiedad) {
     	Path eliminando = carpetaPropiedades.resolve(propiedad.getNombre() + ".json");
     	
@@ -57,7 +64,9 @@ public class GestorArchivo {
     	    e.printStackTrace();
     	}
     }
-
+    
+    //Para extraer la información de un archivo y devolver el objeto correspondiente. Gson solo requiere el archivo del cual extraer y
+    //la clase a la cual corresponderá el objeto creado (Que en este caso es uno del tipo Propiedad). 
     public static Propiedad cargarJSON(String nombre) {
         Path archivo = carpetaPropiedades.resolve(nombre);
 
@@ -68,7 +77,10 @@ public class GestorArchivo {
             return null;
         }
     }
-
+    
+    //Esta función se utiliza para cargar imagenes a la carpeta /archivos/imagenes, de donde se extraerán luego para mostrarlas en las 
+    //interfaces. Está diseñada para devolver los nombres de las imagenes que se cargaron. 
+    
     public static ArrayList<String> elegirImagenes(JFrame parent) {
         ArrayList<String> nombres = new ArrayList<>();
 

@@ -15,19 +15,20 @@ import java.awt.event.MouseEvent;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+//El objeto Mapa permite representar las coordenadas indicadas de forma gráfica, con un mapa interactivo
 public class Mapa {
 
     private final JXMapViewer mapa;
     private final WaypointPainter<Waypoint> pintor;
 
-    //marcador fijo
+    //Constructor con marcador fijo. No se puede cambiar la ubicación del marcador designado. 
     public Mapa(JPanel panel, double latitud, double longitud) {
         this(panel, latitud, longitud, 3);
         GeoPosition posicion = new GeoPosition(latitud, longitud);
         pintor.setWaypoints(Set.of(new DefaultWaypoint(posicion)));
     }
 
-    //Coloca marcador, devuelve coordenadas
+    //Constructor con marcador dinámico. Al marcar una nueva ubicación se actualiza el marcador. 
     public Mapa(JPanel panel, double latInicial, double lonInicial, BiConsumer<Double, Double> alSeleccionar) {
 
 	    this(panel, latInicial, lonInicial, 5);
@@ -57,7 +58,7 @@ public class Mapa {
 	    });
 	}
 
-    //Configuración en común
+    //Constructor común
     private Mapa(JPanel panel, double lat, double lon, int zoom) {
         mapa = new JXMapViewer();
         mapa.setTileFactory(new DefaultTileFactory(
@@ -78,7 +79,8 @@ public class Mapa {
         panel.revalidate();
         panel.repaint();
     }
-
+    
+    //Método getter
     public JXMapViewer getMapa() {
     	return mapa;
     }

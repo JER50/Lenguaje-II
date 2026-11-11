@@ -4,7 +4,10 @@ package pack;
 import javax.swing.*;
 import java.awt.*;
 
+//Esta interfaz aparece al hacer click en la tarjeta representativa dentro de la principal. Se muestra la información adicional pertinente. 
+
 public class InterfazAmpliada extends JPanel{
+	
     // Dispositivo
     private Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
     private int altura = pantalla.height; 

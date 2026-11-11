@@ -1,5 +1,8 @@
 package pack;
 import java.util.ArrayList;
+
+//Clase representativa de las propiedades administradas. Almacenará la información pertinente de cada una de estas. 
+
 public class Propiedad {
     //Atributos
     private String nombre;
@@ -20,6 +23,28 @@ public class Propiedad {
     private double latitud;
     private double longitud;
 
+  //Constructor
+    public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, int pisos, String descripción, ArrayList<String> imagenes, double latitud, double longitud) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.tipoInmueble = tipoInmueble;
+        this.tipoListado = tipoListado;
+        this.direccion = direccion;
+        this.metrosTotales = metrosTotales;
+        this.metrosCubiertos = metrosCubiertos;
+        this.cantAmb = cantAmb;
+        this.cantBaños = cantBaños;
+        this.cochera = cochera;
+        this.expensas = expensas;
+        this.antigüedad = antigüedad;
+        this.pisos = pisos;
+        this.descripción = descripción;
+        this.imagenes = imagenes;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+    
+    //Constructor de duplicación
     public Propiedad(Propiedad copiado) {
         this.nombre = copiado.getNombre();
         this.precio = copiado.getPrecio();
@@ -40,28 +65,6 @@ public class Propiedad {
         this.longitud = copiado.getLongitud();
     }
     
-    
-    //Constructor
-    public Propiedad(String nombre, int precio, String tipoInmueble, String tipoListado, String direccion, int metrosTotales, int metrosCubiertos,int cantAmb, int cantBaños, boolean cochera, int expensas, int antigüedad, int pisos, String descripción, ArrayList<String> imagenes, double latitud, double longitud) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.tipoInmueble = tipoInmueble;
-        this.tipoListado = tipoListado;
-        this.direccion = direccion;
-        this.metrosTotales = metrosTotales;
-        this.metrosCubiertos = metrosCubiertos;
-        this.cantAmb = cantAmb;
-        this.cantBaños = cantBaños;
-        this.cochera = cochera;
-        this.expensas = expensas;
-        this.antigüedad = antigüedad;
-        this.pisos = pisos;
-        this.descripción = descripción;
-        this.imagenes = imagenes;
-        this.latitud = latitud;
-        this.longitud = longitud;
-    }
-
     //Getters y Setters
     public String getNombre() {return nombre;}
     public void setNombre(String nombre) {this.nombre = nombre;}

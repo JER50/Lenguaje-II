@@ -8,13 +8,13 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.io.*;
 
-//Principal
+//La interfaz principal desde la cual se acceden las demás interfaces. Permite añadir, filtrar y ampliar detalles de cada Propiedad almacenada. 
 public class InterfazPrincipal extends JFrame{
 	
-    //Dispositivo
+    //Datos del dispotivo local
 	private Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
-    //Paneles
+    //Inicialización de Paneles
     private JPanel pnlLogo = new JPanel();
     private JPanel pnlCentro = new JPanel(new BorderLayout());
 
@@ -39,11 +39,12 @@ public class InterfazPrincipal extends JFrame{
     private ArrayList<Propiedad> mostrando;
     
     
-    //imagenes
+    //Ícono de la ventana
     private static ImageIcon imglogo = new ImageIcon(Toolkit.getDefaultToolkit().getImage("archivos/imagenes/LogoT.png"));
 
     InterfazPrincipal(){
-    
+    	
+    	//Creación de la ventana
         setTitle("Inmobiliaria");
         setSize((int)(pantalla.width * 0.6), (int)(pantalla.height * 0.7));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -194,7 +195,9 @@ public class InterfazPrincipal extends JFrame{
         add(pnlLogo, BorderLayout.NORTH);
         add(pnlCards, BorderLayout.CENTER);
     }
-
+    
+    //Función dada al hacer click en la tarjeta particular a una Propiedad
+    
     private void abrirDetalle(Propiedad p) {
         if (detalle != null) pnlCards.remove(detalle);
         detalle = new InterfazAmpliada(p, this);
@@ -202,10 +205,12 @@ public class InterfazPrincipal extends JFrame{
         cards.show(pnlCards, "detalle");
     }
 
+    //Función de retorno para volver a la interfaz principal
     protected void volverAGrilla() {
         cards.show(pnlCards, "grilla");
     }
     
+    //Reinicialización de los Objetos Propiedad que se muestran. Esto solo ocurre si se añadió o borro una propiedad. 
     public void refrescarGrilla() {
     	
     	pnlGrilla.removeAll();
@@ -219,26 +224,30 @@ public class InterfazPrincipal extends JFrame{
     }    
     
     
+    //Método que añade la propiedad a los archivos y renueva la lista de las que se mostrarán en la interfaz principal
     public void añadirPropiedad(Propiedad añadiendo) {
         GestorArchivo.guardadoJSON(añadiendo);
     	listaPropiedades.add(añadiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
-    
+    //Método que elimina la propiedad a los archivos y renueva la lista de las que se mostrarán en la interfaz principal
+
     public void eliminarPropiedad(Propiedad removiendo) {
         GestorArchivo.borradoJSON(removiendo);
     	listaPropiedades.remove(removiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
+    //Sobrecarga del método anterior, con la diferencia que no intena borrar el archivo, solo la remueve de la lista.  
     public void eliminarPropiedad(Propiedad removiendo, int auxiliar) {
         
     	listaPropiedades.remove(removiendo);
     	mostrando = new ArrayList<Propiedad>(listaPropiedades);
     }
     
-    
+    //Método utilizado para cargar las propiedades desde los archivos almacenados a un ArrayList<Propiedad> que se retorna. 
+    //Se utiliza para cargarlas al crear el objeto InterfazPrincipal.
     public ArrayList<Propiedad> cargarPropiedades() {
     	
     	ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();

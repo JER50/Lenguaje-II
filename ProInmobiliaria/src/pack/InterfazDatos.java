@@ -6,27 +6,31 @@ import java.util.ArrayList;
 import java.nio.file.Path;
 
 public class InterfazDatos extends JFrame{
-    //Dispositivo
+	
+    //Datos del dispositivo local
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
     private static final Path carpetaImagenes = Path.of(Path.of("").toAbsolutePath().toString(), "archivos", "imagenes");
 
-    //inicializo Paneles
+    //Inicialización de paneles
     private JPanel pnlNorte = new JPanel();
     private JPanel pnlEste = new JPanel();
     private JPanel pnlOeste = new JPanel();
     private JPanel pnlCentro = new JPanel();
     private JPanel pnlSur = new JPanel(new FlowLayout(FlowLayout.RIGHT, 25, 5));
-
     private JPanel pnlContenedor = new JPanel(new BorderLayout());
-
     private JPanel pnlMapa = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-    //Inicializo Listas
-    ArrayList<String> imagenes = new ArrayList<String>();
-    String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
-    String[] tipoPropiedad = {"Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros"};
+    //Listas de referencia
+    private ArrayList<String> imagenes = new ArrayList<String>();
+    private final String[] operacion = {"Venta","Alquiler","Alquiler Temporal"};
+    private final String[] tipoPropiedad = {"Departamento", "Casa", "Terreno", "Local", "Quinta", "Galpón", "Deposito", "Campo", "Hotel", "Edificio", "Otros"};
     
+    //Primer constructor: Esta interfaz se crea al usar "Editar" dentro del panel ampliado de cada propiedad
+    //Reemplaza los datos de todos los campos por aquellos que pertenecen a la Propiedad pasada como argumento.
+    //El objeto Runnable ejecutará la función definida del lado de InterfazAmpliada
     InterfazDatos(Propiedad p, Runnable ejecutar) {
+    	
+    	//Creación de la ventana
         setTitle("Propiedad");
         setSize((int)(pantalla.width * 0.4), (int)(pantalla.height * 0.95));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -37,15 +41,10 @@ public class InterfazDatos extends JFrame{
 
         //Ajuste de Paneles
         pnlCentro.setLayout(new BoxLayout(pnlCentro, BoxLayout.Y_AXIS));
-
         pnlNorte.setPreferredSize(new Dimension(0,20));
         pnlEste.setPreferredSize(new Dimension(10,0));
         pnlOeste.setPreferredSize(new Dimension(10,0));
-
-        int mpAnchura =(int)(pantalla.width*0.375);
-        int mpAltura =(int)(pantalla.height*0.3);
-
-        pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));
+        pnlMapa.setPreferredSize(new Dimension((int)(pantalla.width*0.375), (int)(pantalla.height*0.3)));
         pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlMapa.setOpaque(false);
 
@@ -76,8 +75,7 @@ public class InterfazDatos extends JFrame{
         lblExpensas.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
-        //Componentes
-        //Inicializo Componentes
+        //Inicialización de Componentes y set de valores a los correspondientes a la propiedad
         JTextField txtNombre = new JTextField(p.getNombre(),55);
         JTextField txtDireccion = new JTextField(p.getDireccion(),55);
         JTextField txtLat = new JTextField(String.valueOf(p.getLatitud()));
@@ -114,15 +112,32 @@ public class InterfazDatos extends JFrame{
         JSpinner spinAntiguedad = new JSpinner(numMdlAntiguedad);
 
         JTextArea txtDescripcion = new JTextArea(p.getDescripción(),8, 55);
-        txtDescripcion.setLineWrap(true);
-        txtDescripcion.setWrapStyleWord(true);
-
+        
+        JScrollPane pnlscrolltxt = new JScrollPane(txtDescripcion);
+        
         JRadioButton rbSi = new JRadioButton("Si");
         JRadioButton rbNo = new JRadioButton("No");
 
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(rbSi);
+        grupo.add(rbNo);
+        
+        if(p.isCochera()) {
+        	rbSi.setSelected(true);
+        }
+        else {
+        	rbNo.setSelected(true);
+        }	
+        
         JButton btnAceptar = new JButton("Aceptar");
         JButton btnCancelar = new JButton("Cancelar");
         JButton btnImagenes = new JButton("Seleccionar imagenes: ");
+        
+        Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud(), (lat, lon) -> {
+            txtLat.setText(String.valueOf(lat));
+            txtLon.setText(String.valueOf(lon));
+        });
+        
         
         //Ajuste de Componentes
         txtNombre.setMaximumSize(txtNombre.getPreferredSize());
@@ -143,7 +158,6 @@ public class InterfazDatos extends JFrame{
         spinMetrosCubiertos.setMaximumSize(spinMetrosCubiertos.getPreferredSize());
         spinMetrosCubiertos.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JScrollPane pnlscrolltxt = new JScrollPane(txtDescripcion);
         pnlscrolltxt.setMaximumSize(pnlscrolltxt.getPreferredSize());
         pnlscrolltxt.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -161,7 +175,26 @@ public class InterfazDatos extends JFrame{
 
         cmbTipoLista.setMaximumSize(cmbTipoLista.getPreferredSize());
         cmbTipoLista.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setWrapStyleWord(true);
+        
+        cmbTipoPropiedad.setMaximumSize(cmbTipoPropiedad.getPreferredSize());
+        cmbTipoPropiedad.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        txtLat.setMaximumSize(txtLat.getPreferredSize());
+        txtLat.setAlignmentX(Component.LEFT_ALIGNMENT);
+        txtLat.setFocusable(false);
 
+        txtLon.setMaximumSize(txtLon.getPreferredSize());
+        txtLon.setAlignmentX(Component.LEFT_ALIGNMENT);
+        txtLon.setFocusable(false);
+        
+        mp.getMapa().setPreferredSize(new Dimension((int)(pantalla.width*0.375),(int)(pantalla.height*0.3)));
+
+        
+        //Agregado de funciones a los componentes
+        
         cmbTipoLista.addActionListener(e -> {
             int i = cmbTipoLista.getSelectedIndex();
             if (i == 0){
@@ -171,39 +204,12 @@ public class InterfazDatos extends JFrame{
             spinExpensas.setModel(new SpinnerNumberModel(0, 0, 0, 0));
         });
 
-        cmbTipoPropiedad.setMaximumSize(cmbTipoPropiedad.getPreferredSize());
-        cmbTipoPropiedad.setAlignmentX(Component.LEFT_ALIGNMENT);
-        
-        if(p.isCochera()) {
-        	rbSi.setSelected(true);
-        }
-        else {
-        	rbNo.setSelected(true);
-        }
-        
-        ButtonGroup grupo = new ButtonGroup();
-        grupo.add(rbSi);
-        grupo.add(rbNo);
-
-        txtLat.setMaximumSize(txtLat.getPreferredSize());
-        txtLat.setAlignmentX(Component.LEFT_ALIGNMENT);
-        txtLat.setFocusable(false);
-
-        txtLon.setMaximumSize(txtLon.getPreferredSize());
-        txtLon.setAlignmentX(Component.LEFT_ALIGNMENT);
-        txtLon.setFocusable(false);
-
-        Mapa mp = new Mapa(pnlMapa, p.getLatitud(), p.getLongitud(), (lat, lon) -> {
-            txtLat.setText(String.valueOf(lat));
-            txtLon.setText(String.valueOf(lon));
-        });
-        mp.getMapa().setPreferredSize(new Dimension(mpAnchura,mpAltura));
         
         btnImagenes.addActionListener(e -> {
             imagenes = GestorArchivo.elegirImagenes(this);
         });
         
-        
+        //Esta es la función que se llama al aceptar los cambios de la modificación, desde el lado de la InterfazDatos
         btnAceptar.addActionListener(e -> {
         	p.setNombre(txtNombre.getText());
         	p.setPrecio((int) spinPrecio.getValue());
@@ -237,8 +243,8 @@ public class InterfazDatos extends JFrame{
         btnCancelar.addActionListener(e -> dispose());
         
 
-        //Agrego
-        //Agregar a Paneles
+        //Agregado de paneles al Panel Principal
+        
         pnlCentro.add(lblNombre);
         pnlCentro.add(txtNombre);
         pnlCentro.add(Box.createVerticalStrut(15));
@@ -299,7 +305,8 @@ public class InterfazDatos extends JFrame{
         pnlContenedor.add(pnlOeste, BorderLayout.WEST);
         pnlContenedor.add(pnlSur, BorderLayout.SOUTH);
 
-        //Agregar a Panel Principal
+        //Agregar a Panel Principal a la ventana
+        
         add(pnlContenedor);
         JScrollPane pnlScroll = new JScrollPane(pnlContenedor);
         pnlScroll.getVerticalScrollBar().setUnitIncrement(16);
@@ -307,11 +314,10 @@ public class InterfazDatos extends JFrame{
 
     }
 
-    /*
-    | Desde aqui comienza El contructor Vacio
-    |  es el Boton "Agregar" de la Interfaz Principal.
-    |  Crea Propiedades más no las edita.
-    */
+
+    
+    //Este segundo constructor se utiliza para crear nuevas propiedadades con los datos que se suministren a los cuadros de texto
+    //La creación solo se completa al darle al boton "Crear".
     
     InterfazDatos(InterfazPrincipal ventanaPrincipal){
         setTitle("Propiedad");
@@ -324,15 +330,10 @@ public class InterfazDatos extends JFrame{
 
         //Ajuste de Paneles
         pnlCentro.setLayout(new BoxLayout(pnlCentro, BoxLayout.Y_AXIS));
-
         pnlNorte.setPreferredSize(new Dimension(0,20));
         pnlEste.setPreferredSize(new Dimension(10,0));
         pnlOeste.setPreferredSize(new Dimension(10,0));
-
-        int mpAnchura =(int)(pantalla.width*0.375);
-        int mpAltura =(int)(pantalla.height*0.3);
-
-        pnlMapa.setPreferredSize(new Dimension(mpAnchura, mpAltura));
+        pnlMapa.setPreferredSize(new Dimension((int)(pantalla.width*0.375), (int)(pantalla.height*0.3)));
         pnlMapa.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlMapa.setOpaque(false);
 
@@ -363,17 +364,17 @@ public class InterfazDatos extends JFrame{
         lblExpensas.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 
-        //Componentes
-        //Inicializo Componentes
+        //Inicialización de Componentes
+        
         JTextField txtNombre = new JTextField(55);
         JTextField txtDireccion = new JTextField(55);
         JTextField txtLat = new JTextField(13);
         JTextField txtLon = new JTextField(13);
 
         JComboBox<String> cmbTipoLista = new JComboBox<>(operacion);
-
         JComboBox<String> cmbTipoProiedad = new JComboBox<>(tipoPropiedad);
 
+        		
         SpinnerNumberModel numMdlPrecio = new SpinnerNumberModel(1, 0, 1000000000, 1);
         JSpinner spinPrecio = new JSpinner(numMdlPrecio);
 
@@ -406,12 +407,18 @@ public class InterfazDatos extends JFrame{
         JRadioButton rbNo = new JRadioButton("No");
 
         JButton btnImagenes = new JButton("Seleccionar imagenes: ");
-
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
         
+        JScrollPane pnlscrolltxt = new JScrollPane(txtDescripcion);
+        
+        Mapa mp = new Mapa(pnlMapa, -24.795784554541317, -65.42473102022629, (lat, lon) -> {
+            txtLat.setText(String.valueOf(lat));
+            txtLon.setText(String.valueOf(lon));
+        });
         
         //Ajuste de Componentes
+        
         txtNombre.setMaximumSize(txtNombre.getPreferredSize());
         txtNombre.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -430,7 +437,6 @@ public class InterfazDatos extends JFrame{
         spinMetrosCubiertos.setMaximumSize(spinMetrosCubiertos.getPreferredSize());
         spinMetrosCubiertos.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JScrollPane pnlscrolltxt = new JScrollPane(txtDescripcion);
         pnlscrolltxt.setMaximumSize(pnlscrolltxt.getPreferredSize());
         pnlscrolltxt.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -449,14 +455,6 @@ public class InterfazDatos extends JFrame{
         cmbTipoLista.setMaximumSize(cmbTipoLista.getPreferredSize());
         cmbTipoLista.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        cmbTipoLista.addActionListener(e -> {
-            int i = cmbTipoLista.getSelectedIndex();
-            if (i == 0){
-                 spinExpensas.setModel(new SpinnerNumberModel(1, 0, 1000000, 1));
-                 return;
-            }
-            spinExpensas.setModel(new SpinnerNumberModel(0, 0, 0, 0));
-        });
 
         cmbTipoProiedad.setMaximumSize(cmbTipoProiedad.getPreferredSize());
         cmbTipoProiedad.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -474,12 +472,19 @@ public class InterfazDatos extends JFrame{
         txtLon.setAlignmentX(Component.LEFT_ALIGNMENT);
         txtLon.setFocusable(false);
 
-        Mapa mp = new Mapa(pnlMapa, -24.795784554541317, -65.42473102022629, (lat, lon) -> {
-            txtLat.setText(String.valueOf(lat));
-            txtLon.setText(String.valueOf(lon));
+        mp.getMapa().setPreferredSize(new Dimension((int)(pantalla.width*0.375),(int)(pantalla.height*0.3)));
+        
+        //Añadido de funciones interactivas a componentes
+        
+        cmbTipoLista.addActionListener(e -> {
+            int i = cmbTipoLista.getSelectedIndex();
+            if (i == 0){
+                 spinExpensas.setModel(new SpinnerNumberModel(1, 0, 1000000, 1));
+                 return;
+            }
+            spinExpensas.setModel(new SpinnerNumberModel(0, 0, 0, 0));
         });
-        mp.getMapa().setPreferredSize(new Dimension(mpAnchura,mpAltura));
-
+        
         btnImagenes.addActionListener(e -> {
             imagenes = GestorArchivo.elegirImagenes(this);
         });
@@ -503,8 +508,9 @@ public class InterfazDatos extends JFrame{
         btnCancelar.addActionListener(e -> dispose());
 
 
-        //Agrego
-        //Agregar a Paneles
+        
+        //Agregado de paneles al Panel Principal
+        
         pnlCentro.add(lblNombre);
         pnlCentro.add(txtNombre);
         pnlCentro.add(Box.createVerticalStrut(15));
@@ -565,7 +571,8 @@ public class InterfazDatos extends JFrame{
         pnlContenedor.add(pnlOeste, BorderLayout.WEST);
         pnlContenedor.add(pnlSur, BorderLayout.SOUTH);
 
-        //Agrego Panel Principal
+        //Agrego de Panel Principal a la ventana
+        
         add(pnlContenedor);
         JScrollPane pnlScroll = new JScrollPane(pnlContenedor);
         pnlScroll.getVerticalScrollBar().setUnitIncrement(16);
