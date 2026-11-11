@@ -5,6 +5,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.nio.file.Path;
 
+//Esta interfaz aparece al intentar agregar o modificar una propiedad.
+//Según cual de estas acciones se intente realizar, se mostraran datos diferentes en los campos de rellenado. 
+
 public class InterfazDatos extends JFrame{
 	
     //Datos del dispositivo local
